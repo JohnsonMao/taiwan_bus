@@ -1,0 +1,52 @@
+$primary:   #10A2F6;
+$dark:      #131414;
+$light:     #F5F5F5;
+$gray-light:#414242;
+$gray:      #1C1D1D;
+$shadow:    rgba(0, 0, 0, .5);
+$body-bg:     $dark;
+$body-color:  $light;
+
+$theme-colors: (
+  "primary": $primary,
+  "dark": $dark,
+  "light": $light,
+  "gray": $gray
+);
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&family=Roboto:wght@400;700;900&display=swap');
+
+$font-family-sans-serif: "Noto Sans TC", "Roboto", "sans-serif";
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .375,
+  2: $spacer * .5,
+  3: $spacer * .75,
+  4: $spacer,
+  5: $spacer * 1.125,
+  6: $spacer * 1.25,
+  7: $spacer * 1.5,
+  8: $spacer * 2
+);
+
+$enable-rfs: false;
+$font-size-base: 1rem;
+
+$h1-font-size: 17px;
+$h2-font-size: $font-size-base;
+$h3-font-size: $font-size-base * .875;
+$h4-font-size: $font-size-base * .75;
+
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+);
+
+$box-shadow: 0 .25rem $shadow;
+$border-radius: 6px;
+
+$link-decoration: none;
