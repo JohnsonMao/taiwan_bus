@@ -1,0 +1,23 @@
+@import '../../asset/scss/custom_variables';
+
+h1
+{
+  margin-right: 154px;
+  margin-left: auto;
+  width: 152px;
+  overflow: hidden;
+  white-space: nowrap;
+  svg
+  {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 2px $shadow)
+  }
+}
+.index
+{
+  header
+  {
+    height: 26vh;
+  }
+}
