@@ -1,9 +1,11 @@
+@import '../../asset/scss/custom_variables';
 .router
 {
   padding-top: 26vh;
   .btn
   {
     width: 140px;
+    border-radius: 8px;
   }
   li
   {
@@ -20,12 +22,35 @@
   li:nth-child(2)
   {
     margin-right: 44px;
-    margin-top: 131px;
+    margin-top: 130px;
   }
   li:nth-child(3)
   {
     margin-right: 154px;
-    margin-top: 72px;
+    margin-top: 70px;
+
+    &::before,
+    &::after
+    {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 2px solid $primary;
+      border-radius: 50%;
+      box-shadow: $btn-shadow;
+    }
+    &::before
+    {
+      top: -140%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &::after
+    {
+      top: 12%;
+      right: -55%;
+    }
   }
   &::after
   {
@@ -36,7 +61,7 @@
     right: 0;
     margin-top: 25vh;
     margin-left: auto;
-    margin-right: 79px;
+    margin-right: 85px;
     height: 328px;
     width: 186px;
     z-index: -1;

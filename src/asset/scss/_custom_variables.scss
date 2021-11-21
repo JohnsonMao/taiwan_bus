@@ -1,4 +1,4 @@
-$primary:   #10A2F6;
+$primary:   #1CC8EE;
 $dark:      #131414;
 $light:     #F5F5F5;
 $gray-light:#414242;
@@ -6,7 +6,7 @@ $gray:      #1C1D1D;
 $shadow:    rgba(0, 0, 0, .5);
 $body-bg:     $dark;
 $body-color:  $light;
-
+$btn-shadow:  0 0 2px $primary, 0 0 6px $primary;
 
 $theme-colors: (
   "primary": $primary,
@@ -47,7 +47,7 @@ $font-sizes: (
   4: $h4-font-size,
 );
 
-$box-shadow: 0 .25rem $shadow;
+$box-shadow: 0 .25rem .25rem $shadow;
 $border-radius: 6px;
 
 $link-decoration: none;

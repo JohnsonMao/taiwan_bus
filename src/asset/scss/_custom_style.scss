@@ -14,17 +14,62 @@ h1
 {
   margin-bottom: 0;
 }
-.index
+input
+{
+  padding: 7px 0 7px 16px;
+  background: $gray;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  color: $primary;
+
+  &::placeholder
+  {
+    color: $gray-light;
+  }
+
+  &:focus
+  {
+    outline: none;
+    border: 1px solid $primary;
+    box-shadow: $btn-shadow;
+  }
+}
+.wrap
 {
   backdrop-filter: brightness(40%);
+  background: transparent;
+  transition: .6s;
+  &.page
+  {
+    backdrop-filter: brightness(100%);
+    background: $dark;
+  }
+  header
+  {
+    transition: .6s;
+  }
 }
 .btn
 {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   background: $dark;
-  box-shadow: 0 0 6px $primary;
+  box-shadow: $btn-shadow;
   cursor: pointer;
   transition: .3s;
+  border: 1px solid $primary;
+  border-radius: 9px;
+  
+  &-primary
+  {
+    color: $primary;
+  }
+  &-light
+  {
+    color: $light;
+  }
 
   path
   {

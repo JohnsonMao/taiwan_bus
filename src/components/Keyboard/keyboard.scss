@@ -1,0 +1,16 @@
+@import '../../asset/scss/custom_variables';
+.keyboard
+{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 40px);
+  gap: $spacer;
+}
+.city-btn
+{
+  grid-area: 1 / 1 / 2 / 4;
+}
+.manual-btn
+{
+  grid-area: 1 / 4 / 2 / 6;
+}

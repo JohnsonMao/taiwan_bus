@@ -1,0 +1,55 @@
+@import '../../asset/scss/custom_variables';
+
+.logo
+{
+  margin: calc(27vh - 80px) 154px 0 auto;
+  position: relative;
+  width: 152px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: .6s;
+  svg
+  {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 2px $shadow)
+  }
+  &::after
+  {
+    content: '回首頁';
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $h4-font-size;
+    line-height: 1.25;
+    color: transparent;
+    transition: .6s;
+  }
+}
+.searchInput
+{
+  display: none;
+  opacity: 0;
+}
+.page
+{
+  header
+  {
+    box-shadow: $box-shadow;
+  }
+  .logo
+  {
+    margin: 0;
+    width: 96px;
+    
+    &::after
+    {
+      color: $primary;
+    }
+  }
+  .searchInput
+  {
+    display: block;
+    opacity: 1;
+  }
+}

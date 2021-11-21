@@ -1,20 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Container } from 'react-bootstrap';
 
 import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
 import { ReactComponent as Search } from "../../asset/icon/search.svg";
-import { ReactComponent as Dashed } from "../../asset/icon/dashed_mobile.svg";
 import "./index.scss";
 
 const linkStyle = {
   className:
-    "btn border border-primary rounded d-flex align-items-center justify-content-center fs-3 p-2",
+    "btn btn-primary fs-3 p-2",
 };
 
-export default function Index() {
+export default function Index({ setPathname }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setPathname(pathname);
+  }, [setPathname, pathname])
+
   return (
-    <>
-      {/* <Dashed className="position-absolute end-0 dashed" /> */}
+    <Container className="position-relative">
       <ul className="router">
         <li>
           <Link to="/nearby" {...linkStyle}>
@@ -38,6 +43,6 @@ export default function Index() {
       <footer className="fixed-bottom d-flex justify-content-center fs-4 p-4 fw-light">
         Taiwan Bus © Code: Mao / Design: KT
       </footer>
-    </>
+    </Container>
   );
 }
