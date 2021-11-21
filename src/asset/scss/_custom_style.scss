@@ -9,6 +9,7 @@ ul
 {
   list-style: none;
   margin: 0;
+  padding: 0;
 }
 h1
 {
@@ -48,6 +49,10 @@ input
   {
     transition: .6s;
   }
+}
+.main
+{
+  padding-top: 65px;
 }
 .btn
 {

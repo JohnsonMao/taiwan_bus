@@ -7,7 +7,7 @@ import "./keyboard.scss";
 
 export default function Keyboard() {
   return (
-    <div className="keyboard">
+    <div className="keyboard fixed-bottom bg-gray p-6">
       {keyboard_base.map((item) =>
         item === "手動輸入" ? (
           <label

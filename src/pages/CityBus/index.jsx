@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Keyboard from '../../components/Keyboard';
+import DataList from '../../components/DataList';
 
 export default function CityBus({ setPathname }) {
   const { pathname } = useLocation();
@@ -11,8 +12,9 @@ export default function CityBus({ setPathname }) {
   }, [setPathname, pathname])
 
   return (
-    <div className="fixed-bottom bg-gray p-6">
+    <main className="main">
+      <DataList />
       <Keyboard />
-    </div>
+    </main>
   )
 }

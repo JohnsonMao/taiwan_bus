@@ -11,7 +11,11 @@ export default function Header() {
       <Container className="d-flex align-items-end py-3">
         <Row className="gx-3 ms-auto flex-nowrap">
           <Col xs="auto">
-            <Link to="/" className="d-block logo flex-shrink-0" aria-label="回首頁 Homepage">
+            <Link
+              to="/"
+              className="d-block logo flex-shrink-0"
+              aria-label="回首頁 Homepage"
+            >
               <h1>
                 <Logo />
                 Taiwan Bus
