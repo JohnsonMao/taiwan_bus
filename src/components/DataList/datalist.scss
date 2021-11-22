@@ -1,0 +1,17 @@
+@import '../../asset/scss/custom_variables';
+.datalist
+{
+  height: calc(100vh - 115px);
+  overflow: auto;
+  li:nth-child(odd)
+  {
+    a{
+      background-color: $gray;
+      border-radius: $border-radius;
+    }
+  }
+  &.keyboard-show
+  {
+    padding-bottom: 312px;
+  }
+}

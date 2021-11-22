@@ -1,19 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
+import { ReactComponent as GoBack } from "../../asset/icon/goBack.svg";
+import { ReactComponent as MapSVG } from "../../asset/icon/map.svg";
 import "./header.scss";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1)
+
   return (
     <header className="fixed-top">
       <Container className="d-flex align-items-end py-3">
-        <Row className="gx-3 ms-auto flex-nowrap">
-          <Col xs="auto">
+        <Row className="gx-3 flex-nowrap w-100 align-items-center">
+          <Col className="goBack">
+            <button
+              onClick={goBack}
+              aria-label="上一頁 Go back"
+            >
+              <GoBack />
+            </button>
+          </Col>
+          <Col className="logo">
             <Link
               to="/"
-              className="d-block logo flex-shrink-0"
+              className="d-block flex-shrink-0"
               aria-label="回首頁 Homepage"
             >
               <h1>
@@ -32,6 +45,13 @@ export default function Header() {
                 className="w-100"
               />
             </div>
+          </Col>
+          <Col className="icon">
+            <Link to=""
+              className="d-block flex-shrink-0 text-end"
+              aria-label="地圖 Map">
+              <MapSVG />
+            </Link>
           </Col>
         </Row>
       </Container>

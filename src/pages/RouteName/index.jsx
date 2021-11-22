@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-export default function RouteName() {
+export default function RouteName({ setRouteLevel }) {
+
+  useEffect(() => {
+    setRouteLevel(2);
+  }, [setRouteLevel])
+  
   return (
-    <div>
-      
-    </div>
+    <main className="main">
+      RouteName
+    </main>
   )
 }

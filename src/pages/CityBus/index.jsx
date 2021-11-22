@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import Keyboard from '../../components/Keyboard';
 import DataList from '../../components/DataList';
 
-export default function CityBus({ setPathname }) {
-  const { pathname } = useLocation();
+export default function CityBus({ setRouteLevel }) {
 
   useEffect(() => {
-    setPathname(pathname);
-  }, [setPathname, pathname])
-
+    setRouteLevel(1);
+  }, [setRouteLevel])
+  
   return (
     <main className="main">
       <DataList />

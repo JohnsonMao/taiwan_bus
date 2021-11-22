@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 
 import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
@@ -11,12 +11,11 @@ const linkStyle = {
     "btn btn-primary fs-3 p-2",
 };
 
-export default function Index({ setPathname }) {
-  const { pathname } = useLocation();
+export default function Index({ setRouteLevel }) {
 
   useEffect(() => {
-    setPathname(pathname);
-  }, [setPathname, pathname])
+    setRouteLevel(0);
+  }, [setRouteLevel])
 
   return (
     <Container className="position-relative">
