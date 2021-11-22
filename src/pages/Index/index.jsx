@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 
@@ -11,29 +11,25 @@ const linkStyle = {
     "btn btn-primary fs-3 p-2",
 };
 
-export default function Index({ setRouteLevel }) {
-
-  useEffect(() => {
-    setRouteLevel(0);
-  }, [setRouteLevel])
+export default function Index() {
 
   return (
-    <Container className="position-relative">
+    <Container className="position-relative" as="nav">
       <ul className="router">
         <li>
-          <Link to="/nearby" {...linkStyle}>
+          <Link to="nearby" {...linkStyle}>
             <GPS />
             <span>附近公車站</span>
           </Link>
         </li>
         <li>
-          <Link to="/citybus" {...linkStyle}>
+          <Link to="citybus" {...linkStyle}>
             <Search />
             <span>查詢公車</span>
           </Link>
         </li>
         <li>
-          <Link to="/intercitybus" {...linkStyle}>
+          <Link to="intercitybus" {...linkStyle}>
             <Search />
             <span>查詢客運</span>
           </Link>

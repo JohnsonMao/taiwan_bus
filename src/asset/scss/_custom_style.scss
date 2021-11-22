@@ -53,6 +53,14 @@ input
 .main
 {
   padding-top: 65px;
+  transition: .6s;
+}
+.result
+{
+  .main
+  {
+    padding-top: 115px;
+  }
 }
 .btn
 {

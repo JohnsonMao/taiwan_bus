@@ -1,0 +1,83 @@
+@import '../../asset/scss/custom_variables';
+.list
+{
+  li
+  {
+    margin-bottom: 14px;
+
+    &:last-child
+    {
+      .circle::after
+      {
+        height: 0;
+      }
+    }
+  }
+}
+.event
+{
+  padding: 10px;
+  background: $dark;
+  border: 1px solid;
+  border-color: $dark;
+  border-radius: $border-radius * 2;
+  color: $gray-light;
+}
+.circle
+{
+  height: 15px;
+  width: 15px;
+  background: $gray;
+  border: 2px solid $primary;
+  border-radius: 50%;
+  position: relative;
+  
+  &::after
+  {
+    content: '';
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 50%;
+    height: 43px;
+    width: 2px;
+    background: $primary;
+    box-shadow: 0 0 5px $primary;
+    transform: translateX(-50%);
+  }
+}
+.enter
+{
+  .event
+  {
+    background: $primary;
+    border-color: $primary;
+    color: $dark;
+  }
+  .stop
+  {
+    color: $primary;
+  }
+  .circle
+  {
+    background: $primary;
+    box-shadow: $btn-shadow;
+  }
+}
+.waiting
+{
+  .event
+  {
+    color: $primary;
+    border-color: $primary;
+    box-shadow: $btn-shadow;
+  }
+}
+.leaving
+{
+  .event
+  {
+    color: $light;
+    background: $gray-light;
+    border-color: $gray-light;
+  }
+}

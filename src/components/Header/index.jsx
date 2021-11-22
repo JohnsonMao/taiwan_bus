@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
@@ -9,6 +9,8 @@ import "./header.scss";
 
 export default function Header() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  
   const goBack = () => navigate(-1)
 
   return (
@@ -17,13 +19,14 @@ export default function Header() {
         <Row className="gx-3 flex-nowrap w-100 align-items-center">
           <Col className="goBack">
             <button
+              type="button"
               onClick={goBack}
               aria-label="上一頁 Go back"
             >
               <GoBack />
             </button>
           </Col>
-          <Col className="logo">
+          <Col className="logo d-flex justify-content-center">
             <Link
               to="/"
               className="d-block flex-shrink-0"
@@ -47,7 +50,7 @@ export default function Header() {
             </div>
           </Col>
           <Col className="icon">
-            <Link to=""
+            <Link to={pathname + '/map'}
               className="d-block flex-shrink-0 text-end"
               aria-label="地圖 Map">
               <MapSVG />

@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Keyboard from '../../components/Keyboard';
 import DataList from '../../components/DataList';
 
-export default function CityBus({ setRouteLevel }) {
-
-  useEffect(() => {
-    setRouteLevel(1);
-  }, [setRouteLevel])
+export default function CityBus() {
   
   return (
     <main className="main">

@@ -32,12 +32,13 @@
 {
   display: none;
   opacity: 0;
+  transition: .6s;
 }
 .page
 {
   header
   {
-    box-shadow: $box-shadow;
+    background: $dark;
   }
   .logo
   {

@@ -1,0 +1,61 @@
+@import '../../asset/scss/custom_variables';
+.nav
+{
+  ul
+  {
+    padding-top: calc(27vh - 50px);
+    background: $dark;
+    opacity: 0;
+    transition: .6s;
+    position: relative;
+
+    &::after
+    {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 2px;
+      background: $primary;
+      box-shadow: $btn-shadow;
+      transition: .3s;
+    }
+    &.back::after
+    {
+      transform: translateX(100%);
+    }
+  }
+
+  &-link
+  {
+    background: transparent;
+    border: 0;
+    color: $light;
+  }
+}
+.page
+{
+  .nav
+  {
+    box-shadow: $box-shadow;
+    z-index: 1020;
+    ul
+    {
+      display: flex;
+      padding-top: 12px;
+    }
+  }
+}
+.result
+{
+  .nav
+  {
+    ul
+    {
+      display: flex;
+      padding-top: 65px;
+      opacity: 1; 
+    }
+  }
+}
