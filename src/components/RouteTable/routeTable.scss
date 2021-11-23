@@ -1,6 +1,13 @@
 @import '../../asset/scss/custom_variables';
 .list
 {
+  transition: .3s;
+  ul
+  {
+    margin-right: 24px;
+    width: calc(100vw - 24px);
+  }
+
   li
   {
     margin-bottom: 14px;
@@ -13,6 +20,10 @@
       }
     }
   }
+}
+#back:checked + .wrap .list
+{
+  transform: translateX( calc(-100% - 24px) );
 }
 .event
 {

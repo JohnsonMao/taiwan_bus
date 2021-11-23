@@ -12,7 +12,7 @@ export default function Layout() {
   return (
     <div
       className={`wrap vh-100${
-        pathnameArr[1] === "" ? "" : pathnameArr[2] === undefined ? " page" : " page result"
+        pathnameArr[1] === '' ? '' : pathnameArr[2] ? " page result" : " page"
       }`}
     >
       <Header />

@@ -1,38 +1,56 @@
 @import '../../asset/scss/custom_variables';
 
-.logo a
+.logo
 {
-  margin: calc(27vh - 80px) 154px 0 auto;
-  position: relative;
-  width: 152px;
-  overflow: hidden;
-  white-space: nowrap;
-  transition: .6s;
+  width: 100%;
+  a
+  {
+    margin: calc(27vh - 80px) 154px 0 auto;
+    position: relative;
+    width: 152px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: .6s;
+
+    &::after
+    {
+      content: '回首頁';
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: $h4-font-size;
+      line-height: 1.25;
+      color: transparent;
+      transition: .6s;
+    }
+  }
   svg
   {
     width: 100%;
     height: auto;
     filter: drop-shadow(0 4px 2px $shadow)
   }
-  &::after
-  {
-    content: '回首頁';
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: $h4-font-size;
-    line-height: 1.25;
-    color: transparent;
-    transition: .6s;
-  }
 }
-.searchInput,
-.goBack,
-.icon
+.result_show,
+.page_show
 {
-  display: none;
+  width: 0;
   opacity: 0;
   transition: .6s;
+  input
+  {
+    padding: 0;
+    border-width: 0;
+  }
+  button
+  {
+    background: transparent;
+    border: 0;
+  }
+  svg
+  {
+    display: none;
+  }
 }
 .page
 {
@@ -42,10 +60,10 @@
   }
   .logo
   {
-    flex: 0 0;
+    width: 108px;
     a
     {
-      margin: 0;
+      margin: 0 12px 0 0;
       width: 96px;
       
       &::after
@@ -54,33 +72,47 @@
       }
     }
   }
-  .searchInput
+  .page_show
   {
-    display: block;
+    width: calc(100% - 108px);
     opacity: 1;
+
+    input
+    {
+      padding: 7px 0 7px 16px;
+      border-width: 1px;
+    }
   }
 }
 .result
 {
   .logo
   {
-    flex: 1 0;
+    width: 100%;
+    a
+    {
+      margin: 0;
+    }
   }
-  .searchInput
+  .page_show
   {
-    display: none;
+    width: 0%;
     opacity: 0;
+    
+    input
+    {
+      padding: 0;
+      border-width: 0;
+    }
   }
-  .goBack,
-  .icon
+  .result_show
   {
-    display: block;
+    width: 100%;
     opacity: 1;
 
-    button
+    svg
     {
-      background: transparent;
-      border: 0;
+      display: inline;
     }
   }
 }

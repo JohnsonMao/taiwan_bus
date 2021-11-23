@@ -1,36 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./nav.scss";
 
 export default function Nav() {
-  const [isBack, setIsBack] = useState(false);
-  const handleIsBack = (e) => {
-    const { node } = e.target.dataset;
-    setIsBack(node === 'back');
-  };
-
+  /*  控制 App.js 的 radio  */
   return (
     <div className="fixed-top nav">
-      <ul className={isBack ? "back" : null} onClick={handleIsBack}>
+      <ul className="nav-list">
         <li className="w-50">
-          <button type="button" className="nav-link w-100 p-4" data-node="go">
-            <h2 data-node="go">
-              <span className="text-primary me-1" data-node="go">
+          <label htmlFor="go" className="nav-link d-block p-4">
+            <h2 className="text-center">
+              <span className="text-primary me-1">
                 往
               </span>
               台北橋
             </h2>
-          </button>
+          </label>
         </li>
         <li className="w-50">
-          <button type="button" className="nav-link w-100 p-4" data-node="back">
-            <h2 data-node="back">
-              <span className="text-primary me-1" data-node="back">
+          <label htmlFor="back" className="nav-link d-block p-4">
+            <h2 className="text-center">
+              <span className="text-primary me-1">
                 往
               </span>
               南港
             </h2>
-          </button>
+          </label>
         </li>
       </ul>
     </div>

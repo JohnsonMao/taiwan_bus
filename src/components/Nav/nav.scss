@@ -1,7 +1,7 @@
 @import '../../asset/scss/custom_variables';
 .nav
 {
-  ul
+  &-list
   {
     padding-top: calc(27vh - 50px);
     background: $dark;
@@ -21,10 +21,6 @@
       box-shadow: $btn-shadow;
       transition: .3s;
     }
-    &.back::after
-    {
-      transform: translateX(100%);
-    }
   }
 
   &-link
@@ -34,13 +30,20 @@
     color: $light;
   }
 }
+
+#back:checked + .wrap .nav-list::after
+{
+  transform: translateX(100%);
+}
+
 .page
 {
   .nav
   {
     box-shadow: $box-shadow;
     z-index: 1020;
-    ul
+    
+    &-list
     {
       display: flex;
       padding-top: 12px;
@@ -51,7 +54,7 @@
 {
   .nav
   {
-    ul
+    &-list
     {
       display: flex;
       padding-top: 65px;

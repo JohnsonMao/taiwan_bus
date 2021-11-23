@@ -53,12 +53,15 @@ input
 .main
 {
   padding-top: 65px;
+  height: 100vh;
+  background: rgba($gray, 0);
   transition: .6s;
 }
 .result
 {
   .main
   {
+    background: rgba($gray, 1);
     padding-top: 115px;
   }
 }

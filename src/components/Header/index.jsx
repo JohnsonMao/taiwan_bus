@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
 import { ReactComponent as GoBack } from "../../asset/icon/goBack.svg";
@@ -10,23 +10,21 @@ import "./header.scss";
 export default function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  
-  const goBack = () => navigate(-1)
+
+  const pathnameArr = pathname.split("/");
+
+  const goBack = () => navigate(-1);
 
   return (
     <header className="fixed-top">
       <Container className="d-flex align-items-end py-3">
-        <Row className="gx-3 flex-nowrap w-100 align-items-center">
-          <Col className="goBack">
-            <button
-              type="button"
-              onClick={goBack}
-              aria-label="上一頁 Go back"
-            >
+        <div className="d-flex justify-content-end align-items-center w-100">
+          <div className="result_show">
+            <button type="button" onClick={goBack} aria-label="上一頁 Go back">
               <GoBack />
             </button>
-          </Col>
-          <Col className="logo d-flex justify-content-center">
+          </div>
+          <div className="logo d-flex justify-content-center">
             <Link
               to="/"
               className="d-block flex-shrink-0"
@@ -37,8 +35,8 @@ export default function Header() {
                 Taiwan Bus
               </h1>
             </Link>
-          </Col>
-          <Col className="searchInput">
+          </div>
+          <div className="page_show">
             <div>
               <input
                 type="search"
@@ -48,15 +46,19 @@ export default function Header() {
                 className="w-100"
               />
             </div>
-          </Col>
-          <Col className="icon">
-            <Link to={pathname + '/map'}
-              className="d-block flex-shrink-0 text-end"
-              aria-label="地圖 Map">
+          </div>
+          <div className="result_show">
+            <Link
+              to={pathname + "/map"}
+              className={`flex-shrink-0 text-end ${
+                pathnameArr[3] ? "d-none" : "d-block"
+              }`}
+              aria-label="地圖 Map"
+            >
               <MapSVG />
             </Link>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Container>
     </header>
   );

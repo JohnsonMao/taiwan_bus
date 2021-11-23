@@ -1,0 +1,17 @@
+@import '../../asset/scss/custom_variables';
+
+.leaflet-container .leaflet-control-attribution
+{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: $light;
+  background: rgba($dark, .5);
+
+  a
+  {
+    color: $primary;
+  }
+}
