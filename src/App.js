@@ -13,8 +13,8 @@ export default function App() {
   return (
     <HashRouter>
       {/*  控制公車路線方向顯示的 CSS  */}
-      <input id="go" className="d-none" name="direction" type="radio" />
-      <input id="back" className="d-none" name="direction" type="radio" />
+      <input type="radio" className="d-none" name="direction" id="go" defaultChecked />
+      <input type="radio" className="d-none" name="direction" id="back" />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Index />} />

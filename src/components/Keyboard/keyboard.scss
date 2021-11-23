@@ -1,10 +1,28 @@
 @import '../../asset/scss/custom_variables';
 .keyboard
 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 40px);
-  gap: $spacer;
+  gap: $spacer * .75;
+  transform: translateY(100%);
+  transition: .3s;
+
+  .btn
+  {
+    height: 40px;
+  }
+}
+input[name="keyboard"]:checked + .keyboard
+{
+  transform: translateY(0);
+}
+#noKeyboard:checked + .container .keyboard
+{
+  transform: translateY(92%);
 }
 .city-btn
 {
@@ -13,4 +31,12 @@
 .manual-btn
 {
   grid-area: 1 / 4 / 2 / 6;
+}
+.enter-btn
+{
+  grid-area: 5 / 3 / 6 / 6;
+}
+.goBack-btn
+{
+  grid-area: 3 / 3 / 4 / 6;
 }
