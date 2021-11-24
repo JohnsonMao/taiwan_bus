@@ -10,7 +10,7 @@ export default function RouteTable() {
   
   useEffect(() => {
     const token = PubSub.subscribe("direction", (_, state) => {
-      setIsBack(state.isBack)
+      setIsBack(state)
     })
     return () => {
       PubSub.unsubscribe(token);

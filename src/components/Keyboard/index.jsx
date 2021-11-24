@@ -123,7 +123,7 @@ export default function Keyboard() {
 
   const pressBtn = (e) => {
     const routeName = e.target.dataset.route || '';
-    PubSub.publish("search", { routeName })
+    PubSub.publish("search", routeName)
   }
 
   return (

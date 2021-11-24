@@ -14,7 +14,7 @@ export default function Header() {
   
   useEffect(() => {
     const token = PubSub.subscribe("search", (_, state) => {
-      switch (state.routeName) {
+      switch (state) {
         case "倒退":
           setSearch(prevState => prevState.slice(0, -1))
           break;
@@ -22,13 +22,17 @@ export default function Header() {
           setSearch('')
           break;
         default:
-          setSearch(prevState => prevState + state.routeName)
+          setSearch(prevState => prevState + state)
       }
     })
     return () => {
       PubSub.unsubscribe(token);
     }
   }, [])
+
+  useEffect(() => {
+    PubSub.publish("filter", search)
+  }, [search])
 
   const handleSearch = (e) => setSearch(e.target.value);
 

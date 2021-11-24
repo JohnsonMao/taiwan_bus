@@ -7,7 +7,7 @@ import "./nav.scss";
 export default function Nav() {
   const isBack = (e) => {
     const isBackValue = e.target.id === "back";
-    PubSub.publish("direction", { isBack: isBackValue})
+    PubSub.publish("direction", isBackValue)
   }
 
   return (
