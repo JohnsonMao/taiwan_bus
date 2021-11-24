@@ -29,7 +29,6 @@ export default function Header() {
       PubSub.unsubscribe(token);
     }
   }, [])
-
   useEffect(() => {
     PubSub.publish("filter", search)
   }, [search])

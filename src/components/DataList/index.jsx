@@ -10,7 +10,6 @@ export default function DataList() {
   const { city } = useContext(Context);
   const { data, error, loading } = useHttp();
   const [filterType, setFilterType] = useState('');
-  const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
     const token = PubSub.subscribe("filter", (_, state) => {
@@ -21,13 +20,18 @@ export default function DataList() {
     }
   }, [])
 
+  const filterData = data.filter(item => item?.RouteName.Zh_tw.indexOf(filterType) !== -1);
+  let showData = filterData
+  showData.length = 50;
+
   return (
     <>
     <h2 className="fs-2 mt-7 mb-1">{city || '請選擇縣市'}</h2>
     <ul className="datalist keyboard-show">
       {
+        filterType.trim() === ''? null :
         loading ? <div>Loading</div> : (
-        filterData.map(item => (
+        showData.map(item => (
           <li key={item.RouteUID}>
             <Link to={item.RouteUID} className="d-block px-4 py-3">
               <h3 className="fs-1 lh-base">{item.RouteName.Zh_tw}</h3>
