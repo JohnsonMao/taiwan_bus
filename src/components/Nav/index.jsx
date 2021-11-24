@@ -1,11 +1,19 @@
 import React from "react";
+import PubSub from "pubsub-js";
 
 import "./nav.scss";
 
+
 export default function Nav() {
-  /*  控制 App.js 的 radio  */
+  const isBack = (e) => {
+    const isBackValue = e.target.id === "back";
+    PubSub.publish("direction", { isBack: isBackValue})
+  }
+
   return (
     <div className="fixed-top nav">
+      <input type="radio" className="d-none" name="direction" id="go" onChange={isBack} defaultChecked />
+      <input type="radio" className="d-none" name="direction" id="back" onChange={isBack} />
       <ul className="nav-list">
         <li className="w-50">
           <label htmlFor="go" className="nav-link d-block p-4">

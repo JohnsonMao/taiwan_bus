@@ -20,10 +20,10 @@
       }
     }
   }
-}
-#back:checked + .wrap .list
-{
-  transform: translateX( calc(-100% - 24px) );
+  &.isBack
+  {
+    transform: translateX( calc(-100% - 24px) );
+  }
 }
 .event
 {

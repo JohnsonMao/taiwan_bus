@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import PubSub from "pubsub-js";
 import { Container, Row, Col } from 'react-bootstrap';
 
 import './routeTable.scss';
 
 export default function RouteTable() {
+  
+  const [isBack, setIsBack] = useState(false);
+  
+  useEffect(() => {
+    const token = PubSub.subscribe("direction", (_, state) => {
+      setIsBack(state.isBack)
+    })
+    return () => {
+      PubSub.unsubscribe(token);
+    }
+  }, [])
 
   return (
     <Container className="overflow-hidden">
       <div className="fs-4 text-primary text-end mt-6 mb-2">*於 3 秒前更新</div>
-      <div className="list d-flex">
+      <div className={`list d-flex${isBack ? ' isBack' : ''}`}>
         <ul className="flex-shrink-0">
           <Row as="li" className="gx-3 align-items-center">
             <Col xs={3}>

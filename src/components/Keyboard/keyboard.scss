@@ -9,6 +9,7 @@
   grid-template-columns: repeat(5, 1fr);
   gap: $spacer * .75;
   transform: translateY(100%);
+  z-index: 1020;
   transition: .3s;
 
   .btn

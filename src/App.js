@@ -4,7 +4,7 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Index from "./pages/Index";
 import CityBus from "./pages/CityBus";
-import SearchState from "./components/SearchState";
+import SearchResult from "./components/SearchResult";
 import RouteTable from "./components/RouteTable";
 import Map from "./components/Map";
 import "./asset/scss/style.scss";
@@ -12,14 +12,11 @@ import "./asset/scss/style.scss";
 export default function App() {
   return (
     <HashRouter>
-      {/*  控制公車路線方向顯示的 CSS  */}
-      <input type="radio" className="d-none" name="direction" id="go" defaultChecked />
-      <input type="radio" className="d-none" name="direction" id="back" />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Index />} />
           <Route path="citybus" element={<CityBus />}>
-            <Route index element={<SearchState />} />
+            <Route index element={<SearchResult />} />
             <Route path=":id" element={<RouteTable />} />
             <Route path=":id/map" element={<Map />} />
           </Route>

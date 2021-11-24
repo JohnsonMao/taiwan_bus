@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import PubSub from "pubsub-js";
 import { Container } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
@@ -8,6 +9,29 @@ import { ReactComponent as MapSVG } from "../../asset/icon/map.svg";
 import "./header.scss";
 
 export default function Header() {
+
+  const [search, setSearch] = useState('');
+  
+  useEffect(() => {
+    const token = PubSub.subscribe("search", (_, state) => {
+      switch (state.routeName) {
+        case "倒退":
+          setSearch(prevState => prevState.slice(0, -1))
+          break;
+        case "C":
+          setSearch('')
+          break;
+        default:
+          setSearch(prevState => prevState + state.routeName)
+      }
+    })
+    return () => {
+      PubSub.unsubscribe(token);
+    }
+  }, [])
+
+  const handleSearch = (e) => setSearch(e.target.value);
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -44,6 +68,8 @@ export default function Header() {
                 placeholder="選擇路線或手動輸入關鍵字"
                 aria-label="選擇路線或手動輸入關鍵字"
                 className="w-100"
+                value={search}
+                onChange={handleSearch}
               />
             </div>
           </div>

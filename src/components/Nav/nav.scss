@@ -31,7 +31,7 @@
   }
 }
 
-#back:checked + .wrap .nav-list::after
+#back:checked + .nav-list::after
 {
   transform: translateX(100%);
 }
