@@ -2,7 +2,7 @@ import ajax from "./ajax";
 
 const ROOT_URL = "https://ptx.transportdata.tw/MOTC/v2/Bus";
 
-const noCity = [0, "Please set the city parameters"]
+const noCity = [0, "Please set the city parameters"];
 
 /* 預設篩選城市路線資料 */
 const initCityBus = {
@@ -20,7 +20,7 @@ export const apiCityBus = (city = "", data = null) =>
     ? noCity
     : ajax(ROOT_URL + "/Route/City/" + city, { ...initCityBus, ...data });
 
-/* 路線資料
+/* 路線站點資料
  *
  * RouteUID 路線識別碼
  * RouteName 路線名稱
@@ -48,12 +48,22 @@ export const apiStopOfRoute = (city = "", routeName = "", data = null) =>
         ...data,
       });
 
-
 /* 批次動態定點資料
  *
  * PlateNumb 車牌號碼
  * A2EventType 進站離站: [0:'離站',1:'進站']
  */
+const initBusNearStop = {
+  $select: ["PlateNumb", "A2EventType"],
+};
+
+export const apiBusNearStop = (city = "", routeName = "", data = null) =>
+  city === ""
+    ? noCity
+    : ajax(ROOT_URL + "/RealTimeNearStop/City/" + city + "/" + routeName, {
+        ...initBusNearStop,
+        ...data,
+      });
 
 /* 批次預估到站資料
  *
@@ -65,7 +75,33 @@ export const apiStopOfRoute = (city = "", routeName = "", data = null) =>
  * EstimateTime 預估到站時間 [與 StopStatus 有關連]
  * StopStatus 車輛狀態 [0:'正常',1:'尚未發車',2:'交管不停靠',3:'末班車已過',4:'今日未營運']
  */
+const initEstimatedTime = {
+  $select: [
+    "PlateNumb",
+    "StopUID",
+    "StopName",
+    "RouteName",
+    "Direction",
+    "EstimateTime",
+    "StopStatus",
+  ],
+};
 
+export const apiEstimatedTime = (city = "", routeName = "", data = null) =>
+  city === ""
+    ? noCity
+    : ajax(
+        ROOT_URL + "/EstimatedTimeOfArrival/City/" + city + "/" + routeName,
+        {
+          ...initEstimatedTime,
+          ...data,
+        }
+      );
+
+/* 整合 Route 資料 */
+export const apiRouteName = (city = "", routeName = "", data = null) => {
+  
+}
 
 /* 批次動態定時資料 Map
  *
@@ -74,7 +110,6 @@ export const apiStopOfRoute = (city = "", routeName = "", data = null) =>
  * Speed 行駛速度
  * Direction 去程返程
  */
-
 
 /* 路線線型
  *
