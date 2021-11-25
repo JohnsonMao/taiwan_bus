@@ -40,13 +40,11 @@ const initStopOfRoute = {
   $select: ["RouteUID", "RouteName", "Direction", "Stops"],
 };
 
-export const apiStopOfRoute = (city = "", routeName = "", data = null) =>
-  city === ""
-    ? noCity
-    : ajax(ROOT_URL + "/DisplayStopOfRoute/City/" + city + "/" + routeName, {
-        ...initStopOfRoute,
-        ...data,
-      });
+const apiStopOfRoute = (city = "", routeName = "", data = null) =>
+  ajax(ROOT_URL + "/DisplayStopOfRoute/City/" + city + "/" + routeName, {
+    ...initStopOfRoute,
+    ...data,
+  });
 
 /* 批次動態定點資料
  *
@@ -57,13 +55,11 @@ const initBusNearStop = {
   $select: ["PlateNumb", "A2EventType"],
 };
 
-export const apiBusNearStop = (city = "", routeName = "", data = null) =>
-  city === ""
-    ? noCity
-    : ajax(ROOT_URL + "/RealTimeNearStop/City/" + city + "/" + routeName, {
-        ...initBusNearStop,
-        ...data,
-      });
+const apiBusNearStop = (city = "", routeName = "", data = null) =>
+  ajax(ROOT_URL + "/RealTimeNearStop/City/" + city + "/" + routeName, {
+    ...initBusNearStop,
+    ...data,
+  });
 
 /* 批次預估到站資料
  *
@@ -87,21 +83,30 @@ const initEstimatedTime = {
   ],
 };
 
-export const apiEstimatedTime = (city = "", routeName = "", data = null) =>
-  city === ""
-    ? noCity
-    : ajax(
-        ROOT_URL + "/EstimatedTimeOfArrival/City/" + city + "/" + routeName,
-        {
-          ...initEstimatedTime,
-          ...data,
-        }
-      );
+const apiEstimatedTime = (city = "", routeName = "", data = null) =>
+  ajax(ROOT_URL + "/EstimatedTimeOfArrival/City/" + city + "/" + routeName, {
+    ...initEstimatedTime,
+    ...data,
+  });
 
 /* 整合 Route 資料 */
-export const apiRouteName = (city = "", routeName = "", data = null) => {
-  
-}
+export const apiRouteName = async (city = "", routeName = "", data = null) => {
+  if (city === "") {
+    return noCity;
+  }
+  const stopOfRoute = await apiStopOfRoute(city, routeName, data);
+  const busNearStop = await apiBusNearStop(city, routeName, data);
+  const estimatedTime = await apiEstimatedTime(city, routeName, data);
+  const result = [];
+  stopOfRoute.forEach((item, index) => {
+    result[index] = Object.assign(
+      item,
+      busNearStop[index],
+      estimatedTime[index]
+    );
+  });
+  return result;
+};
 
 /* 批次動態定時資料 Map
  *

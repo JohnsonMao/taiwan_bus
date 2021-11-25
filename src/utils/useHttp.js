@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { apiCityBus, apiStopOfRoute } from "../api";
+import { apiCityBus, apiRouteName } from "../api";
 import { CITYBUS, ROUTENAME } from './type_config';
 import useInterval from './useInterval';
 
@@ -8,6 +8,7 @@ export default function useHttp(type = "", city = "", routeName = "") {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
+  
   console.log("useHttp", city, routeName)
 
   const updateData = useCallback(async () => {
@@ -20,9 +21,9 @@ export default function useHttp(type = "", city = "", routeName = "") {
           break;
 
         case ROUTENAME:
-          const stopOfRouteData = await apiStopOfRoute(city, routeName);
+          const routeNameData = await apiRouteName(city, routeName);
           console.log("call route name api")
-          setData(stopOfRouteData);
+          setData(routeNameData);
           break;
 
         default:
