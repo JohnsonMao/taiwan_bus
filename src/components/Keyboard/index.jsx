@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
 import PubSub from "pubsub-js";
 
-import { ReactComponent as Del } from "../../asset/icon/del.svg";
 import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
-import Context from "../../utils/useContext";
+import { Context } from "../../pages/Layout";
 import {
   keyboard_base,
   keyboard_city,
@@ -36,12 +35,16 @@ const KeyboardBase = ({ city }) => (
           key={item}
           type="button"
           className={`btn ${
-            Number.isInteger(item) ? "btn-light" : "btn-primary"
+            item === "倒退"
+              ? "delete-icon p-1"
+              : Number.isInteger(item)
+              ? "btn-light"
+              : "btn-primary"
           }`}
           aria-label={item}
           data-route={item}
         >
-          {item === "倒退" ? <Del data-route={item} /> : item}
+          {item === "倒退" ? null : item}
         </button>
       ) : (
         <label
@@ -118,13 +121,12 @@ const inputRadio = {
 };
 
 export default function Keyboard() {
-  
   const { city, setCity } = useContext(Context);
 
   const pressBtn = (e) => {
-    const routeName = e.target.dataset.route || '';
-    PubSub.publish("search", routeName)
-  }
+    const routeName = e.target.dataset.route || "";
+    PubSub.publish("search", routeName);
+  };
 
   return (
     <div className="keyboard-frame" onClick={pressBtn}>

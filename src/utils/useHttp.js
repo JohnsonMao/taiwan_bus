@@ -1,19 +1,30 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { apiCityBus } from "../api";
+import { apiCityBus, apiStopOfRoute } from "../api";
+import { CITYBUS, ROUTENAME } from './type_config';
+import useInterval from './useInterval';
 
-export default function useHttp(city = "", type = "cityBus") {
+export default function useHttp(type = "", city = "", routeName = "") {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
+  console.log("useHttp", city, routeName)
 
   const updateData = useCallback(async () => {
     try {
       switch (type) {
-        case "cityBus":
-          const result = await apiCityBus();
-          setData(result);
+        case CITYBUS:
+          const cityBusData = await apiCityBus(city);
+          console.log("call city bus api")
+          setData(cityBusData);
           break;
+
+        case ROUTENAME:
+          const stopOfRouteData = await apiStopOfRoute(city, routeName);
+          console.log("call route name api")
+          setData(stopOfRouteData);
+          break;
+
         default:
       }
       setLoading(false)
@@ -21,11 +32,7 @@ export default function useHttp(city = "", type = "cityBus") {
       setError(true);
       setData(error);
     }
-  }, [type]);
-
-  useEffect(() => {
-    setData([]);
-  }, [type]);
+  }, [type, city, routeName]);
 
   useEffect(() => {
     setLoading(true);

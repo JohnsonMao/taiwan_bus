@@ -1,11 +1,15 @@
 @import '../../asset/scss/custom_variables';
 .list
 {
-  transition: .3s;
   ul
   {
     margin-right: 24px;
-    width: calc(100vw - 24px);
+    padding: 0 12px;
+    width: 100%;
+    height: calc(100vh - 162px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: .3s;
   }
 
   li
@@ -20,7 +24,7 @@
       }
     }
   }
-  &.isBack
+  &.isBack ul
   {
     transform: translateX( calc(-100% - 24px) );
   }

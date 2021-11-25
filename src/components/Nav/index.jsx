@@ -1,19 +1,21 @@
 import React from "react";
-import PubSub from "pubsub-js";
+import PropTypes from 'prop-types';
 
 import "./nav.scss";
 
+export default function Nav({ setIsBack }) {
 
-export default function Nav() {
   const isBack = (e) => {
-    const isBackValue = e.target.id === "back";
-    PubSub.publish("direction", isBackValue)
+    const { id } = e.target;
+    if (id === '') return
+    const isBackValue = id === "back";
+    setIsBack(isBackValue)
   }
 
   return (
-    <div className="fixed-top nav">
-      <input type="radio" className="d-none" name="direction" id="go" onChange={isBack} defaultChecked />
-      <input type="radio" className="d-none" name="direction" id="back" onChange={isBack} />
+    <div className="fixed-top nav" onClick={isBack}>
+      <input type="radio" className="d-none" name="direction" id="go" defaultChecked />
+      <input type="radio" className="d-none" name="direction" id="back" />
       <ul className="nav-list">
         <li className="w-50">
           <label htmlFor="go" className="nav-link d-block p-4">
@@ -38,4 +40,8 @@ export default function Nav() {
       </ul>
     </div>
   );
+}
+
+Nav.propTypes = {
+  setIsBack: PropTypes.func.isRequired
 }

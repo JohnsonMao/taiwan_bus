@@ -1,27 +1,46 @@
-import React, { useState, useEffect } from "react";
-import PubSub from "pubsub-js";
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useContext } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
-import './routeTable.scss';
+import { Context } from "../../pages/Layout";
+import { ROUTENAME } from "../../utils/type_config";
+import useHttp from "../../utils/useHttp";
+import "./routeTable.scss";
 
 export default function RouteTable() {
-  
-  const [isBack, setIsBack] = useState(false);
-  
-  useEffect(() => {
-    const token = PubSub.subscribe("direction", (_, state) => {
-      setIsBack(state)
-    })
-    return () => {
-      PubSub.unsubscribe(token);
-    }
-  }, [])
+  const { city_En, isBack, routeName } = useContext(Context);
 
+  const { data, error, loading } = useHttp(ROUTENAME, city_En, routeName);
+  console.log(data, error, loading);
   return (
-    <Container className="overflow-hidden">
-      <div className="fs-4 text-primary text-end mt-6 mb-2">*於 3 秒前更新</div>
-      <div className={`list d-flex${isBack ? ' isBack' : ''}`}>
+    <Container className="position-relative">
+      <div className="d-flex justify-content-between mt-5 mb-2">
+        <h2 className="fs-1 text-primary">{routeName}</h2>
+        <span className="fs-4 text-primary">*於 3 秒前更新</span>
+      </div>
+      <div className={`list d-flex overflow-hidden${isBack ? " isBack" : ""}`}>
         <ul className="flex-shrink-0">
+          {data[0] === 0
+            ? null
+            : data[0]?.Stops.map((stop) => (
+                <Row
+                  as="li"
+                  key={stop.StopID}
+                  className="gx-3 align-items-center"
+                >
+                  <Col xs={3}>
+                    <div className="event text-center fs-3">未發車</div>
+                  </Col>
+                  <Col xs={5}>
+                    <h3 className="stop fs-3">{stop.StopName.Zh_tw}</h3>
+                  </Col>
+                  <Col xs={3}>
+                    <div className="text-end fs-3 text-primary"></div>
+                  </Col>
+                  <Col xs={1}>
+                    <div className="circle"></div>
+                  </Col>
+                </Row>
+              ))}
           <Row as="li" className="gx-3 align-items-center">
             <Col xs={3}>
               <div className="event text-center fs-3">未發車</div>
@@ -80,6 +99,28 @@ export default function RouteTable() {
           </Row>
         </ul>
         <ul className="flex-shrink-0">
+          {data[0] === 0
+            ? null
+            : data[1]?.Stops.map((stop) => (
+                <Row
+                  as="li"
+                  key={stop.StopID}
+                  className="gx-3 align-items-center"
+                >
+                  <Col xs={3}>
+                    <div className="event text-center fs-3">未發車</div>
+                  </Col>
+                  <Col xs={5}>
+                    <h3 className="stop fs-3">{stop.StopName.Zh_tw}</h3>
+                  </Col>
+                  <Col xs={3}>
+                    <div className="text-end fs-3 text-primary"></div>
+                  </Col>
+                  <Col xs={1}>
+                    <div className="circle"></div>
+                  </Col>
+                </Row>
+              ))}
           <Row as="li" className="gx-3 align-items-center">
             <Col xs={3}>
               <div className="event text-center fs-3">未發車</div>

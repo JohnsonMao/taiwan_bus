@@ -75,7 +75,7 @@ input
   background: $dark;
   box-shadow: $btn-shadow;
   cursor: pointer;
-  transition: .3s;
+  transition: .15s;
   border: 1px solid $primary;
   border-radius: 9px;
   
@@ -88,19 +88,31 @@ input
     color: $light;
   }
 
-  path
-  {
-    transition: .3s;
-  }
-
   &:hover
   {
     background: $primary;
     color: $dark;
+  }
+}
 
-    path
-    {
-      fill: $dark;
-    }
+.delete-icon
+{
+  content: url('../icon/del.svg');
+  
+  &:hover
+  {
+    content: url('../icon/del_hover.svg');
+  }
+}
+::-webkit-scrollbar
+{
+  background: $gray-light;
+  width: 6px;
+
+  &-thumb
+  {
+    background: $primary;
+    width: 6px;
+    cursor: pointer;
   }
 }

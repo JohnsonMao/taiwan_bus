@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PubSub from "pubsub-js";
+import PropTypes from 'prop-types';
 import { Container } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
@@ -8,7 +9,7 @@ import { ReactComponent as GoBack } from "../../asset/icon/goBack.svg";
 import { ReactComponent as MapSVG } from "../../asset/icon/map.svg";
 import "./header.scss";
 
-export default function Header() {
+export default function Header({ setKeyword }) {
 
   const [search, setSearch] = useState('');
   
@@ -16,24 +17,27 @@ export default function Header() {
     const token = PubSub.subscribe("search", (_, state) => {
       switch (state) {
         case "倒退":
-          setSearch(prevState => prevState.slice(0, -1))
+            setSearch(prevState => prevState.slice(0, -1))
           break;
-        case "C":
-          setSearch('')
+          case "C":
+            setSearch('')
           break;
-        default:
-          setSearch(prevState => prevState + state)
+          default:
+            setSearch(prevState => prevState + state)
       }
     })
     return () => {
       PubSub.unsubscribe(token);
     }
   }, [])
-  useEffect(() => {
-    PubSub.publish("filter", search)
-  }, [search])
 
-  const handleSearch = (e) => setSearch(e.target.value);
+  useEffect(() => {
+    setKeyword(search)
+  }, [setKeyword, search])
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  }
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -91,4 +95,9 @@ export default function Header() {
       </Container>
     </header>
   );
+}
+
+
+Header.propTypes = {
+  setKeyword: PropTypes.func.isRequired
 }
