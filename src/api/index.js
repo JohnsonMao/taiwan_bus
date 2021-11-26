@@ -23,10 +23,9 @@ export const apiCityBus = (city = "", data = null) =>
 /* 路線站點資料
  *
  * RouteUID 路線識別碼
- * RouteName 路線名稱
  * Direction 去返程
  * Stops 車站
- *    StopUID
+ *    StopID
  *    StopName
  *    StopBoarding [-1:'可下車',0:'可上下車',1:'可上車']
  *    StopSequence 順序
@@ -37,7 +36,7 @@ export const apiCityBus = (city = "", data = null) =>
  */
 /* 預設篩選特定路線資料 */
 const initStopOfRoute = {
-  $select: ["RouteUID", "RouteName", "Direction", "Stops"],
+  $select: ["RouteUID", "Direction", "Stops"],
 };
 
 const apiStopOfRoute = (city = "", routeName = "", data = null) =>
@@ -49,10 +48,11 @@ const apiStopOfRoute = (city = "", routeName = "", data = null) =>
 /* 批次動態定點資料
  *
  * PlateNumb 車牌號碼
+ * StopID 站牌識別碼
  * A2EventType 進站離站: [0:'離站',1:'進站']
  */
 const initBusNearStop = {
-  $select: ["PlateNumb", "A2EventType"],
+  $select: ["PlateNumb", "StopID", "A2EventType"],
 };
 
 const apiBusNearStop = (city = "", routeName = "", data = null) =>
@@ -63,24 +63,13 @@ const apiBusNearStop = (city = "", routeName = "", data = null) =>
 
 /* 批次預估到站資料
  *
- * PlateNumb 車牌號碼 [値為値為-1時，表示目前該站位無車輛行駛]
- * StopUID 站牌識別碼
- * StopName 站名
- * RouteName 路線名稱
+ * StopID 站牌識別碼
  * Direction 車輛方向 [0:'去程',1:'返程',2:'迴圈',255:'未知']
  * EstimateTime 預估到站時間 [與 StopStatus 有關連]
  * StopStatus 車輛狀態 [0:'正常',1:'尚未發車',2:'交管不停靠',3:'末班車已過',4:'今日未營運']
  */
 const initEstimatedTime = {
-  $select: [
-    "PlateNumb",
-    "StopUID",
-    "StopName",
-    "RouteName",
-    "Direction",
-    "EstimateTime",
-    "StopStatus",
-  ],
+  $select: ["StopID", "Direction", "EstimateTime", "StopStatus"],
 };
 
 const apiEstimatedTime = (city = "", routeName = "", data = null) =>
@@ -97,14 +86,40 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
   const stopOfRoute = await apiStopOfRoute(city, routeName, data);
   const busNearStop = await apiBusNearStop(city, routeName, data);
   const estimatedTime = await apiEstimatedTime(city, routeName, data);
-  const result = [];
-  stopOfRoute.forEach((item, index) => {
-    result[index] = Object.assign(
-      item,
-      busNearStop[index],
-      estimatedTime[index]
+  /* stopOfRoute   [{Direction: 0, stops: [...], ...}, {Direction: 1, stops: [...], ...}]
+   * busNearStop   [{Direction..., StopUID..., Plate..., A2E... }, ...]
+   * estimatedTime [{Direction..., StopUID..., Estimate..., StopStatus...}, ...]
+   */
+
+  /* 站點資料重新排序整合 */
+  let stops = [...stopOfRoute[0].Stops, ...stopOfRoute[1].Stops];
+  stops.sort((first, second) => first.StopID - second.StopID);
+  estimatedTime.sort((first, second) => first.StopID - second.StopID);
+  stops.forEach((stop, index) => {
+    Object.assign(stop, estimatedTime[index]);
+  });
+
+  /* 資料區分成 去程 與 返程 */
+  const result = [[], []];
+  stops.forEach((stop) => {
+    // Direction 車輛方向 [0:'去程',1:'返程',2:'迴圈',255:'未知']
+    if (stop.Direction === 0 || stop.Direction === 1) {
+      result[stop.Direction].push(stop);
+    }
+  });
+
+  /* 按照站序排列 */
+  result[0].sort((first, second) => first.StopSequence - second.StopSequence);
+  result[1].sort((first, second) => first.StopSequence - second.StopSequence);
+
+  /* 將 即將到站巴士資料 整合進 站點資料 */
+  busNearStop.forEach((bus) => {
+    result[bus.Direction][bus.StopSequence - 1] = Object.assign(
+      result[bus.Direction][bus.StopSequence - 1],
+      bus
     );
   });
+
   return result;
 };
 

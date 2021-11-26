@@ -9,20 +9,16 @@ export default function useHttp(type = "", city = "", routeName = "") {
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
   
-  console.log("useHttp", city, routeName)
-
   const updateData = useCallback(async () => {
     try {
       switch (type) {
         case CITYBUS:
           const cityBusData = await apiCityBus(city);
-          console.log("call city bus api")
           setData(cityBusData);
           break;
 
         case ROUTENAME:
           const routeNameData = await apiRouteName(city, routeName);
-          console.log("call route name api")
           setData(routeNameData);
           break;
 
