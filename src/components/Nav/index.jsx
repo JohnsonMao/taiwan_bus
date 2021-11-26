@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import "./nav.scss";
 
-export default function Nav({ setIsBack }) {
+export default function Nav({ setIsBack, routeArr }) {
 
   const isBack = (e) => {
     const { id } = e.target;
@@ -23,7 +23,7 @@ export default function Nav({ setIsBack }) {
               <span className="text-primary me-1">
                 往
               </span>
-              台北橋
+              {routeArr[1]}
             </h2>
           </label>
         </li>
@@ -33,7 +33,7 @@ export default function Nav({ setIsBack }) {
               <span className="text-primary me-1">
                 往
               </span>
-              南港
+              {routeArr[0]}
             </h2>
           </label>
         </li>

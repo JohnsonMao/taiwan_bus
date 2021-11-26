@@ -56,7 +56,7 @@ export default function RouteTable() {
   const { city_En, isBack, routeName } = useContext(Context);
 
   const { data, error, loading } = useHttp(ROUTENAME, city_En, routeName);
-  console.log(data, error, loading);
+
   return (
     <Container className="position-relative">
       <div className="d-flex justify-content-between mt-5 mb-2">

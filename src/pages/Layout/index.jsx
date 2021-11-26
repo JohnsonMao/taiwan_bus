@@ -21,6 +21,12 @@ export function Layout() {
   /* City English name */
   const cityIndex = keyboard_city.findIndex((cityObj) => cityObj.CityName === city)
   const city_En = cityIndex !== -1 ? keyboard_city[cityIndex].City : '';
+  
+  /* Route Start and End State */
+  const [routeArr, setRouteArr] = useState(['start', 'end'])
+  const handleRouteArr = (e) => {
+    setRouteArr(e)
+  }
 
   /* Search keyword State */
   const [keyword, setKeyword] = useState('');
@@ -42,7 +48,8 @@ export function Layout() {
     setCity: handleCity,
     keyword: keyword,
     isBack: isBack,
-    routeName: decodeURI(pathnameArr[2])
+    routeName: decodeURI(pathnameArr[2]),
+    setRouteArr: handleRouteArr
   }
 
   return (
@@ -52,7 +59,7 @@ export function Layout() {
       }`}
     >
       <Header setKeyword={handleKeyword} />
-      <Nav setIsBack={handleIsBack} />
+      <Nav setIsBack={handleIsBack} routeArr={routeArr}/>
       <Context.Provider value={outletProps}>
         {outlet}
       </Context.Provider>

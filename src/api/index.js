@@ -40,7 +40,7 @@ const initStopOfRoute = {
 };
 
 const apiStopOfRoute = (city = "", routeName = "", data = null) =>
-  ajax(ROOT_URL + "/DisplayStopOfRoute/City/" + city + "/" + routeName, {
+  ajax(ROOT_URL + "/StopOfRoute/City/" + city + "/" + routeName, {
     ...initStopOfRoute,
     ...data,
   });
