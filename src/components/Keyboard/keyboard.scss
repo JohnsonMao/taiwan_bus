@@ -10,6 +10,7 @@
   gap: $spacer * .75;
   transform: translateY(100%);
   z-index: 1020;
+  box-shadow: 0 -4px 6px $shadow;
   transition: .3s;
 
   .btn
@@ -21,9 +22,9 @@ input[name="keyboard"]:checked + .keyboard
 {
   transform: translateY(0);
 }
-#noKeyboard:checked + .container .keyboard
+#noKeyboard:checked + .keyboard-frame .keyboard
 {
-  transform: translateY(92%);
+  transform: translateY(95%);
 }
 .city-btn
 {
@@ -40,4 +41,10 @@ input[name="keyboard"]:checked + .keyboard
 .goBack-btn
 {
   grid-area: 3 / 3 / 4 / 6;
+}
+.keyworad-show-btn
+{
+  box-shadow: 0 -4px 6px $shadow;
+  cursor: pointer;
+  z-index: 1030;
 }

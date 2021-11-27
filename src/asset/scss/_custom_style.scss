@@ -88,7 +88,8 @@ input
     color: $light;
   }
 
-  &:hover
+  &:hover,
+  &.active
   {
     background: $primary;
     color: $dark;
@@ -115,4 +116,11 @@ input
     width: 6px;
     cursor: pointer;
   }
+}
+
+.text-one-line
+{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

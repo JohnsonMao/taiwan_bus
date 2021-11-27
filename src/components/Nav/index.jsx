@@ -19,7 +19,7 @@ export default function Nav({ setIsBack, routeArr }) {
       <ul className="nav-list">
         <li className="w-50">
           <label htmlFor="go" className="nav-link d-block p-4">
-            <h2 className="text-center">
+            <h2 className="text-center text-one-line">
               <span className="text-primary me-1">
                 往
               </span>
@@ -29,7 +29,7 @@ export default function Nav({ setIsBack, routeArr }) {
         </li>
         <li className="w-50">
           <label htmlFor="back" className="nav-link d-block p-4">
-            <h2 className="text-center">
+            <h2 className="text-center text-one-line">
               <span className="text-primary me-1">
                 往
               </span>

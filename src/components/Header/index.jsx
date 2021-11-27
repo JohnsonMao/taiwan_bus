@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PubSub from "pubsub-js";
 import PropTypes from 'prop-types';
 import { Container } from "react-bootstrap";
@@ -9,7 +9,7 @@ import { ReactComponent as GoBack } from "../../asset/icon/goBack.svg";
 import { ReactComponent as MapSVG } from "../../asset/icon/map.svg";
 import "./header.scss";
 
-export default function Header({ setKeyword }) {
+export default function Header({ setKeyword, setShowMap, showMap }) {
 
   const [search, setSearch] = useState('');
   
@@ -17,13 +17,13 @@ export default function Header({ setKeyword }) {
     const token = PubSub.subscribe("search", (_, state) => {
       switch (state) {
         case "倒退":
-            setSearch(prevState => prevState.slice(0, -1))
+          setSearch(prevState => prevState.slice(0, -1))
           break;
-          case "C":
-            setSearch('')
+        case "C":
+          setSearch('')
           break;
-          default:
-            setSearch(prevState => prevState + state)
+        default:
+          setSearch(prevState => prevState + state)
       }
     })
     return () => {
@@ -40,11 +40,18 @@ export default function Header({ setKeyword }) {
   }
 
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
-  const pathnameArr = pathname.split("/");
+  const goBack = () => {
+    if (showMap) {
+      setShowMap(false);
+    } else {
+      navigate(-1);
+    }
+  }
 
-  const goBack = () => navigate(-1);
+  const goMap = () => {
+    setShowMap(true)
+  }
 
   return (
     <header className="fixed-top">
@@ -81,15 +88,15 @@ export default function Header({ setKeyword }) {
             </div>
           </div>
           <div className="result_show">
-            <Link
-              to={pathname + "/map"}
-              className={`flex-shrink-0 text-end ${
-                pathnameArr[3] ? "d-none" : "d-block"
+            <button
+              onClick={goMap}
+              className={`flex-shrink-0 ms-auto ${
+                showMap ? "d-none" : "d-block"
               }`}
               aria-label="地圖 Map"
             >
               <MapSVG />
-            </Link>
+            </button>
           </div>
         </div>
       </Container>
@@ -99,5 +106,7 @@ export default function Header({ setKeyword }) {
 
 
 Header.propTypes = {
-  setKeyword: PropTypes.func.isRequired
+  setKeyword: PropTypes.func.isRequired,
+  setShowMap: PropTypes.func.isRequired,
+  showMap: PropTypes.bool.isRequired
 }

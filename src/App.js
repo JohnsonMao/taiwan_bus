@@ -5,8 +5,7 @@ import { Layout } from "./pages/Layout";
 import Index from "./pages/Index";
 import CityBus from "./pages/CityBus";
 import SearchResult from "./components/SearchResult";
-import RouteTable from "./components/RouteTable";
-import Map from "./components/Map";
+import RoutePage from "./components/RoutePage";
 import "./asset/scss/style.scss";
 
 export default function App() {
@@ -17,8 +16,7 @@ export default function App() {
           <Route index element={<Index />} />
           <Route path="citybus" element={<CityBus />}>
             <Route index element={<SearchResult />} />
-            <Route path=":id" element={<RouteTable />} />
-            <Route path=":id/map" element={<Map />} />
+            <Route path=":id" element={<RoutePage />} />
           </Route>
           <Route path="/*" element={<Navigate replace to="/" />} />
         </Route>

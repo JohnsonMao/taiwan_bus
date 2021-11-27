@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import PropTypes from "prop-types";
 import PubSub from "pubsub-js";
 
 import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
@@ -63,14 +64,16 @@ const KeyboardBase = ({ city }) => (
 /* `設定城市鍵盤` */
 const KeyboardCity = ({ city, onClick }) => {
   const [enterCity, setEnterCity] = useState(city);
-  const handleEnterCity = (e) => setEnterCity(e.target.dataset.city);
+  const handleEnterCity = (e) => {
+    setEnterCity(e.target.dataset.city);
+  }
   return (
     <div className="keyboard bg-gray p-6" onClick={handleEnterCity}>
       {keyboard_city.map((item) => (
         <button
           key={item.City}
           type="button"
-          className="btn btn-primary fs-3 p-0"
+          className={`btn btn-primary fs-3 p-0 ${enterCity === item.CityName ? 'active' : ''}`}
           aria-label={item.CityName + " " + item.City}
           data-city={item.CityName}
         >
@@ -120,22 +123,41 @@ const inputRadio = {
   name: "keyboard",
 };
 
-export default function Keyboard() {
+export default function Keyboard({ show, setShow }) {
   const { city, setCity } = useContext(Context);
 
   const pressBtn = (e) => {
-    const routeName = e.target.dataset.route || "";
-    PubSub.publish("search", routeName);
+    const { route } = e.target.dataset;
+    PubSub.publish("search", route || "");
   };
 
   return (
-    <div className="keyboard-frame" onClick={pressBtn}>
+    <div className="keyboard-frame position-relative" onClick={pressBtn}>
+      <input {...inputRadio} id="moreKeyboard" />
+      <KeyboardMore />
       <input {...inputRadio} id="cityKeyboard" defaultChecked={!city} />
       <KeyboardCity city={city} onClick={setCity} />
       <input {...inputRadio} id="baseKeyboard" defaultChecked={city} />
       <KeyboardBase city={city} />
-      <input {...inputRadio} id="moreKeyboard" />
-      <KeyboardMore />
+      <label
+        htmlFor="baseKeyboard"
+        className={`position-absolute bottom-0 end-0 d-block text-primary bg-gray me-2 rounded keyworad-show-btn ${
+          show ? "d-block" : "d-none"
+        }`}
+        onClick={setShow}
+        aria-label="鍵盤 Keyboard"
+      >
+        <img
+          src={require("../../asset/icon/keyboard.svg").default}
+          className="px-4 py-2"
+          alt="鍵盤 Keyboard"
+        />
+      </label>
     </div>
   );
 }
+
+Keyboard.propTypes = {
+  setShow: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+};

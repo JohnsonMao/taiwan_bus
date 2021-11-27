@@ -1,26 +1,26 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useRef } from 'react';
 import { Container } from "react-bootstrap";
 
 import Keyboard from '../Keyboard';
 import DataList from '../DataList';
 
 export default function SearchResult() {
-  const [showKeyboard, setShowKeyboard] = useState(true);
-  useEffect(() => {
-    window.addEventListener('scroll', function(e) {
-      console.log(e)
-    })
-    return () => {
-
-    }
-  }, [])
+  const [show, setShow] = useState(false);  // show open keyboard button
+  const noKeyboard = useRef(null);
+  const isShow = () => {
+    setShow(true);
+    noKeyboard.current.checked = true
+  }
+  const noShow = () => {
+    setShow(false);
+  }
   return (
     <>
-    <input type="radio" className="d-none" name="keyboard" id="noKeyboard" />
-    <Container className="position-relative">
-      <DataList />
-      <Keyboard />
+    <Container>
+      <DataList setShow={isShow} show={show} />
     </Container>
+    <input type="radio" className="d-none" name="keyboard" id="noKeyboard" ref={noKeyboard} />
+    <Keyboard setShow={noShow} show={show}/>
     </>
   )
 }

@@ -62,14 +62,15 @@ const apiBusNearStop = (city = "", routeName = "", data = null) =>
   });
 
 /* 批次預估到站資料
- *
+ * 
+ * RouteName 路線名
  * StopID 站牌識別碼
  * Direction 車輛方向 [0:'去程',1:'返程',2:'迴圈',255:'未知']
  * EstimateTime 預估到站時間 [與 StopStatus 有關連]
  * StopStatus 車輛狀態 [0:'正常',1:'尚未發車',2:'交管不停靠',3:'末班車已過',4:'今日未營運']
  */
 const initEstimatedTime = {
-  $select: ["StopID", "Direction", "EstimateTime", "StopStatus"],
+  $select: ["RouteName", "StopID", "Direction", "EstimateTime", "StopStatus"],
 };
 
 const apiEstimatedTime = (city = "", routeName = "", data = null) =>
@@ -94,9 +95,12 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
   /* 站點資料重新排序整合 */
   let stops = [...stopOfRoute[0].Stops, ...stopOfRoute[1].Stops];
   stops.sort((first, second) => first.StopID - second.StopID);
-  estimatedTime.sort((first, second) => first.StopID - second.StopID);
+
+  /* 過濾資料並排序整合 */
+  let newEstimatedTime = estimatedTime.filter(stop => stop.RouteName.Zh_tw === routeName)
+  newEstimatedTime.sort((first, second) => first.StopID - second.StopID);
   stops.forEach((stop, index) => {
-    Object.assign(stop, estimatedTime[index]);
+    Object.assign(stop, newEstimatedTime[index]);
   });
 
   /* 資料區分成 去程 與 返程 */
@@ -123,18 +127,18 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
   return result;
 };
 
-/* 批次動態定時資料 Map
- *
- * PlateNumb 車牌號碼
- * BusPosition 車輛經緯度
- * Speed 行駛速度
- * Direction 去程返程
- */
-
 /* 路線線型
  *
  * RouteUID
  * RouteName
  * Direction
  * Geometry 路線軌跡
+ */
+
+/* 批次動態定時資料 Map
+ *
+ * PlateNumb 車牌號碼
+ * BusPosition 車輛經緯度
+ * Speed 行駛速度
+ * Direction 去程返程
  */

@@ -38,7 +38,13 @@ export function Layout() {
   const [isBack, setIsBack] = useState(false);
   const handleIsBack = (e) => {
     setIsBack(e)
-  } 
+  }
+
+  /* show map */
+  const [showMap, setShowMap] = useState(false);
+  const handleShowMap = (e) => {
+    setShowMap(e)
+  }
 
   /* 傳遞 outlet props */
   const outlet = useOutlet();
@@ -49,7 +55,9 @@ export function Layout() {
     keyword: keyword,
     isBack: isBack,
     routeName: decodeURI(pathnameArr[2]),
-    setRouteArr: handleRouteArr
+    setRouteArr: handleRouteArr,
+    setShowMap: handleShowMap,
+    showMap: showMap,
   }
 
   return (
@@ -58,8 +66,8 @@ export function Layout() {
         pathnameArr[1] === '' ? '' : pathnameArr[2] ? " page result" : " page"
       }`}
     >
-      <Header setKeyword={handleKeyword} />
-      <Nav setIsBack={handleIsBack} routeArr={routeArr}/>
+      <Header setKeyword={handleKeyword} setShowMap={handleShowMap} showMap={showMap} />
+      <Nav setIsBack={handleIsBack} routeArr={routeArr} />
       <Context.Provider value={outletProps}>
         {outlet}
       </Context.Provider>
