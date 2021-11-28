@@ -1,4 +1,9 @@
 @import '../../asset/scss/custom_variables';
+$mr-1: 30px;
+$mr-2: 44px;
+$mr-3: 154px;
+$mr-bg: 85px;
+
 .router
 {
   padding-top: 26.5vh;
@@ -29,19 +34,33 @@
   }
   li:nth-child(1)
   {
-    margin-right: 30px;
+    margin-right: $mr-1;
     margin-top: 14px;
+
+    @media(min-width: 1024px)
+    {
+      margin-right: calc($mr-1 + 100px);
+    }
   }
   li:nth-child(2)
   {
-    margin-right: 44px;
+    margin-right: $mr-2;
     margin-top: 130px;
+
+    @media(min-width: 1024px)
+    {
+      margin-right: calc($mr-2 + 100px);
+    }
   }
   li:nth-child(3)
   {
-    margin-right: 154px;
+    margin-right: $mr-3;
     margin-top: 70px;
-
+    
+    @media(min-width: 1024px)
+    {
+      margin-right: calc($mr-3 + 100px);
+    }
     &::before,
     &::after
     {
@@ -74,9 +93,14 @@
     right: 0;
     margin-top: 25.5vh;
     margin-left: auto;
-    margin-right: 85px;
+    margin-right: $mr-bg;
     height: 328px;
     width: 186px;
     z-index: -1;
+    
+    @media(min-width: 1024px)
+    {
+      margin-right: calc($mr-bg + 100px);
+    }
   }
 }

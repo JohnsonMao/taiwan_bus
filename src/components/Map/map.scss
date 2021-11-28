@@ -1,14 +1,30 @@
 @import '../../asset/scss/custom_variables';
 
+.mapContainer
+{
+  position: absolute; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @media(min-width: 1024px)
+  {
+    right: 40%;
+  }
+}
 .leaflet-container .leaflet-control-attribution
 {
   position: fixed;
-  bottom: 0;
+  bottom: calc(50% - 118px);
   left: 0;
   right: 0;
-  text-align: center;
   color: $light;
   background: rgba($dark, .5);
+
+  @media(min-width: 1024px)
+  {
+    bottom: 0;
+  }
 
   a
   {

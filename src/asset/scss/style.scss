@@ -20,9 +20,8 @@
 @import "~bootstrap/scss/grid";
 
 // 5. Add additional custom code here
+@import "./custom_style";
 
 @import "~bootstrap/scss/helpers";
 
 @import "~bootstrap/scss/utilities/api";
-
-@import "./custom_style";

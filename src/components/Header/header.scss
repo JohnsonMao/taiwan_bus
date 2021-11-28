@@ -12,6 +12,11 @@
     white-space: nowrap;
     transition: .6s;
 
+    @media(min-width: 1024px)
+    {
+      margin: calc(27vh - 80px) 254px 0 auto;
+    }
+
     &::after
     {
       content: '回首頁';
@@ -118,6 +123,14 @@
     svg
     {
       display: inline;
+    }
+  }
+
+  .map
+  {
+    @media(min-width: 1024px)
+    {
+      visibility: hidden;
     }
   }
   

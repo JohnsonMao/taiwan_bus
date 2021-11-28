@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Container } from 'react-bootstrap';
 
 import { Context } from "../../pages/Layout";
 import ListLi from "../../components/DataList/List_li";
@@ -36,11 +37,13 @@ export default function Favorites() {
   };
 
   return (
-    <main className="main container">
-      <h2 className="fs-2 mt-7 mb-1">我的收藏</h2>
-      <ul className="datalist pb-7" onClick={onClickRoute}>
-        <ListLi data={favorites} favorites={favorites} />
-      </ul>
+    <main className="main">
+      <Container>
+        <h2 className="fs-2 mt-7 mb-1">我的收藏</h2>
+        <ul className="datalist pb-7" onClick={onClickRoute}>
+          <ListLi data={favorites} favorites={favorites} />
+        </ul>
+      </Container>
     </main>
   );
 }

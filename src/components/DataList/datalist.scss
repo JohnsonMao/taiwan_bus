@@ -3,6 +3,7 @@
 {
   height: calc(100vh - 115px);
   overflow: auto;
+  
   li:nth-child(odd)
   {
     background-color: $gray;

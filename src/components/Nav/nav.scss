@@ -1,6 +1,11 @@
 @import '../../asset/scss/custom_variables';
 .nav
 {
+  @media(min-width: 1024px)
+  {
+    margin-left: auto;
+    max-width: 40%;
+  }
   &-list
   {
     padding-top: calc(27vh - 50px);

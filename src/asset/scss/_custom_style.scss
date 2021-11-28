@@ -44,6 +44,11 @@ input
   {
     backdrop-filter: brightness(100%);
     background: $dark;
+    @media(min-width: 1024px)
+    {
+      background: linear-gradient(to left, $dark 40%,
+                                        rgba($dark, .5) 40%);
+    }
   }
   header
   {
@@ -57,6 +62,19 @@ input
   background: rgba($gray, 0);
   overflow: hidden;
   transition: .6s;
+  @media(min-width: 1024px)
+  {
+    margin-left: auto;
+    max-width: 40%;
+  }
+}
+.page header
+{
+  @media(min-width: 1024px)
+  {
+    margin-left: auto;
+    max-width: 40%;
+  }
 }
 .result
 {
