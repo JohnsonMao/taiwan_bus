@@ -90,13 +90,22 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
           <div className="result_show">
             <button
               onClick={goMap}
-              className={`flex-shrink-0 ms-auto ${
+              className={`flex-shrink-0 ms-auto map ${
                 showMap ? "d-none" : "d-block"
               }`}
               aria-label="地圖 Map"
             >
               <MapSVG />
             </button>
+          </div>
+          <div className="page_show like">
+            <Link
+              to="/favorites"
+              className="flex-shrink-0 ms-2 d-block"
+              aria-label="我的收藏 Favorites"
+            >
+              <img src={require('../../asset/icon/like_btn.svg').default} alt="我的收藏 Favorites" />
+            </Link>
           </div>
         </div>
       </Container>

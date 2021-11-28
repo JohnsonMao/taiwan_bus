@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../pages/Layout";
 import { ROUTENAME } from "../../utils/type_config";
 import useHttp from "../../utils/useHttp";
+import Loading from "../Loading";
 import RouteTable from "../RouteTable";
 import Map from "../Map";
 
@@ -12,9 +13,7 @@ export default function RoutePage() {
   const [control, setControl] = useState(true)
   const [count, setCount] = useState(15)
 
-  const { data, error, loading } = useHttp(ROUTENAME, city_En, routeName, control);
-
-  
+  const { data, error } = useHttp(ROUTENAME, city_En, routeName, control);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,9 +26,7 @@ export default function RoutePage() {
     return () => {
       clearInterval(timer)
     }
-  }, [count])
-
-  console.log(count, control, data)
+  }, [count, setControl, control])
 
   const mapData = isBack ? data[1] : data[0];
   
@@ -40,9 +37,9 @@ export default function RoutePage() {
   }
   return (
     <div>
-      {loading ? (
-        <div>Loading</div>
-      ) : data[0] === 0 ? null : (
+      {data.length === 0 ? (
+        <Loading />
+      ) : data[0] === 0　|| error ? <div>網頁出錯啦！</div> : (
         <>
           {map ? <RouteTable data={data} map={map} zoom={zoom} count={count} /> : null}
           <Map data={mapData} setMap={handleMap} zoom={zoom} geo={data[2]} />

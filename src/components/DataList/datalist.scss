@@ -5,9 +5,10 @@
   overflow: auto;
   li:nth-child(odd)
   {
-    a{
-      background-color: $gray;
-      border-radius: $border-radius;
-    }
+    background-color: $gray;
+    border-radius: $border-radius;
+  }
+  a{
+    flex: 1 0;
   }
 }

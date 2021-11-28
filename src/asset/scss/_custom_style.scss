@@ -87,12 +87,35 @@ input
   {
     color: $light;
   }
-
+  &-favorite
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    cursor: pointer;
+    border: 0;
+  }
   &:hover,
   &.active
   {
     background: $primary;
     color: $dark;
+  }
+  &-gray-light,
+  &-gray-light:hover,
+  &-gray-light:active
+  {
+    color: $gray-light;
+    box-shadow: none;
+    border: 1px solid $gray-light;
+    background: $dark;
+
+    path
+    {
+      fill: $gray-light;
+      stroke: $gray-light !important;
+    }
   }
 }
 
@@ -108,12 +131,12 @@ input
 ::-webkit-scrollbar
 {
   background: $gray-light;
-  width: 6px;
+  width: 4px;
 
   &-thumb
   {
     background: $primary;
-    width: 6px;
+    width: 4px;
     cursor: pointer;
   }
 }
@@ -123,4 +146,10 @@ input
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.loading
+{
+  height: 56px;
+  width: 56px;
 }

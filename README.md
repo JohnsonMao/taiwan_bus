@@ -1,20 +1,35 @@
-# 自行車道地圖資訊整合網 | Demo
+# 自行車道地圖資訊整合網 | [Demo](https://johnsonmao.github.io/taiwan_bus)
 
-## Introduction
+## 作品說明
 
-## Features
+The F2E 全台公車動態時刻查詢應用服務
 
-## Route
+## 系統說明
+
+本專案運行方式是使用 `yarn`、`yarn start`
+
+## 資料夾說明
 
 ```
-|- 首頁 /
-  |- 查詢公車 /citybus
-  |- 附近公車 /nearby
-  |- 查詢客運 /intercitybus
+|- /src
+    |- /api：存放 API 串接整合資料
+    |- /asset：通用 Icon 與 SCSS
+    |- /components：元件
+    |- /pages：頁面
+    |- /utils：通用工具、設置
 ```
 
-## Remark
+## 使用技術
+
+- React
+- Leaflet
+- PubSub-js
+- Bootstrap 5
+
+## 第三方服務
+
+## 引用圖檔 與 設計
+
+設計採用 [KT](https://ktdesigner.neocities.org/UIweb/TaiwanBus.html) 的設計稿
 
 Cover photo by <a href="https://unsplash.com/@malteesimo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Malte Schmidt</a> on <a href="https://unsplash.com/s/photos/city?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
-https://images.unsplash.com/photo-1512850183-6d7990f42385?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1887&q=80

@@ -4,8 +4,21 @@
   padding-top: 26.5vh;
   .btn
   {
+    position: relative;
     width: 140px;
     border-radius: 8px;
+    z-index: 1030;
+    
+    path
+    {
+      stroke: $light;
+      transition: .15s;
+    }
+    &:hover path
+    {
+      stroke: $dark;
+      fill: $dark;
+    }
   }
   li
   {

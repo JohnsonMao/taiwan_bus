@@ -28,19 +28,18 @@ export default function useHttp(type = "", city = "", routeName = "", control = 
       setError(true);
       setData(error);
     }
-  }, [type, city, routeName, control]);
+  }, [type, city, routeName]);
 
   useEffect(() => {
     setLoading(true);
     setError(false);
-    console.log('-------api-------')
     const delay = setTimeout(() => {
       updateData();
     }, 0);
     return () => {
       clearTimeout(delay);
     };
-  }, [updateData]);
+  }, [updateData, control]);
 
   return { data, error, loading };
 }

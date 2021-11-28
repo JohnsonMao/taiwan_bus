@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Context } from "../../pages/Layout";
 import { CITYBUS } from "../../utils/type_config";
+import ListLi from "./List_li";
+import Loading from "../Loading";
 import useHttp from "../../utils/useHttp";
 import "./datalist.scss";
 
 export default function DataList({ setShow }) {
-  const { city, city_En, keyword, setRouteArr } = useContext(Context);
+  const { city, city_En, keyword, setRouteArr, favorites, setFavorites } =
+    useContext(Context);
 
-  const { data, error, loading } = useHttp(CITYBUS, city_En);
-  
+  const { data, loading } = useHttp(CITYBUS, city_En);
+
+  /* 關鍵字即時過濾清單 */
   const filterData =
     data[0] === 0
       ? []
@@ -20,55 +23,54 @@ export default function DataList({ setShow }) {
   /* 渲染前 50 筆資料，無限下拉功能尚未實作 */
   showData.length = 50;
 
-  const handleRouteArr = (e) => {
-    const { start, end } = e.target.parentNode.dataset;
-    setRouteArr([start, end]);
+  const onClickRoute = (e) => {
+    const { start, end, favorite } = e.target.parentNode.dataset;
+    if (!favorite) {
+      setRouteArr([start, end]);
+    }
+    if (favorite) {
+      const active = e.target.classList[0];
+      const favoriteObj = {
+        RouteName: {}
+      }
+      const favoriteArr = favorite.split("&");
+      favoriteObj.RouteUID = favoriteArr[0];
+      favoriteObj.RouteName.Zh_tw = favoriteArr[1];
+      favoriteObj.DepartureStopNameZh = favoriteArr[2];
+      favoriteObj.DestinationStopNameZh = favoriteArr[3];
+      switch (active) {
+        case "active":
+          const newData = favorites.filter(
+            (favorite) => favorite.RouteUID !== favoriteObj.RouteUID
+          );
+          setFavorites(newData);
+          break;
+        default:
+          setFavorites((prevData) => [...prevData, favoriteObj]);
+      }
+    }
   };
 
   const handleShow = (e) => {
     const { start } = e.target.parentNode.dataset;
     if (start) {
-      setShow()
+      setShow();
     }
-  }
+  };
 
   return (
     <>
       <h2 className="fs-2 mt-7 mb-1">{city || "請選擇縣市"}</h2>
       <ul
         className="datalist pb-7"
-        onClick={handleRouteArr}
+        onClick={onClickRoute}
         onMouseOver={handleShow}
         onTouchStart={handleShow}
       >
         {keyword.trim() === "" ? null : loading ? (
-          <div>Loading</div>
+          <Loading />
         ) : (
-          showData.map((item) => (
-            <li
-              key={item.RouteUID}
-              data-start={item.DepartureStopNameZh}
-              data-end={item.DestinationStopNameZh}
-            >
-              <Link
-                to={item.RouteName.Zh_tw}
-                className="d-block px-4 py-3"
-                data-start={item.DepartureStopNameZh}
-                data-end={item.DestinationStopNameZh}
-              >
-                <h3 className="fs-1 lh-base text-one-line">{item.RouteName.Zh_tw}</h3>
-                <h4
-                  className="fs-3 text-light lh-base text-one-line"
-                  data-start={item.DepartureStopNameZh}
-                  data-end={item.DestinationStopNameZh}
-                >
-                  {item.DepartureStopNameZh}
-                  <span className="text-primary mx-1">往</span>
-                  {item.DestinationStopNameZh}
-                </h4>
-              </Link>
-            </li>
-          ))
+          <ListLi data={showData} favorites={favorites} />
         )}
       </ul>
     </>
@@ -76,5 +78,5 @@ export default function DataList({ setShow }) {
 }
 
 DataList.propTypes = {
-  setShow: PropTypes.func.isRequired
+  setShow: PropTypes.func.isRequired,
 };

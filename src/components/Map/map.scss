@@ -15,6 +15,10 @@
     color: $primary;
   }
 }
+.leaflet-popup
+{
+  font-family: $font-family-sans-serif;
+}
 .leaflet-tooltip
 {
   background-color: transparent;

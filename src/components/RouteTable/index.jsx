@@ -34,17 +34,12 @@ const StopsTable = ({ stops }) =>
             ? "離站中"
             : stop?.A2EventType === 1
             ? "進站中"
-            : stop.StopStatus === 1
-            ? "未發車"
             : stop.StopStatus === 0
-            ? Math.floor(stop.EstimateTime / 60) !== 0
+            ? stop.EstimateTime !== undefined &&
+              Math.floor(stop.EstimateTime / 60) !== 0
               ? Math.floor(stop.EstimateTime / 60) + " 分"
               : "1 分內"
-            : stop.EstimateTime === undefined
-            ? "未提供"
-            : stop.StopStatus === 3
-            ? "末班已過"
-            : "今日不停"}
+            : "未發車"}
         </div>
       </Col>
       <Col
@@ -78,15 +73,18 @@ const StopsTable = ({ stops }) =>
 
 export default function RouteTable({ data, map, zoom, count }) {
   const { isBack, routeName, showMap, setShowMap } = useContext(Context);
-  const onClick = useCallback((e) => {
-    const center = e.target.parentNode.dataset.center || e.target.dataset.center;
-    if (center) {
-      const newCenter = center.split('-')
-      console.log(center)
-      setShowMap(true);
-      map.setView(newCenter, zoom)
-    }
-  }, [setShowMap, map, zoom])
+  const onClick = useCallback(
+    (e) => {
+      const center =
+        e.target.parentNode.dataset.center || e.target.dataset.center;
+      if (center) {
+        const newCenter = center.split("-");
+        setShowMap(true);
+        map.setView(newCenter, zoom);
+      }
+    },
+    [setShowMap, map, zoom]
+  );
   return (
     <Container
       fluid
