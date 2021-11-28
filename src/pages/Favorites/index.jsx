@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { Context } from "../../pages/Layout";
@@ -41,7 +42,10 @@ export default function Favorites() {
       <Container>
         <h2 className="fs-2 mt-7 mb-1">我的收藏</h2>
         <ul className="datalist pb-7" onClick={onClickRoute}>
+          {favorites[0] === undefined ? 
+          <Link to="/citybus">趕快去添加路線吧～</Link> :
           <ListLi data={favorites} favorites={favorites} />
+          }
         </ul>
       </Container>
     </main>
