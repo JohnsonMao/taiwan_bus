@@ -10,7 +10,7 @@ const StopsTable = ({ stops }) =>
     <Row
       as="li"
       key={stop.StopUID}
-      className={`gx-3 align-items-center ${
+      className={`gx-3 align-items-center py-1 ${
         stop?.A2EventType === 0
           ? "leaving"
           : stop?.A2EventType === 1
@@ -71,30 +71,32 @@ const StopsTable = ({ stops }) =>
           stop.StopPosition.PositionLat + "-" + stop.StopPosition.PositionLon
         }
       >
-        <div className="circle"></div>
+        <div className="circle fs-4 text-center lh-sm">{stop.StopSequence}</div>
       </Col>
     </Row>
   ));
 
-export default function RouteTable({ data, map, zoom }) {
+export default function RouteTable({ data, map, zoom, count }) {
   const { isBack, routeName, showMap, setShowMap } = useContext(Context);
   const onClick = useCallback((e) => {
-    const { center } = e.target.parentNode.dataset;
+    const center = e.target.parentNode.dataset.center || e.target.dataset.center;
     if (center) {
       const newCenter = center.split('-')
+      console.log(center)
       setShowMap(true);
       map.setView(newCenter, zoom)
     }
-  }, [map, zoom])
+  }, [setShowMap, map, zoom])
   return (
     <Container
-      className={`position-relative routeTable bg-gray ${
+      fluid
+      className={`position-fixed bottom-0 routeTable bg-gray ${
         showMap ? "showMap" : ""
       }`}
     >
       <div className="d-flex justify-content-between pt-5 pb-2">
         <h2 className="fs-1 text-primary">{routeName}</h2>
-        <span className="fs-4 text-primary">*於 3 秒前更新</span>
+        <span className="fs-4 text-primary"> {count + 1} 秒後更新</span>
       </div>
       <div
         className={`list d-flex overflow-hidden${isBack ? " isBack" : ""}`}
@@ -117,4 +119,7 @@ StopsTable.propTypes = {
 
 RouteTable.propType = {
   data: PropTypes.array.isRequired,
+  map: PropTypes.object.isRequired,
+  zoom: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
 };

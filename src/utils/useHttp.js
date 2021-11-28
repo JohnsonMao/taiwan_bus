@@ -2,13 +2,12 @@ import { useEffect, useState, useCallback } from "react";
 
 import { apiCityBus, apiRouteName } from "../api";
 import { CITYBUS, ROUTENAME } from './type_config';
-import useInterval from './useInterval';
 
-export default function useHttp(type = "", city = "", routeName = "") {
+export default function useHttp(type = "", city = "", routeName = "", control = true) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
-  
+
   const updateData = useCallback(async () => {
     try {
       switch (type) {
@@ -29,11 +28,12 @@ export default function useHttp(type = "", city = "", routeName = "") {
       setError(true);
       setData(error);
     }
-  }, [type, city, routeName]);
+  }, [type, city, routeName, control]);
 
   useEffect(() => {
     setLoading(true);
     setError(false);
+    console.log('-------api-------')
     const delay = setTimeout(() => {
       updateData();
     }, 0);

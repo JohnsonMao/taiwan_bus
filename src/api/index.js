@@ -1,4 +1,5 @@
 import ajax from "./ajax";
+import Wkt from 'wicket';
 
 const ROOT_URL = "https://ptx.transportdata.tw/MOTC/v2/Bus";
 
@@ -79,6 +80,24 @@ const apiEstimatedTime = (city = "", routeName = "", data = null) =>
     ...data,
   });
 
+/* 路線線型
+ *
+ * RouteUID
+ * RouteName
+ * Direction
+ * Geometry 路線軌跡
+ */
+const initShape = {
+  $select: ["RouteUID", "RouteName", "Direction", "Geometry"],
+};
+
+const apiShape = (city = "", routeName = "", data = null) =>
+  ajax(ROOT_URL + "/Shape/City/" + city + "/" + routeName, {
+    ...initShape,
+    ...data,
+  });
+
+  
 /* 整合 Route 資料 */
 export const apiRouteName = async (city = "", routeName = "", data = null) => {
   if (city === "") {
@@ -87,6 +106,7 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
   const stopOfRoute = await apiStopOfRoute(city, routeName, data);
   const busNearStop = await apiBusNearStop(city, routeName, data);
   const estimatedTime = await apiEstimatedTime(city, routeName, data);
+  const shape = await apiShape(city, routeName, data);
   /* stopOfRoute   [{Direction: 0, stops: [...], ...}, {Direction: 1, stops: [...], ...}]
    * busNearStop   [{Direction..., StopUID..., Plate..., A2E... }, ...]
    * estimatedTime [{Direction..., StopUID..., Estimate..., StopStatus...}, ...]
@@ -124,16 +144,14 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
     );
   });
 
-  return result;
-};
+  /* Geometry 字串轉 GeoJson */
+  const wkt = new Wkt.Wkt();
+  wkt.read(shape[0].Geometry)
+  const newGeoJson = wkt.toJson().coordinates.map(position => position.reverse())
+  result.push(newGeoJson)
 
-/* 路線線型
- *
- * RouteUID
- * RouteName
- * Direction
- * Geometry 路線軌跡
- */
+  return result;  // result: [[Direction: 0], [Direction: 1], GeoJson]
+};
 
 /* 批次動態定時資料 Map
  *

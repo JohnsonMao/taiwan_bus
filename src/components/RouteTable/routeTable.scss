@@ -14,7 +14,7 @@
 
   li
   {
-    margin-bottom: 14px;
+    margin-bottom: 2px;
     cursor: pointer;
 
     &:last-child
@@ -41,8 +41,8 @@
 }
 .circle
 {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   background: $gray;
   border: 2px solid $primary;
   border-radius: 50%;
@@ -75,6 +75,7 @@
   }
   .circle
   {
+    color: $dark;
     background: $primary;
     box-shadow: $btn-shadow;
   }
@@ -99,13 +100,14 @@
 }
 .routeTable
 {
-  background: $dark;
   z-index: 1010;
   transition: .3s;
 
   &.showMap
   {
-    z-index: 0;
-    opacity: 0;
+    ul
+    {
+      height: calc(50vh - 162px);
+    }
   }
 }

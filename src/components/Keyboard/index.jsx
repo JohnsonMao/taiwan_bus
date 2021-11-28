@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useContext, useRef } from "react";
 import PubSub from "pubsub-js";
 
 import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
@@ -123,11 +122,13 @@ const inputRadio = {
   name: "keyboard",
 };
 
-export default function Keyboard({ show, setShow }) {
+export default function Keyboard() {
   const { city, setCity } = useContext(Context);
-
+  const audio = useRef(null);
   const pressBtn = (e) => {
     const { route } = e.target.dataset;
+    audio.current.currentTime = 0;
+    audio.current.play();
     PubSub.publish("search", route || "");
   };
 
@@ -141,10 +142,7 @@ export default function Keyboard({ show, setShow }) {
       <KeyboardBase city={city} />
       <label
         htmlFor="baseKeyboard"
-        className={`position-absolute bottom-0 end-0 d-block text-primary bg-gray me-2 rounded keyworad-show-btn ${
-          show ? "d-block" : "d-none"
-        }`}
-        onClick={setShow}
+        className="position-absolute bottom-0 end-0 text-primary bg-gray me-2 rounded keyboard-show-btn"
         aria-label="鍵盤 Keyboard"
       >
         <img
@@ -153,11 +151,9 @@ export default function Keyboard({ show, setShow }) {
           alt="鍵盤 Keyboard"
         />
       </label>
+      <audio ref={audio}>
+        <source src={require("../../asset/Bus.mp3").default} type="audio/mpeg" />
+      </audio>
     </div>
   );
 }
-
-Keyboard.propTypes = {
-  setShow: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired,
-};

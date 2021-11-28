@@ -31,3 +31,22 @@
   border-radius: 50%;
   box-shadow: $btn-shadow;
 }
+.lineShadow
+{
+  filter: drop-shadow(0 0 5px $primary);
+}
+.leaflet-top
+{
+  top: 116px;
+}
+.leaflet-touch .leaflet-bar
+{
+  border: 0;
+}
+.leaflet-bar a
+{
+  margin-bottom: 1px;
+  border: 0;
+  background: $gray;
+  color: $light;
+}
