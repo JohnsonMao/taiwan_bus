@@ -56,6 +56,22 @@
   {
     display: none;
   }
+  img
+  {
+    display: none;
+  }
+}
+.crossIcon
+{
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 0;
+  height: 6px;
+  background: $light;
+  border: 2px solid $dark;
+  transform: rotate(-45deg) translate(-8px, 10px);
+  transition: .3s;
 }
 .page
 {
@@ -124,6 +140,17 @@
     {
       display: inline;
     }
+    .crossIcon
+    {
+      width: 0;
+      display: inline;
+
+      &.showCross
+      {
+        width: 34px;
+      }
+    }
+
   }
 
   .map
@@ -167,6 +194,7 @@
 
     svg
     {
+      width: 34px;
       display: inline;
     }
   }

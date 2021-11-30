@@ -42,15 +42,11 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
   const navigate = useNavigate();
 
   const goBack = () => {
-    if (showMap) {
-      setShowMap(false);
-    } else {
-      navigate(-1);
-    }
+    navigate(-1);
   }
 
-  const goMap = () => {
-    setShowMap(true)
+  const toggleMap = () => {
+    setShowMap(!showMap)
   }
 
   return (
@@ -87,15 +83,14 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
               />
             </div>
           </div>
-          <div className="result_show">
+          <div className="result_show d-flex justify-content-end">
             <button
-              onClick={goMap}
-              className={`flex-shrink-0 ms-auto map ${
-                showMap ? "d-none" : "d-block"
-              }`}
+              onClick={toggleMap}
+              className="flex-shrink-0 position-relative map"
               aria-label="地圖 Map"
             >
               <MapSVG />
+              <span className={`crossIcon ${showMap ? "showCross" : ""}`}></span>
             </button>
           </div>
           <div className="page_show like">
