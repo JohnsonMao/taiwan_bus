@@ -9,9 +9,10 @@ import Map from "../Map";
 
 export default function RoutePage() {
 
+  const CD = 30;    /* 幾秒更新 */
   const { city_En, isBack, routeName } = useContext(Context);
   const [control, setControl] = useState(true)
-  const [count, setCount] = useState(15)
+  const [count, setCount] = useState(CD)
 
   const { data, error } = useHttp(ROUTENAME, city_En, routeName, control);
 
@@ -19,7 +20,7 @@ export default function RoutePage() {
     const timer = setInterval(() => {
       if (count === 0) {
         setControl(!control);
-        setCount(15)
+        setCount(CD)
       }
       setCount(count => count - 1)
     }, 1000)

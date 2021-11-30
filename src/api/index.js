@@ -160,3 +160,23 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
  * Speed 行駛速度
  * Direction 去程返程
  */
+
+
+/* 附近站牌資料 API 
+ *
+ * StationUID 站位識別碼
+ * StationName 站位名稱
+ * StationPosition 站牌位置
+ * StationAddress 站位地址
+ * Stops 經過站牌的路線
+ */
+const initNearby = {
+  $select: ["StationUID", "StationName", "StationPosition", "StationAddress", "Stops"],
+  $spatialFilter: 'nearby(25.047675, 121.517055, 1000)'
+};
+
+const apiNearby = (data = null) =>
+  ajax(ROOT_URL + "/Station/NearBy", {
+    ...initShape,
+    ...data,
+  });

@@ -44,7 +44,7 @@ export default function Map({ data, setMap, zoom, geo }) {
             icon={busNearStopMarker}
             position={[PositionLat, PositionLon]}
           >
-            <Tooltip offset={[0, 0]} direction="center" opacity={1} permanent className="text-dark">
+            <Tooltip offset={[0, 0]} direction="center" opacity={1} permanent>
               {stop.StopSequence}
             </Tooltip>
           </Marker>
