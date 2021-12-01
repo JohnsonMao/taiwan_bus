@@ -70,3 +70,17 @@
   background: $gray;
   color: $light;
 }
+.backMarkerShow
+{
+  .goMarker
+  {
+    display: none;
+  }
+}
+.goMarkerShow
+{
+  .backMarker
+  {
+    display: none;
+  }
+}

@@ -28,8 +28,6 @@ export default function RoutePage() {
       clearInterval(timer)
     }
   }, [count, setControl, control])
-
-  const mapData = isBack ? data[1] : data[0];
   
   const [map, setMap] = useState(null)
   const zoom = 14;
@@ -37,13 +35,13 @@ export default function RoutePage() {
     setMap(e)
   }
   return (
-    <div>
+    <div className={isBack ? 'backMarkerShow' : 'goMarkerShow'}>
       {data.length === 0 ? (
         <Loading />
       ) : data[0] === 0　|| error ? <div>網頁出錯啦！</div> : (
         <>
           {map ? <RouteTable data={data} map={map} zoom={zoom} count={count} /> : null}
-          <Map data={mapData} setMap={handleMap} zoom={zoom} geo={data[2]} />
+          <Map data={data} setMap={handleMap} zoom={zoom} />
         </>
       )}
     </div>
