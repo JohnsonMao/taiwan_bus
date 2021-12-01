@@ -20,8 +20,8 @@ export default function App() {
             <Route index element={<SearchResult />} />
             <Route path=":id" element={<RoutePage />} />
           </Route>
-          <Route path="favorites" element={<Favorites />} />
           <Route path="nearby" element={<Nearby />} />
+          <Route path="favorites" element={<Favorites />} />
           <Route path="/*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>

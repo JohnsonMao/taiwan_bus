@@ -19,13 +19,13 @@ export default function StationList({ data = [] }) {
   return (
     <>
       {
-        data.map((item) => (
+        data.map((item, index) => (
           <li
-            key={item.StationUID}
+            key={index}
             className="d-flex justify-content-between align-items-center"
           >
             <Link
-              to={"/citybus/" + item.StationUID}
+              to={"/nearby/" + item.StationID}
               className="d-block px-4 py-3"
             >
               <h3 className="fs-1 lh-base text-one-line">

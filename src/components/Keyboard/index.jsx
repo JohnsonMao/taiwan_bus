@@ -62,15 +62,17 @@ const KeyboardBase = ({ city }) => (
 
 /* `設定城市鍵盤` */
 const KeyboardCity = ({ city, setCity }) => {
-  const [enterCity, setEnterCity] = useState(city);
+  const [enterCity, setEnterCity] = useState(city || '');
   const handleEnterCity = (e) => {
-    const { city, saveCity, node } = e.target.dataset;
+    const { city, savecity, node } = e.target.dataset;
     switch (node) {
       case "setCity":
+        console.log(city)
         setEnterCity(city);
         break;
       case "saveCity":
-        setCity(saveCity);
+        console.log(savecity)
+        setCity(savecity);
         break;
       default:
     } 
@@ -93,7 +95,7 @@ const KeyboardCity = ({ city, setCity }) => {
         htmlFor="baseKeyboard"
         className="btn btn-primary fs-3 enter-btn"
         aria-label="設定"
-        data-saveCity={enterCity}
+        data-savecity={enterCity}
         data-node="saveCity"
       >
         設定

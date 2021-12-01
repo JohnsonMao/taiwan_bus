@@ -78,7 +78,7 @@ const apiEstimatedTime = (city = "", routeName = "") =>
     initEstimatedTime
   );
 
-/* 路線線型
+/* 路線軌跡
  *
  * RouteUID
  * RouteName
@@ -145,7 +145,7 @@ export const apiRouteName = async (city = "", routeName = "") => {
   wkt.read(shape[0].Geometry);
   const newGeoJson = wkt
     .toJson()
-    .coordinates.map((position) => position.reverse());
+    .coordinates.map((position) => position.reverse());  // 將經緯度反轉
   result.push(newGeoJson);
 
   return result; // result: [[Direction: 0], [Direction: 1], GeoJson]
@@ -161,7 +161,7 @@ export const apiRouteName = async (city = "", routeName = "") => {
 
 /* 附近站牌資料 API
  *
- * StationUID 站位識別碼
+ * StationID 站位識別碼
  * StationName 站位名稱
  * StationPosition 站牌位置
  * StationAddress 站位地址
@@ -170,7 +170,7 @@ export const apiRouteName = async (city = "", routeName = "") => {
  */
 const initNearby = {
   $select: [
-    "StationUID",
+    "StationID",
     "StationName",
     "StationPosition",
     "StationAddress",
@@ -181,3 +181,26 @@ const initNearby = {
 
 export const apiNearby = (data = null) =>
   ajax(ROOT_URL + "/Station/NearBy", Object.assign(initNearby, data));
+
+/* 站牌路線 API
+ *
+ * RouteUID 識別碼
+ * RouteName 路線名稱
+ * DepartureStopNameZh 起點
+ * DestinationStopNameZh 終點
+ */
+
+const initStation = {
+  $select: [
+    "RouteUID",
+    "RouteName",
+    "DepartureStopNameZh",
+    "DestinationStopNameZh",
+  ],
+};
+
+export const apiStation = (city = "", stationID) =>
+  ajax(
+    ROOT_URL + "/Route/City/" + city + "/PassThrough/Station/" + stationID,
+    initStation
+  );

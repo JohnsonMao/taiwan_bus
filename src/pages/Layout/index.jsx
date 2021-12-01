@@ -22,9 +22,8 @@ export function Layout() {
   /* City State */
   const [city, setCity] = useState(getHistory(STORAGE_CITY) || "");
   const handleCity = (e) => {
-    const { city } = e.target.dataset;
-    setCity(city || "");
-    saveHistory(STORAGE_CITY, city || "");
+    setCity(e);
+    saveHistory(STORAGE_CITY, e || "");
   };
   /* City English name */
   const cityIndex = keyboard_city.findIndex(
@@ -92,8 +91,8 @@ export function Layout() {
       className={`wrap vh-100${
         pathnameArr[1] === ""
           ? ""
-          : pathnameArr[1] === "favorites"
-          ? " page favorites"
+          : pathnameArr[1] !== "citybus"
+          ? " page other"
           : pathnameArr[2]
           ? " page result"
           : " page"
