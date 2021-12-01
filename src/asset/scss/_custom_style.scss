@@ -127,21 +127,6 @@ input
     background: $primary;
     color: $dark;
   }
-  &-gray-light,
-  &-gray-light:hover,
-  &-gray-light:active
-  {
-    color: $gray-light;
-    box-shadow: none;
-    border: 1px solid $gray-light;
-    background: $dark;
-
-    path
-    {
-      fill: $gray-light;
-      stroke: $gray-light !important;
-    }
-  }
 }
 
 .delete-icon

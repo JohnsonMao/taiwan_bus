@@ -1,9 +1,14 @@
 import { useEffect, useState, useCallback } from "react";
 
 import { apiCityBus, apiRouteName, apiNearby } from "../api";
-import { CITYBUS, ROUTENAME, NEARBY } from './type_config';
+import { CITYBUS, ROUTENAME, NEARBY } from "./type_config";
 
-export default function useHttp(type = "", location = "", routeName = "", control = true) {
+export default function useHttp(
+  type = "",
+  location = "",
+  routeName = "",
+  control = true
+) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
@@ -22,14 +27,15 @@ export default function useHttp(type = "", location = "", routeName = "", contro
           break;
 
         case NEARBY:
-          const newLocation = `nearby(${location})`
-          const nearbyData = await apiNearby(newLocation)
+          if (location === 'null, null') return
+          const newLocation = { $spatialFilter: [`nearby(${location}, 500)`] };
+          const nearbyData = await apiNearby(newLocation);
           setData(nearbyData);
           break;
 
         default:
       }
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       setError(true);
       setData(error);

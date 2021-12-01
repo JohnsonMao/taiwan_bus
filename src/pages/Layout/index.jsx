@@ -30,7 +30,7 @@ export function Layout() {
   const cityIndex = keyboard_city.findIndex(
     (cityObj) => cityObj.CityName === city
   );
-  const city_En = cityIndex !== -1 ? keyboard_city[cityIndex].City : "";
+  const city_En = keyboard_city[cityIndex]?.City || "";
 
   /* Route Start and End State */
   const [routeArr, setRouteArr] = useState(

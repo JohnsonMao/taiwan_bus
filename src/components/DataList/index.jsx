@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Context } from "../../pages/Layout";
-import ListLi from "./List_li";
+import RouteList from "./RouteList";
+import StationList from "./StationList";
 import "./datalist.scss";
 
 export default function DataList({ setShow, title, data = [] }) {
@@ -53,10 +54,14 @@ export default function DataList({ setShow, title, data = [] }) {
         onMouseOver={handleShow}
         onTouchStart={handleShow}
       >
-        {setShow === undefined && data[0] === undefined ? (
-          <Link to="/citybus" className="fs-3">趕快去添加路線吧～</Link>
+        {title === "我的附近" ? (
+          <StationList data={data} />
+        ) : title === "我的收藏" && data[0] === undefined ? (
+          <Link to="/citybus" className="fs-3">
+            趕快去添加路線吧～
+          </Link>
         ) : (
-          <ListLi data={data} favorites={favorites} />
+          <RouteList data={data} favorites={favorites} />
         )}
       </ul>
     </div>

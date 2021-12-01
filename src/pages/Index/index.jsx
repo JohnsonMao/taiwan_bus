@@ -16,7 +16,7 @@ export default function Index() {
     <Container className="position-relative" as="nav">
       <ul className="router">
         <li>
-          <Link to="/" className="btn btn-gray-light fs-3 p-2">
+          <Link to="nearby" {...linkStyle}>
             <GPS />
             <span>附近公車站</span>
           </Link>

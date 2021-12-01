@@ -5,7 +5,7 @@ import { Context } from "../../pages/Layout";
 import DataList from "../../components/DataList";
 
 export default function Favorites() {
-  const { setRouteArr, favorites, setFavorites } = useContext(Context);
+  const { favorites } = useContext(Context);
 
   return (
     <main className="main">

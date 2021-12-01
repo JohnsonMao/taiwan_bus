@@ -61,10 +61,19 @@ const KeyboardBase = ({ city }) => (
 );
 
 /* `設定城市鍵盤` */
-const KeyboardCity = ({ city, onClick }) => {
+const KeyboardCity = ({ city, setCity }) => {
   const [enterCity, setEnterCity] = useState(city);
   const handleEnterCity = (e) => {
-    setEnterCity(e.target.dataset.city);
+    const { city, saveCity, node } = e.target.dataset;
+    switch (node) {
+      case "setCity":
+        setEnterCity(city);
+        break;
+      case "saveCity":
+        setCity(saveCity);
+        break;
+      default:
+    } 
   }
   return (
     <div className="keyboard bg-gray p-6" onClick={handleEnterCity}>
@@ -75,6 +84,7 @@ const KeyboardCity = ({ city, onClick }) => {
           className={`btn btn-primary fs-3 p-0 ${enterCity === item.CityName ? 'active' : ''}`}
           aria-label={item.CityName + " " + item.City}
           data-city={item.CityName}
+          data-node="setCity"
         >
           {item.CityName}
         </button>
@@ -83,8 +93,8 @@ const KeyboardCity = ({ city, onClick }) => {
         htmlFor="baseKeyboard"
         className="btn btn-primary fs-3 enter-btn"
         aria-label="設定"
-        data-city={enterCity}
-        onClick={onClick}
+        data-saveCity={enterCity}
+        data-node="saveCity"
       >
         設定
       </label>
@@ -137,7 +147,7 @@ export default function Keyboard() {
       <input {...inputRadio} id="moreKeyboard" />
       <KeyboardMore />
       <input {...inputRadio} id="cityKeyboard" defaultChecked={!city} />
-      <KeyboardCity city={city} onClick={setCity} />
+      <KeyboardCity city={city} setCity={setCity} />
       <input {...inputRadio} id="baseKeyboard" defaultChecked={city} />
       <KeyboardBase city={city} />
       <label

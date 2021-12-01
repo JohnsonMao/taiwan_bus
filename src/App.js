@@ -5,6 +5,7 @@ import { Layout } from "./pages/Layout";
 import Index from "./pages/Index";
 import CityBus from "./pages/CityBus";
 import Favorites from "./pages/Favorites";
+import Nearby from "./pages/Nearby";
 import SearchResult from "./components/SearchResult";
 import RoutePage from "./components/RoutePage";
 import "./asset/scss/style.scss";
@@ -20,6 +21,7 @@ export default function App() {
             <Route path=":id" element={<RoutePage />} />
           </Route>
           <Route path="favorites" element={<Favorites />} />
+          <Route path="nearby" element={<Nearby />} />
           <Route path="/*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>

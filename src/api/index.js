@@ -1,5 +1,5 @@
 import ajax from "./ajax";
-import Wkt from 'wicket';
+import Wkt from "wicket";
 
 const ROOT_URL = "https://ptx.transportdata.tw/MOTC/v2/Bus";
 
@@ -16,10 +16,8 @@ const initCityBus = {
 };
 
 /* City Bus API */
-export const apiCityBus = (city = "", data = null) =>
-  city === ""
-    ? noCity
-    : ajax(ROOT_URL + "/Route/City/" + city, { ...initCityBus, ...data });
+export const apiCityBus = (city = "") =>
+  city === "" ? noCity : ajax(ROOT_URL + "/Route/City/" + city, initCityBus);
 
 /* 路線站點資料
  *
@@ -40,11 +38,11 @@ const initStopOfRoute = {
   $select: ["RouteUID", "Direction", "Stops"],
 };
 
-const apiStopOfRoute = (city = "", routeName = "", data = null) =>
-  ajax(ROOT_URL + "/StopOfRoute/City/" + city + "/" + routeName, {
-    ...initStopOfRoute,
-    ...data,
-  });
+const apiStopOfRoute = (city = "", routeName = "") =>
+  ajax(
+    ROOT_URL + "/StopOfRoute/City/" + city + "/" + routeName,
+    initStopOfRoute
+  );
 
 /* 批次動態定點資料
  *
@@ -56,14 +54,14 @@ const initBusNearStop = {
   $select: ["PlateNumb", "StopID", "A2EventType"],
 };
 
-const apiBusNearStop = (city = "", routeName = "", data = null) =>
-  ajax(ROOT_URL + "/RealTimeNearStop/City/" + city + "/" + routeName, {
-    ...initBusNearStop,
-    ...data,
-  });
+const apiBusNearStop = (city = "", routeName = "") =>
+  ajax(
+    ROOT_URL + "/RealTimeNearStop/City/" + city + "/" + routeName,
+    initBusNearStop
+  );
 
 /* 批次預估到站資料
- * 
+ *
  * RouteName 路線名
  * StopID 站牌識別碼
  * Direction 車輛方向 [0:'去程',1:'返程',2:'迴圈',255:'未知']
@@ -74,11 +72,11 @@ const initEstimatedTime = {
   $select: ["RouteName", "StopID", "Direction", "EstimateTime", "StopStatus"],
 };
 
-const apiEstimatedTime = (city = "", routeName = "", data = null) =>
-  ajax(ROOT_URL + "/EstimatedTimeOfArrival/City/" + city + "/" + routeName, {
-    ...initEstimatedTime,
-    ...data,
-  });
+const apiEstimatedTime = (city = "", routeName = "") =>
+  ajax(
+    ROOT_URL + "/EstimatedTimeOfArrival/City/" + city + "/" + routeName,
+    initEstimatedTime
+  );
 
 /* 路線線型
  *
@@ -91,22 +89,18 @@ const initShape = {
   $select: ["RouteUID", "RouteName", "Direction", "Geometry"],
 };
 
-const apiShape = (city = "", routeName = "", data = null) =>
-  ajax(ROOT_URL + "/Shape/City/" + city + "/" + routeName, {
-    ...initShape,
-    ...data,
-  });
+const apiShape = (city = "", routeName = "") =>
+  ajax(ROOT_URL + "/Shape/City/" + city + "/" + routeName, initShape);
 
-  
 /* 整合 Route 資料 */
-export const apiRouteName = async (city = "", routeName = "", data = null) => {
+export const apiRouteName = async (city = "", routeName = "") => {
   if (city === "") {
     return noCity;
   }
-  const stopOfRoute = await apiStopOfRoute(city, routeName, data);
-  const busNearStop = await apiBusNearStop(city, routeName, data);
-  const estimatedTime = await apiEstimatedTime(city, routeName, data);
-  const shape = await apiShape(city, routeName, data);
+  const stopOfRoute = await apiStopOfRoute(city, routeName);
+  const busNearStop = await apiBusNearStop(city, routeName);
+  const estimatedTime = await apiEstimatedTime(city, routeName);
+  const shape = await apiShape(city, routeName);
   /* stopOfRoute   [{Direction: 0, stops: [...], ...}, {Direction: 1, stops: [...], ...}]
    * busNearStop   [{Direction..., StopUID..., Plate..., A2E... }, ...]
    * estimatedTime [{Direction..., StopUID..., Estimate..., StopStatus...}, ...]
@@ -117,7 +111,9 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
   stops.sort((first, second) => first.StopID - second.StopID);
 
   /* 過濾資料並排序整合 */
-  let newEstimatedTime = estimatedTime.filter(stop => stop.RouteName.Zh_tw === routeName)
+  let newEstimatedTime = estimatedTime.filter(
+    (stop) => stop.RouteName.Zh_tw === routeName
+  );
   newEstimatedTime.sort((first, second) => first.StopID - second.StopID);
   stops.forEach((stop, index) => {
     Object.assign(stop, newEstimatedTime[index]);
@@ -146,11 +142,13 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
 
   /* Geometry 字串轉 GeoJson */
   const wkt = new Wkt.Wkt();
-  wkt.read(shape[0].Geometry)
-  const newGeoJson = wkt.toJson().coordinates.map(position => position.reverse())
-  result.push(newGeoJson)
+  wkt.read(shape[0].Geometry);
+  const newGeoJson = wkt
+    .toJson()
+    .coordinates.map((position) => position.reverse());
+  result.push(newGeoJson);
 
-  return result;  // result: [[Direction: 0], [Direction: 1], GeoJson]
+  return result; // result: [[Direction: 0], [Direction: 1], GeoJson]
 };
 
 /* 批次動態定時資料 Map
@@ -161,21 +159,25 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
  * Direction 去程返程
  */
 
-
-/* 附近站牌資料 API 
+/* 附近站牌資料 API
  *
  * StationUID 站位識別碼
  * StationName 站位名稱
  * StationPosition 站牌位置
  * StationAddress 站位地址
  * Stops 經過站牌的路線
+ * LocationCityCode 城市代碼
  */
 const initNearby = {
-  $select: ["StationUID", "StationName", "StationPosition", "StationAddress", "Stops"],
+  $select: [
+    "StationUID",
+    "StationName",
+    "StationPosition",
+    "StationAddress",
+    "Stops",
+    "LocationCityCode",
+  ],
 };
 
 export const apiNearby = (data = null) =>
-  ajax(ROOT_URL + "/Station/NearBy", {
-    ...initNearby,
-    ...data,
-  });
+  ajax(ROOT_URL + "/Station/NearBy", Object.assign(initNearby, data));

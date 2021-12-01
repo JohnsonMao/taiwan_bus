@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 
-export default function ListLi({ data = [], favorites = [] }) {
+export default function RouteList({ data = [], favorites = [] }) {
 
   data.forEach((item) => {
     item.favorite = false;
@@ -79,7 +79,7 @@ export default function ListLi({ data = [], favorites = [] }) {
   )
 }
 
-ListLi.propTypes = {
+RouteList.propTypes = {
   data: PropTypes.array,
   favorites: PropTypes.array,
 }
