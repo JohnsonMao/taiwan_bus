@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 
-export default function ListLi({ data, favorites }) {
+export default function ListLi({ data = [], favorites = [] }) {
 
   data.forEach((item) => {
     item.favorite = false;

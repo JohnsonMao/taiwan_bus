@@ -170,13 +170,12 @@ export const apiRouteName = async (city = "", routeName = "", data = null) => {
  * StationAddress 站位地址
  * Stops 經過站牌的路線
  */
-// const initNearby = {
-//   $select: ["StationUID", "StationName", "StationPosition", "StationAddress", "Stops"],
-//   $spatialFilter: 'nearby(25.047675, 121.517055, 1000)'
-// };
+const initNearby = {
+  $select: ["StationUID", "StationName", "StationPosition", "StationAddress", "Stops"],
+};
 
-// const apiNearby = (data = null) =>
-//   ajax(ROOT_URL + "/Station/NearBy", {
-//     ...initShape,
-//     ...data,
-//   });
+export const apiNearby = (data = null) =>
+  ajax(ROOT_URL + "/Station/NearBy", {
+    ...initNearby,
+    ...data,
+  });
