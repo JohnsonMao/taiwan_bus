@@ -1,52 +1,16 @@
 import React, { useContext } from "react";
-import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { Context } from "../../pages/Layout";
-import ListLi from "../../components/DataList/List_li";
-import "../../components/DataList/datalist.scss";
+import DataList from "../../components/DataList";
 
 export default function Favorites() {
   const { setRouteArr, favorites, setFavorites } = useContext(Context);
 
-  const onClickRoute = (e) => {
-    const { start, end, favorite } = e.target.parentNode.dataset;
-    if (!favorite) {
-      setRouteArr([start, end]);
-    }
-    if (favorite) {
-      const active = e.target.classList[0];
-      const favoriteObj = {
-        RouteName: {},
-      };
-      const favoriteArr = favorite.split("&");
-      favoriteObj.RouteUID = favoriteArr[0];
-      favoriteObj.RouteName.Zh_tw = favoriteArr[1];
-      favoriteObj.DepartureStopNameZh = favoriteArr[2];
-      favoriteObj.DestinationStopNameZh = favoriteArr[3];
-      switch (active) {
-        case "active":
-          const newData = favorites.filter(
-            (favorite) => favorite.RouteUID !== favoriteObj.RouteUID
-          );
-          setFavorites(newData);
-          break;
-        default:
-          setFavorites((prevData) => [...prevData, favoriteObj]);
-      }
-    }
-  };
-
   return (
     <main className="main">
-      <Container>
-        <h2 className="fs-2 mt-7 mb-1">我的收藏</h2>
-        <ul className="datalist pb-7" onClick={onClickRoute}>
-          {favorites[0] === undefined ? 
-          <Link to="/citybus">趕快去添加路線吧～</Link> :
-          <ListLi data={favorites} favorites={favorites} />
-          }
-        </ul>
+      <Container className="content">
+        <DataList title="我的收藏" data={favorites} />
       </Container>
     </main>
   );

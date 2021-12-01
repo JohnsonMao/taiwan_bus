@@ -31,7 +31,12 @@ export default function SearchResult() {
   return (
     <>
       <Container className="content">
-        {keyword.trim() === "" ? null : loading ? (
+        {keyword.trim() === "" ? (
+          <>
+            <h2 className="fs-2 pt-7 mb-1">{city || "請選擇縣市"}</h2>
+            <div className="fs-3">選擇路線或手動輸入關鍵字～</div>
+          </>
+        ) : loading ? (
           <Loading />
         ) : (
           <DataList setShow={noShow} title={city} data={showData} />

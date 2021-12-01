@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Context } from "../../pages/Layout";
@@ -52,7 +53,11 @@ export default function DataList({ setShow, title, data = [] }) {
         onMouseOver={handleShow}
         onTouchStart={handleShow}
       >
-        <ListLi data={data} favorites={favorites} />
+        {setShow === undefined && data[0] === undefined ? (
+          <Link to="/citybus" className="fs-3">趕快去添加路線吧～</Link>
+        ) : (
+          <ListLi data={data} favorites={favorites} />
+        )}
       </ul>
     </div>
   );
