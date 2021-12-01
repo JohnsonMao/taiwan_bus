@@ -1,82 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Tooltip,
-  Polyline,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-import {
-  goStopMarker,
-  goBusNearStopMarker,
-  backStopMarker,
-  backBusNearStopMarker,
-} from "./Icon";
+import StopMarkers from "./StopMarkers";
 import "./map.scss";
 
 const lineColor = {
   color: "#1CC8EE",
 };
 
-const StopMarker = ({ stop, icon, className }) => {
-  
-  const { PositionLat, PositionLon } = stop.StopPosition;
-
-  return (<Marker
-            key={stop.StopUID}
-            icon={icon}
-            position={[PositionLat, PositionLon]}
-          >
-            <Tooltip
-              offset={[0, 0]}
-              direction="center"
-              opacity={1}
-              permanent
-              className={className}
-            >
-              {stop.StopSequence}
-            </Tooltip>
-            <Popup>
-              <div>
-                <h2>{stop.StopName.Zh_tw}</h2>
-                <span>
-                  {stop?.A2EventType === 0
-                    ? "離站中"
-                    : stop?.A2EventType === 1
-                    ? "進站中"
-                    : stop.StopStatus === 0
-                    ? stop.EstimateTime !== undefined &&
-                      Math.floor(stop.EstimateTime / 60) !== 0
-                      ? Math.floor(stop.EstimateTime / 60) + " 分"
-                      : "1 分內"
-                    : "未發車"}
-                </span>
-              </div>
-            </Popup>
-          </Marker>
-)}
-
-const StopMarkers = ({ stops, direction }) => {
-  const busNearStopMarker = direction === 0 ? goBusNearStopMarker : backBusNearStopMarker;
-  const stopMarker = direction === 0 ? goStopMarker : backStopMarker;
-  const className = direction === 0 ? 'goMarker' : 'backMarker';
-
-  return (<>
-    {
-      stops.map((stop, index) => {
-        return stop?.A2EventType === 1 ? (
-          <StopMarker key={index} stop={stop} icon={busNearStopMarker} className={className} />
-        ) : (
-          <StopMarker key={index} stop={stop} icon={stopMarker} className={className} />
-        );
-      })
-    }
-  </>)
-}
 export default function Map({ data, setMap, zoom }) {
   /* 擷取所有站點的中心點 */
   let centerLat = 0;
@@ -89,7 +22,7 @@ export default function Map({ data, setMap, zoom }) {
   centerLon = centerLon / data[0].length;
 
   const [position] = useState([centerLat, centerLon]);
-  console.log(position)
+  console.log(position);
   return (
     <MapContainer
       center={position}
@@ -116,4 +49,5 @@ export default function Map({ data, setMap, zoom }) {
 Map.propTypes = {
   data: PropTypes.array.isRequired,
   zoom: PropTypes.number.isRequired,
+  setMap: PropTypes.func.isRequired
 };

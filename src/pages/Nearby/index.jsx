@@ -11,7 +11,7 @@ export default function Nearby() {
 
   const { latitude, longitude } = useGeolocation();
   const location = latitude + ', ' + longitude
-  const { data, error, loading } = useHttp(NEARBY, location);
+  const { data } = useHttp(NEARBY, location);
   return (
     <main className="main">
       <Container className="content">

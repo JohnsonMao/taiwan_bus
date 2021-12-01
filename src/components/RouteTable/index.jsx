@@ -80,7 +80,7 @@ export default function RouteTable({ data, map, zoom, count }) {
       if (center) {
         const newCenter = center.split("-");
         setShowMap(true);
-        map.setView(newCenter, zoom);
+        map.setView(newCenter, (zoom + 3));
       }
     },
     [setShowMap, map, zoom]
