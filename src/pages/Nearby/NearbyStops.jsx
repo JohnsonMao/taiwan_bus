@@ -1,14 +1,15 @@
-import useGeolocation from "react-hook-geolocation";
-
 import DataList from "../../components/DataList";
-import { NEARBY } from "../../utils/type_config";
-import useHttp from "../../utils/useHttp";
+import Loading from "../../components/Loading";
 
-export default function NearbyStops() {
+export default function NearbyStops({ data, map, zoom, loading }) {
 
-  const { latitude, longitude } = useGeolocation();
-  const location = latitude + ', ' + longitude
-  const { data } = useHttp(NEARBY, location);
-  
-  return (<DataList title="我的附近" data={data} />)
+  return (
+    <>
+      {loading ? (
+        <Loading />
+      ) : map ? (
+        <DataList title="我的附近" data={data} map={map} zoom={zoom} />
+      ) : null}
+    </>
+  );
 }

@@ -5,71 +5,59 @@ import PropTypes from "prop-types";
 import { Context } from "../../pages/Layout";
 import "./routeTable.scss";
 
-const StopsTable = ({ stops }) =>
-  stops.map((stop) => (
-    <Row
-      as="li"
-      key={stop.StopUID}
-      className={`gx-3 align-items-center py-1 ${
-        stop?.A2EventType === 0
-          ? "leaving"
-          : stop?.A2EventType === 1
-          ? "enter"
-          : stop.StopStatus === 0
-          ? "waiting"
-          : ""
-      }`}
-      data-center={
-        stop.StopPosition.PositionLat + "-" + stop.StopPosition.PositionLon
-      }
-    >
-      <Col
-        xs={3}
-        data-center={
-          stop.StopPosition.PositionLat + "-" + stop.StopPosition.PositionLon
-        }
-      >
-        <div className="event text-center fs-3">
-          {stop?.A2EventType === 0
-            ? "離站中"
-            : stop?.A2EventType === 1
-            ? "進站中"
-            : stop.StopStatus === 0
-            ? stop.EstimateTime !== undefined &&
-              Math.floor(stop.EstimateTime / 60) !== 0
-              ? Math.floor(stop.EstimateTime / 60) + " 分"
-              : "1 分內"
-            : "未發車"}
-        </div>
-      </Col>
-      <Col
-        xs={5}
-        data-center={
-          stop.StopPosition.PositionLat + "-" + stop.StopPosition.PositionLon
-        }
-      >
-        <h3 className="stop fs-3">{stop.StopName.Zh_tw}</h3>
-      </Col>
-      <Col
-        xs={3}
-        data-center={
-          stop.StopPosition.PositionLat + "-" + stop.StopPosition.PositionLon
-        }
-      >
-        <div className="text-end fs-3 text-primary">
-          {stop?.PlateNumb || null}
-        </div>
-      </Col>
-      <Col
-        xs={1}
-        data-center={
-          stop.StopPosition.PositionLat + "-" + stop.StopPosition.PositionLon
-        }
-      >
-        <div className="circle fs-4 text-center lh-sm">{stop.StopSequence}</div>
-      </Col>
-    </Row>
-  ));
+const StopsTable = ({ stops }) => {
+  return (
+    <>
+      {stops.map((stop) => {
+        const { PositionLat, PositionLon } = stop.StopPosition;
+        return (
+          <Row
+            as="li"
+            key={stop.StopUID}
+            className={`gx-3 align-items-center py-1 ${
+              stop?.A2EventType === 0
+                ? "leaving"
+                : stop?.A2EventType === 1
+                ? "enter"
+                : stop.StopStatus === 0
+                ? "waiting"
+                : ""
+            }`}
+            data-center={PositionLat + "-" + PositionLon}
+          >
+            <Col xs={3} data-center={PositionLat + "-" + PositionLon}>
+              <div className="event text-center fs-3">
+                {stop?.A2EventType === 0
+                  ? "離站中"
+                  : stop?.A2EventType === 1
+                  ? "進站中"
+                  : stop.StopStatus === 0
+                  ? stop.EstimateTime !== undefined &&
+                    Math.floor(stop.EstimateTime / 60) !== 0
+                    ? Math.floor(stop.EstimateTime / 60) + " 分"
+                    : "1 分內"
+                  : "未發車"}
+              </div>
+            </Col>
+            <Col xs={5} data-center={PositionLat + "-" + PositionLon}>
+              <h3 className="stop fs-3">{stop.StopName.Zh_tw}</h3>
+            </Col>
+            <Col xs={3} data-center={PositionLat + "-" + PositionLon}>
+              <div className="text-end fs-3 text-primary">
+                {stop?.PlateNumb || null}
+              </div>
+            </Col>
+            <Col xs={1} data-center={PositionLat + "-" + PositionLon}>
+              <div className="circle fs-4 text-center lh-sm">
+                {stop.StopSequence}
+              </div>
+            </Col>
+          </Row>
+        );
+      })}
+    </>
+  );
+};
 
 export default function RouteTable({ data, map, zoom, count }) {
   const { isBack, search_keyword, showMap, setShowMap } = useContext(Context);
@@ -80,7 +68,7 @@ export default function RouteTable({ data, map, zoom, count }) {
       if (center) {
         const newCenter = center.split("-");
         setShowMap(true);
-        map.setView(newCenter, (zoom + 3));
+        map.setView(newCenter, zoom + 3);
       }
     },
     [setShowMap, map, zoom]

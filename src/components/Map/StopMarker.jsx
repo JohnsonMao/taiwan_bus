@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -44,5 +44,5 @@ export default function StopMarker({ stop, icon, className }) {
 StopMarker.propTypes = {
   stop: PropTypes.object,
   icon: PropTypes.object,
-  className: PropTypes.string
-}
+  className: PropTypes.string,
+};

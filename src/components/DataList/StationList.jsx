@@ -1,61 +1,59 @@
-import { useContext } from 'react'
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import { Context } from "../../pages/Layout";
-import { keyboard_city } from '../../utils/keyboard_config';
+import { keyboard_city } from "../../utils/keyboard_config";
 
 export default function StationList({ data = [] }) {
-
   const { setCity } = useContext(Context);
   const cityIndex = keyboard_city.findIndex(
-    cityObj => cityObj.CityCode === data[0]?.LocationCityCode
+    (cityObj) => cityObj.CityCode === data[0]?.LocationCityCode
   );
 
   if (cityIndex !== -1) {
-    setCity(keyboard_city[cityIndex].CityName)
+    setCity(keyboard_city[cityIndex].CityName);
   }
 
   return (
     <>
-      {
-        data.map((item, index) => (
+      {data.map((station, index) => {
+        const { PositionLat, PositionLon } = station.StationPosition;
+        return (
           <li
             key={index}
             className="d-flex justify-content-between align-items-center"
+            data-center={PositionLat + "-" + PositionLon}
           >
             <Link
-              to={item.StationID + '-' + item.StationName.Zh_tw}
+              to={station.StationID + "-" + station.StationName.Zh_tw}
+              data-center={PositionLat + "-" + PositionLon}
               className="d-block px-4 py-3"
             >
               <h3 className="fs-1 lh-base text-one-line">
-                {item.StationName.Zh_tw}
+                {station.StationName.Zh_tw}
               </h3>
-              <h4
-                className="fs-3 text-gray-light lh-base text-one-line"
-              >
-                {item.StationAddress}
+              <h4 className="fs-3 text-gray-light lh-base text-one-line">
+                {station.StationAddress}
               </h4>
-              <p
-                className="fs-3 text-light lh-base wb-keep-all m-0"
-              >
-                {item.Stops.map((item, index, arr) => {
-                  const max = arr.length - 1
+              <p className="fs-3 text-light lh-base wb-keep-all m-0">
+                {station.Stops.map((item, index, arr) => {
+                  const max = arr.length - 1;
                   if (index !== max) {
-                    return (item.RouteName.Zh_tw + ', ')
+                    return item.RouteName.Zh_tw + ", ";
                   } else {
-                    return (item.RouteName.Zh_tw)
+                    return item.RouteName.Zh_tw;
                   }
                 })}
               </p>
             </Link>
           </li>
-        ))
-      }
+        );
+      })}
     </>
-  )
+  );
 }
 
 StationList.propTypes = {
   data: PropTypes.array
-}
+};

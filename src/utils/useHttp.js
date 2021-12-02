@@ -35,7 +35,7 @@ export default function useHttp(
 
         case STATION:
           const stationData = await apiStation(location, search_keyword)
-          setData(stationData);
+          setData(prevData => [prevData[0], stationData]);
           break;
 
         default:
