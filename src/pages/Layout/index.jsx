@@ -78,7 +78,7 @@ export function Layout() {
     setCity: handleCity,
     keyword: keyword,
     isBack: isBack,
-    routeName: decodeURI(pathnameArr[2]),
+    search_keyword: decodeURI(pathnameArr[2]),
     setRouteArr: handleRouteArr,
     setShowMap: handleShowMap,
     showMap: showMap,

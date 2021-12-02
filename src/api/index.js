@@ -145,7 +145,7 @@ export const apiRouteName = async (city = "", routeName = "") => {
   wkt.read(shape[0].Geometry);
   const newGeoJson = wkt
     .toJson()
-    .coordinates.map((position) => position.reverse());  // 將經緯度反轉
+    .coordinates.map((position) => position.reverse()); // 將經緯度反轉
   result.push(newGeoJson);
 
   return result; // result: [[Direction: 0], [Direction: 1], GeoJson]
@@ -200,7 +200,9 @@ const initStation = {
 };
 
 export const apiStation = (city = "", stationID) =>
-  ajax(
-    ROOT_URL + "/Route/City/" + city + "/PassThrough/Station/" + stationID,
-    initStation
-  );
+  city === ""
+    ? noCity
+    : ajax(
+        ROOT_URL + "/Route/City/" + city + "/PassThrough/Station/" + stationID,
+        initStation
+      );

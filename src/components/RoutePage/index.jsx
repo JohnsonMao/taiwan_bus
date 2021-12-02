@@ -10,11 +10,11 @@ import Map from "../Map";
 export default function RoutePage() {
 
   const CD = 30;    /* 幾秒更新 */
-  const { city_En, isBack, routeName } = useContext(Context);
+  const { city_En, isBack, search_keyword } = useContext(Context);
   const [control, setControl] = useState(true)
   const [count, setCount] = useState(CD)
 
-  const { data, error } = useHttp(ROUTENAME, city_En, routeName, control);
+  const { data, error } = useHttp(ROUTENAME, city_En, search_keyword, control);
 
   useEffect(() => {
     const timer = setInterval(() => {

@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { apiCityBus, apiRouteName, apiNearby } from "../api";
-import { CITYBUS, ROUTENAME, NEARBY } from "./type_config";
+import { apiCityBus, apiRouteName, apiNearby, apiStation } from "../api";
+import { CITYBUS, ROUTENAME, NEARBY, STATION } from "./type_config";
 
 export default function useHttp(
   type = "",
   location = "",
-  routeName = "",
+  search_keyword = "",
   control = true
 ) {
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ export default function useHttp(
           break;
 
         case ROUTENAME:
-          const routeNameData = await apiRouteName(location, routeName);
+          const routeNameData = await apiRouteName(location, search_keyword);
           setData(routeNameData);
           break;
 
@@ -33,6 +33,11 @@ export default function useHttp(
           setData(nearbyData);
           break;
 
+        case STATION:
+          const stationData = await apiStation(location, search_keyword)
+          setData(stationData);
+          break;
+
         default:
       }
       setLoading(false);
@@ -40,7 +45,7 @@ export default function useHttp(
       setError(true);
       setData(error);
     }
-  }, [type, location, routeName]);
+  }, [type, location, search_keyword]);
 
   useEffect(() => {
     setLoading(true);

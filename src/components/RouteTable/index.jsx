@@ -72,7 +72,7 @@ const StopsTable = ({ stops }) =>
   ));
 
 export default function RouteTable({ data, map, zoom, count }) {
-  const { isBack, routeName, showMap, setShowMap } = useContext(Context);
+  const { isBack, search_keyword, showMap, setShowMap } = useContext(Context);
   const onClick = useCallback(
     (e) => {
       const center =
@@ -93,7 +93,7 @@ export default function RouteTable({ data, map, zoom, count }) {
       }`}
     >
       <div className="d-flex justify-content-between pt-5 pb-2">
-        <h2 className="fs-1 text-primary">{routeName}</h2>
+        <h2 className="fs-1 text-primary">{search_keyword}</h2>
         <span className="fs-4 text-primary"> {count + 1} 秒後更新</span>
       </div>
       <div
