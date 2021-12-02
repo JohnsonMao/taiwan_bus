@@ -13,7 +13,11 @@ export default function StopRoute() {
 
   return (
     <>
-      {loading ? <Loading /> : <DataList title={searchArr[1]} data={data[1]} />}
+      {loading ? (
+        <Loading />
+      ) : (
+        <DataList title={searchArr[1]} data={data[1]} page="nearby" />
+      )}
     </>
   );
 }

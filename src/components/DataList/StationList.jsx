@@ -6,12 +6,12 @@ import { Context } from "../../pages/Layout";
 import { keyboard_city } from "../../utils/keyboard_config";
 
 export default function StationList({ data = [] }) {
-  const { setCity } = useContext(Context);
+  const { city, setCity } = useContext(Context);
   const cityIndex = keyboard_city.findIndex(
     (cityObj) => cityObj.CityCode === data[0]?.LocationCityCode
   );
 
-  if (cityIndex !== -1) {
+  if (cityIndex !== -1 && city !== keyboard_city[cityIndex].CityName) {
     setCity(keyboard_city[cityIndex].CityName);
   }
 
@@ -55,5 +55,5 @@ export default function StationList({ data = [] }) {
 }
 
 StationList.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
 };

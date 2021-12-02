@@ -1,9 +1,13 @@
 @import '../../asset/scss/custom_variables';
 .datalist
 { 
+  height: 100%;
   ul
   {
-    overflow: auto;
+    height: calc(100vh - 110px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: .3s;
   }
   
   li:nth-child(odd)

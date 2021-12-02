@@ -92,7 +92,7 @@ export function Layout() {
         pathnameArr[1] === ""
           ? ""
           : pathnameArr[1] !== "citybus"
-          ? " page other"
+          ? " page " + pathnameArr[1]
           : pathnameArr[2]
           ? " page result"
           : " page"

@@ -7,8 +7,8 @@ import RouteList from "./RouteList";
 import StationList from "./StationList";
 import "./datalist.scss";
 
-export default function DataList({ setShow, title, data = [], map, zoom }) {
-  const { setRouteArr, favorites, setFavorites, setShowMap } = useContext(Context);
+export default function DataList({ setShow, title, data = [], map, zoom, page }) {
+  const { setRouteArr, favorites, setFavorites } = useContext(Context);
 
   /* 收藏功能 */
   const onClickRoute = (e) => {
@@ -54,18 +54,17 @@ export default function DataList({ setShow, title, data = [], map, zoom }) {
         e.target.parentNode.dataset.center || e.target.dataset.center;
       if (center) {
         const newCenter = center.split("-");
-        setShowMap(true);
         map.setView(newCenter, zoom + 3);
       }
     },
-    [setShowMap, map, zoom]
+    [map, zoom]
   );
 
   return (
-    <div className="datalist h-100 py-7">
+    <div className={`datalist ${page === "nearby" ? 'pt-7': 'py-7'}`}>
       <h2 className="fs-2 mb-1">{title || "請選擇縣市"}</h2>
       <ul
-        className="h-100 pb-7"
+        className="pb-7"
         onClick={title === "我的附近" ? onClickStation : onClickRoute}
         onMouseOver={handleShow}
         onTouchStart={handleShow}
@@ -88,6 +87,7 @@ DataList.propTypes = {
   setShow: PropTypes.func,
   title: PropTypes.string,
   data: PropTypes.array,
+  page: PropTypes.string,
   zoom: PropTypes.number,
   map: PropTypes.object
 };

@@ -76,7 +76,7 @@ export default function RouteTable({ data, map, zoom, count }) {
   return (
     <Container
       fluid
-      className={`position-fixed bottom-0 routeTable bg-gray ${
+      className={`position-fixed bottom-0 tableAndMap bg-gray ${
         showMap ? "showMap" : ""
       }`}
     >
@@ -85,7 +85,7 @@ export default function RouteTable({ data, map, zoom, count }) {
         <span className="fs-4 text-primary"> {count + 1} 秒後更新</span>
       </div>
       <div
-        className={`list d-flex overflow-hidden${isBack ? " isBack" : ""}`}
+        className={`routeList d-flex overflow-hidden${isBack ? " isBack" : ""}`}
         onClick={onClick}
       >
         <ul className="flex-shrink-0 pt-1 pb-3">
