@@ -10,7 +10,7 @@ const goStopMarker = new L.Icon({
   shadowAnchor: null,
   iconSize: new L.Point(30, 30),
   className: "stopIcon goMarker",
-})
+});
 const goBusNearStopMarker = new L.Icon({
   iconUrl: require("../../asset/icon/busNearStop.svg").default,
   iconRetinaUrl: require("../../asset/icon/busNearStop.svg").default,
@@ -21,7 +21,7 @@ const goBusNearStopMarker = new L.Icon({
   shadowAnchor: null,
   iconSize: new L.Point(30, 30),
   className: "stopIcon goMarker",
-})
+});
 const backStopMarker = new L.Icon({
   iconUrl: require("../../asset/icon/stop.svg").default,
   iconRetinaUrl: require("../../asset/icon/stop.svg").default,
@@ -32,7 +32,7 @@ const backStopMarker = new L.Icon({
   shadowAnchor: null,
   iconSize: new L.Point(30, 30),
   className: "stopIcon backMarker",
-})
+});
 const backBusNearStopMarker = new L.Icon({
   iconUrl: require("../../asset/icon/busNearStop.svg").default,
   iconRetinaUrl: require("../../asset/icon/busNearStop.svg").default,
@@ -43,5 +43,22 @@ const backBusNearStopMarker = new L.Icon({
   shadowAnchor: null,
   iconSize: new L.Point(30, 30),
   className: "stopIcon backMarker",
-})
-export {goStopMarker, goBusNearStopMarker, backStopMarker, backBusNearStopMarker}
+});
+const StationMarker = new L.Icon({
+  iconUrl: require("../../asset/icon/GPS.svg").default,
+  iconRetinaUrl: require("../../asset/icon/GPS.svg").default,
+  iconAnchor: null,
+  popupAnchor: [0, 0],
+  shadowUrl: null,
+  shadowSize: null,
+  shadowAnchor: null,
+  iconSize: new L.Point(30, 30),
+  className: "",
+});
+export {
+  goStopMarker,
+  goBusNearStopMarker,
+  backStopMarker,
+  backBusNearStopMarker,
+  StationMarker,
+};

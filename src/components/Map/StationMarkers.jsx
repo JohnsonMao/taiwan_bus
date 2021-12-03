@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-import { goStopMarker } from "./Icon";
+import { StationMarker } from "./Icon";
 
 export default function StopMarker({ station }) {
   return (
@@ -12,7 +12,7 @@ export default function StopMarker({ station }) {
         return (
           <Marker
             key={index}
-            icon={goStopMarker}
+            icon={StationMarker}
             position={[PositionLat, PositionLon]}
           >
             <Popup>
