@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+import Timer from './Timer';
 import { Context } from "../../pages/Layout";
 import "./routeTable.scss";
 
@@ -76,8 +77,10 @@ const StopsTable = ({ stops, direction }) => {
   );
 };
 
-export default function RouteTable({ data, setIndex, setCenter, count }) {
+export default function RouteTable({ data, setIndex, setCenter, setControl, control }) {
   const { isBack, search_keyword, showMap, setShowMap } = useContext(Context);
+
+  /* 控制點擊指引地圖站牌 */
   const onClick = useCallback(
     (e) => {
       const centerstr =
@@ -101,7 +104,7 @@ export default function RouteTable({ data, setIndex, setCenter, count }) {
     >
       <div className="d-flex justify-content-between pt-5 pb-2">
         <h2 className="fs-1 text-primary">{search_keyword}</h2>
-        <span className="fs-4 text-primary"> {count + 1} 秒後更新</span>
+        <Timer setControl={setControl} control={control} />
       </div>
       <div
         className={`routeList d-flex overflow-hidden${isBack ? " isBack" : ""}`}
@@ -127,5 +130,6 @@ RouteTable.propType = {
   data: PropTypes.array.isRequired,
   setIndex: PropTypes.func.isRequired,
   setCenter: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired,
+  setControl: PropTypes.func.isRequired,
+  control: PropTypes.bool.isRequired,
 };

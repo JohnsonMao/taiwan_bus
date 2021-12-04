@@ -8,25 +8,13 @@ import RouteTable from "../RouteTable";
 import Map from "../Map";
 
 export default function RoutePage() {
-  const CD = 30; /* 幾秒更新 */
   const { city_En, isBack, search_keyword } = useContext(Context);
   const [control, setControl] = useState(true);
-  const [count, setCount] = useState(CD);
+  const handleControl = (e) => {
+    setControl(e)
+  }
 
   const { data, error } = useHttp(ROUTENAME, city_En, search_keyword, control);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (count === 0) {
-        setControl(!control);
-        setCount(CD);
-      }
-      setCount((count) => count - 1);
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [count, setControl, control]);
 
   const [map, setMap] = useState(null);
   const zoom = 14;
@@ -72,7 +60,8 @@ export default function RoutePage() {
               data={data}
               setIndex={handleIndex}
               setCenter={handleCenter}
-              count={count}
+              setControl={handleControl}
+              control={control}
             />
           ) : null}
           <Map
