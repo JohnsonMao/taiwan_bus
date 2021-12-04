@@ -8,11 +8,10 @@ import RouteTable from "../RouteTable";
 import Map from "../Map";
 
 export default function RoutePage() {
-
-  const CD = 30;    /* 幾秒更新 */
+  const CD = 30; /* 幾秒更新 */
   const { city_En, isBack, search_keyword } = useContext(Context);
-  const [control, setControl] = useState(true)
-  const [count, setCount] = useState(CD)
+  const [control, setControl] = useState(true);
+  const [count, setCount] = useState(CD);
 
   const { data, error } = useHttp(ROUTENAME, city_En, search_keyword, control);
 
@@ -20,40 +19,71 @@ export default function RoutePage() {
     const timer = setInterval(() => {
       if (count === 0) {
         setControl(!control);
-        setCount(CD)
+        setCount(CD);
       }
-      setCount(count => count - 1)
-    }, 1000)
+      setCount((count) => count - 1);
+    }, 1000);
     return () => {
-      clearInterval(timer)
-    }
-  }, [count, setControl, control])
-  
-  const [map, setMap] = useState(null)
+      clearInterval(timer);
+    };
+  }, [count, setControl, control]);
+
+  const [map, setMap] = useState(null);
   const zoom = 14;
   const handleMap = (e) => {
-    setMap(e)
-  }
+    setMap(e);
+  };
+  const [index, setIndex] = useState("noIndex");
+  const handleIndex = (e) => {
+    setIndex(e);
+  };
 
   /* 擷取所有站點的中心點 */
-  const center = [0 ,0];
+  let latitude = 0;
+  let longitude = 0;
   const stopsArr = data[0] || [];
   stopsArr.forEach((stop) => {
-    center[0] += stop.StopPosition.PositionLat;
-    center[1] += stop.StopPosition.PositionLon;
+    latitude += stop.StopPosition.PositionLat;
+    longitude += stop.StopPosition.PositionLon;
   });
   const stopsArrLen = stopsArr.length === 0 ? 1 : stopsArr.length;
-  center[0] = center[0] / stopsArrLen;
-  center[1] = center[1] / stopsArrLen;
+  latitude = latitude / stopsArrLen;
+  longitude = longitude / stopsArrLen;
+
+  const [center, setCenter] = useState([latitude, longitude]);
+  const handleCenter = (e) => {
+    setCenter(e);
+  };
+
+  useEffect(() => {
+    setCenter([latitude, longitude])
+  }, [latitude, longitude , setCenter])
 
   return (
-    <div className={isBack ? 'backMarkerShow' : 'goMarkerShow'}>
+    <div className={isBack ? "backMarkerShow" : "goMarkerShow"}>
       {data.length === 0 ? (
         <Loading />
-      ) : data[0] === 0　|| error ? <div>網頁出錯啦！</div> : (
+      ) : data[0] === 0 || error ? (
+        <div>網頁出錯啦！</div>
+      ) : (
         <>
-          {map ? <RouteTable data={data} map={map} zoom={zoom} count={count} /> : null}
-          <Map data={data} center={center} setMap={handleMap} zoom={zoom} page="route" />
+          {map ? (
+            <RouteTable
+              data={data}
+              setIndex={handleIndex}
+              setCenter={handleCenter}
+              count={count}
+            />
+          ) : null}
+          <Map
+            data={data}
+            index={index}
+            center={center}
+            map={map}
+            setMap={handleMap}
+            zoom={zoom}
+            page="route"
+          />
         </>
       )}
     </div>

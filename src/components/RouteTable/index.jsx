@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 import { Context } from "../../pages/Layout";
 import "./routeTable.scss";
 
-const StopsTable = ({ stops }) => {
+const StopsTable = ({ stops, direction }) => {
   return (
     <>
-      {stops.map((stop) => {
+      {stops.map((stop, index) => {
         const { PositionLat, PositionLon } = stop.StopPosition;
         return (
           <Row
@@ -23,9 +23,14 @@ const StopsTable = ({ stops }) => {
                 ? "waiting"
                 : ""
             }`}
-            data-center={PositionLat + "-" + PositionLon}
+            data-centerstr={PositionLat + "-" + PositionLon}
+            data-index={direction + "-" + index}
           >
-            <Col xs={3} data-center={PositionLat + "-" + PositionLon}>
+            <Col
+              xs={3}
+              data-centerstr={PositionLat + "-" + PositionLon}
+              data-index={direction + "-" + index}
+            >
               <div className="event text-center fs-3">
                 {stop?.A2EventType === 0
                   ? "離站中"
@@ -39,15 +44,27 @@ const StopsTable = ({ stops }) => {
                   : "未發車"}
               </div>
             </Col>
-            <Col xs={5} data-center={PositionLat + "-" + PositionLon}>
+            <Col
+              xs={5}
+              data-centerstr={PositionLat + "-" + PositionLon}
+              data-index={direction + "-" + index}
+            >
               <h3 className="stop fs-3">{stop.StopName.Zh_tw}</h3>
             </Col>
-            <Col xs={3} data-center={PositionLat + "-" + PositionLon}>
+            <Col
+              xs={3}
+              data-centerstr={PositionLat + "-" + PositionLon}
+              data-index={direction + "-" + index}
+            >
               <div className="text-end fs-3 text-primary">
                 {stop?.PlateNumb || null}
               </div>
             </Col>
-            <Col xs={1} data-center={PositionLat + "-" + PositionLon}>
+            <Col
+              xs={1}
+              data-centerstr={PositionLat + "-" + PositionLon}
+              data-index={direction + "-" + index}
+            >
               <div className="circle fs-4 text-center lh-sm">
                 {stop.StopSequence}
               </div>
@@ -59,19 +76,21 @@ const StopsTable = ({ stops }) => {
   );
 };
 
-export default function RouteTable({ data, map, zoom, count }) {
+export default function RouteTable({ data, setIndex, setCenter, count }) {
   const { isBack, search_keyword, showMap, setShowMap } = useContext(Context);
   const onClick = useCallback(
     (e) => {
-      const center =
-        e.target.parentNode.dataset.center || e.target.dataset.center;
-      if (center) {
-        const newCenter = center.split("-");
+      const centerstr =
+        e.target.parentNode.dataset.centerstr || e.target.dataset.centerstr;
+      const index = e.target.parentNode.dataset.index || e.target.dataset.index;
+      if (centerstr) {
+        const center = centerstr.split("-");
         setShowMap(true);
-        map.setView(newCenter, zoom + 3);
+        setCenter(center);
+        setIndex(index);
       }
     },
-    [setShowMap, map, zoom]
+    [setShowMap, setCenter, setIndex]
   );
   return (
     <Container
@@ -89,10 +108,10 @@ export default function RouteTable({ data, map, zoom, count }) {
         onClick={onClick}
       >
         <ul className="flex-shrink-0 pt-1 pb-3">
-          <StopsTable stops={data[0]} />
+          <StopsTable stops={data[0]} direction={0} />
         </ul>
         <ul className="flex-shrink-0 pt-1 pb-3">
-          <StopsTable stops={data[1]} />
+          <StopsTable stops={data[1]} direction={1} />
         </ul>
       </div>
     </Container>
@@ -101,11 +120,12 @@ export default function RouteTable({ data, map, zoom, count }) {
 
 StopsTable.propTypes = {
   stops: PropTypes.array,
+  direction: PropTypes.number,
 };
 
 RouteTable.propType = {
   data: PropTypes.array.isRequired,
-  map: PropTypes.object.isRequired,
-  zoom: PropTypes.number.isRequired,
+  setIndex: PropTypes.func.isRequired,
+  setCenter: PropTypes.func.isRequired,
   count: PropTypes.number.isRequired,
 };

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PropTypes from "prop-types";
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -10,7 +11,22 @@ const lineColor = {
   color: "#1CC8EE",
 };
 
-export default function Map({ data, center, setMap, zoom = 14, page }) {
+export default function Map({ data, index, center, map, setMap, zoom = 14, page }) {
+
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (index !== 'noIndex') {
+        map.setView(center, zoom + 3);
+      } else {
+        map.setView(center, zoom);
+      }
+    }, 0)
+      return () => {
+        clearTimeout(delay)
+      }
+  }, [map, center, zoom, index])
+
   return (
     <MapContainer
       center={center}
@@ -30,11 +46,11 @@ export default function Map({ data, center, setMap, zoom = 14, page }) {
             className="lineShadow"
             positions={data[2]}
           />
-          <StopMarkers stops={data[0]} direction={0} />
-          <StopMarkers stops={data[1]} direction={1} />
+          <StopMarkers stops={data[0]} direction={0} activeIndex={index} map={map} />
+          <StopMarkers stops={data[1]} direction={1} activeIndex={index} map={map} />
         </>
       ) : (
-        <StationMarkers station={data} />
+        <StationMarkers stations={data} activeIndex={index} map={map} />
       )}
     </MapContainer>
   );
@@ -46,4 +62,6 @@ Map.propTypes = {
   zoom: PropTypes.number.isRequired,
   center: PropTypes.array.isRequired,
   setMap: PropTypes.func.isRequired,
+  index: PropTypes.string.isRequired,
+  map: PropTypes.object,
 };

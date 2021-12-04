@@ -8,7 +8,7 @@ import {
   backBusNearStopMarker,
 } from "./Icon";
 
-export default function StopMarkers({ stops, direction }) {
+export default function StopMarkers({ stops, direction, map, activeIndex }) {
   const busNearStopMarker =
     direction === 0 ? goBusNearStopMarker : backBusNearStopMarker;
   const stopMarker = direction === 0 ? goStopMarker : backStopMarker;
@@ -23,6 +23,8 @@ export default function StopMarkers({ stops, direction }) {
             stop={stop}
             icon={busNearStopMarker}
             className={className}
+            isActive={activeIndex === direction + '-' + index}
+            map={map}
           />
         ) : (
           <StopMarker
@@ -30,6 +32,8 @@ export default function StopMarkers({ stops, direction }) {
             stop={stop}
             icon={stopMarker}
             className={className}
+            isActive={activeIndex === direction + '-' + index}
+            map={map}
           />
         );
       })}
@@ -39,5 +43,7 @@ export default function StopMarkers({ stops, direction }) {
 
 StopMarkers.propTypes = {
   stops: PropTypes.array, 
-  direction: PropTypes.number 
+  direction: PropTypes.number,
+  activeIndex: PropTypes.string, 
+  map: PropTypes.object 
 }

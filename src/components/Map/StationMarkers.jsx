@@ -1,43 +1,26 @@
 import PropTypes from "prop-types";
-import { Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-import { StationMarker } from "./Icon";
+import StationMarker from "./StationMarker";
 
-export default function StopMarker({ station }) {
+export default function StopMarker({ stations, activeIndex, map }) {
+  
   return (
     <>
-      {station.map((station, index) => {
-        const { PositionLat, PositionLon } = station.StationPosition;
-        return (
-          <Marker
-            key={index}
-            icon={StationMarker}
-            position={[PositionLat, PositionLon]}
-          >
-            <Popup>
-              <div>
-                <h2>{station.StationName.Zh_tw}</h2>
-                <h3>{station.StationAddress}</h3>
-                <p className="m-0">
-                  {station.Stops.map((item, index, arr) => {
-                    const max = arr.length - 1
-                    if (index !== max) {
-                      return (item.RouteName.Zh_tw + ', ')
-                    } else {
-                      return (item.RouteName.Zh_tw)
-                    }
-                  })}
-                </p>
-              </div>
-            </Popup>
-          </Marker>
-        );
-      })}
+      {stations.map((station, index) => (
+        <StationMarker
+          key={index}
+          station={station}
+          isActive={activeIndex === index+''}
+          map={map}
+        />
+      ))}
     </>
   );
 }
 
 StopMarker.propTypes = {
-  station: PropTypes.array
+  stations: PropTypes.array,
+  activeIndex: PropTypes.string,
+  map: PropTypes.object,
 };

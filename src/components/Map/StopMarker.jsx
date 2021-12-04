@@ -1,10 +1,20 @@
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-export default function StopMarker({ stop, icon, className }) {
+export default function StopMarker({ stop, icon, className, isActive, map }) {
   const { PositionLat, PositionLon } = stop.StopPosition;
 
+  const [refReady, setRefReady] = useState(false);
+  let popupRef = useRef(null);
+
+  useEffect(() => {
+    if (refReady && isActive) {
+      popupRef.openOn(map)
+    }
+  }, [refReady, isActive, map])
+  
   return (
     <Marker
       key={stop.StopUID}
@@ -20,7 +30,12 @@ export default function StopMarker({ stop, icon, className }) {
       >
         {stop.StopSequence}
       </Tooltip>
-      <Popup>
+      <Popup
+        ref={(r) => {
+          popupRef = r;
+          setRefReady(true);
+        }}
+      >
         <div>
           <h2>{stop.StopName.Zh_tw}</h2>
           <span>

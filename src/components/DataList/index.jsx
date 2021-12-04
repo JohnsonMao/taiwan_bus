@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -7,7 +7,14 @@ import RouteList from "./RouteList";
 import StationList from "./StationList";
 import "./datalist.scss";
 
-export default function DataList({ setShow, title, data = [], map, zoom, page }) {
+export default function DataList({
+  setShow,
+  setIndex,
+  setCenter,
+  title,
+  data = [],
+  page,
+}) {
   const { setRouteArr, favorites, setFavorites } = useContext(Context);
 
   /* 收藏功能 */
@@ -48,29 +55,28 @@ export default function DataList({ setShow, title, data = [], map, zoom, page })
   };
 
   /* 站點鎖定地圖 */
-  const onClickStation = useCallback(
-    (e) => {
-      const center =
-        e.target.parentNode.dataset.center || e.target.dataset.center;
-      if (center) {
-        const newCenter = center.split("-");
-        map.setView(newCenter, zoom + 3);
-      }
-    },
-    [map, zoom]
-  );
+  const onClickStation = (e) => {
+    const centerstr =
+      e.target.parentNode.dataset.centerstr || e.target.dataset.centerstr;
+    const index = e.target.parentNode.dataset.index || e.target.dataset.index;
+    if (centerstr) {
+      const center = centerstr.split("-");
+      setCenter(center);
+      setIndex(index);
+    }
+  };
 
   return (
-    <div className={`datalist ${page === "nearby" ? 'pt-7': 'py-7'}`}>
+    <div className={`datalist ${page === "nearby" ? "pt-7" : "py-7"}`}>
       <h2 className="fs-2 mb-1">{title || "請選擇縣市"}</h2>
       <ul
-        className="pb-7"
+        className={title === "我的附近" ? "" : "pb-7"}
         onClick={title === "我的附近" ? onClickStation : onClickRoute}
         onMouseOver={handleShow}
         onTouchStart={handleShow}
       >
         {title === "我的附近" ? (
-          <StationList data={data} map={map} zoom={zoom} />
+          <StationList data={data} />
         ) : title === "我的收藏" && data[0] === undefined ? (
           <Link to="/citybus" className="fs-3">
             趕快去添加路線吧～
@@ -89,5 +95,5 @@ DataList.propTypes = {
   data: PropTypes.array,
   page: PropTypes.string,
   zoom: PropTypes.number,
-  map: PropTypes.object
+  map: PropTypes.object,
 };

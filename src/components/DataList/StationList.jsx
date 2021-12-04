@@ -23,11 +23,13 @@ export default function StationList({ data = [] }) {
           <li
             key={index}
             className="d-flex justify-content-between align-items-center"
-            data-center={PositionLat + "-" + PositionLon}
+            data-centerstr={PositionLat + "-" + PositionLon}
+            data-index={index}
           >
             <Link
               to={station.StationID + "-" + station.StationName.Zh_tw}
-              data-center={PositionLat + "-" + PositionLon}
+              data-centerstr={PositionLat + "-" + PositionLon}
+              data-index={index}
               className="d-block px-4 py-3"
             >
               <h3 className="fs-1 lh-base text-one-line">

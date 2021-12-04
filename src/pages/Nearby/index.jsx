@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
 import { Container } from "react-bootstrap";
@@ -22,19 +22,28 @@ export default function Nearby() {
   const handleMap = (e) => {
     setMap(e);
   };
+  const [index, setIndex] = useState('noIndex');
+  const handleIndex = (e) => {
+    setIndex(e)
+  }
 
-  const center = [latitude, longitude];
+  const [center, setCenter] = useState([latitude, longitude])
+
+  useEffect(() => {
+    setCenter([latitude, longitude])
+  }, [latitude, longitude , setCenter])
+
   return (
     <main className="main">
-      <Container className={`position-fixed bottom-0 tableAndMap bg-dark ${showMap ? 'showMap' : ''}`}>
+      <Container className={`pb-7 position-fixed bottom-0 tableAndMap bg-dark ${showMap ? 'showMap' : ''}`}>
         <Routes>
           <Route
             index
             element={
               <NearbyStops
                 data={data}
-                map={map}
-                zoom={zoom}
+                setIndex={handleIndex}
+                setCenter={setCenter}
                 loading={loading}
               />
             }
@@ -44,15 +53,17 @@ export default function Nearby() {
       </Container>
       {loading ? (
         <Loading />
-      ) : latitude !== null ? (
+      ) : center[0] === null ? <span>讀取位置中...</span> : (
         <Map
           data={data}
+          index={index}
           center={center}
+          map={map}
           setMap={handleMap}
           zoom={zoom}
           page="nearby"
         />
-      ) : null}
+      )}
     </main>
   );
 }
