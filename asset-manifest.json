@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/taiwan_bus/static/css/main.37afd476.chunk.css",
-    "main.js": "/taiwan_bus/static/js/main.b206b993.chunk.js",
-    "main.js.map": "/taiwan_bus/static/js/main.b206b993.chunk.js.map",
+    "main.css": "/taiwan_bus/static/css/main.e10fcfca.chunk.css",
+    "main.js": "/taiwan_bus/static/js/main.058c8d96.chunk.js",
+    "main.js.map": "/taiwan_bus/static/js/main.058c8d96.chunk.js.map",
     "runtime-main.js": "/taiwan_bus/static/js/runtime-main.4d6c5631.js",
     "runtime-main.js.map": "/taiwan_bus/static/js/runtime-main.4d6c5631.js.map",
     "static/css/2.68ba508b.chunk.css": "/taiwan_bus/static/css/2.68ba508b.chunk.css",
-    "static/js/2.b2e1dc1f.chunk.js": "/taiwan_bus/static/js/2.b2e1dc1f.chunk.js",
-    "static/js/2.b2e1dc1f.chunk.js.map": "/taiwan_bus/static/js/2.b2e1dc1f.chunk.js.map",
+    "static/js/2.7ce66134.chunk.js": "/taiwan_bus/static/js/2.7ce66134.chunk.js",
+    "static/js/2.7ce66134.chunk.js.map": "/taiwan_bus/static/js/2.7ce66134.chunk.js.map",
     "index.html": "/taiwan_bus/index.html",
     "static/css/2.68ba508b.chunk.css.map": "/taiwan_bus/static/css/2.68ba508b.chunk.css.map",
-    "static/css/main.37afd476.chunk.css.map": "/taiwan_bus/static/css/main.37afd476.chunk.css.map",
-    "static/js/2.b2e1dc1f.chunk.js.LICENSE.txt": "/taiwan_bus/static/js/2.b2e1dc1f.chunk.js.LICENSE.txt",
+    "static/css/main.e10fcfca.chunk.css.map": "/taiwan_bus/static/css/main.e10fcfca.chunk.css.map",
+    "static/js/2.7ce66134.chunk.js.LICENSE.txt": "/taiwan_bus/static/js/2.7ce66134.chunk.js.LICENSE.txt",
     "static/media/Bus.mp3": "/taiwan_bus/static/media/Bus.f58a8cda.mp3",
     "static/media/GPS.svg": "/taiwan_bus/static/media/GPS.e4f566a1.svg",
+    "static/media/bus.svg": "/taiwan_bus/static/media/bus.b0884a42.svg",
     "static/media/busNearStop.svg": "/taiwan_bus/static/media/busNearStop.d070c4ff.svg",
     "static/media/style.scss": "/taiwan_bus/static/media/del_hover.96fcf3b1.svg",
     "static/media/index.scss": "/taiwan_bus/static/media/dashed_mobile.00b0f540.svg",
@@ -30,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.4d6c5631.js",
     "static/css/2.68ba508b.chunk.css",
-    "static/js/2.b2e1dc1f.chunk.js",
-    "static/css/main.37afd476.chunk.css",
-    "static/js/main.b206b993.chunk.js"
+    "static/js/2.7ce66134.chunk.js",
+    "static/css/main.e10fcfca.chunk.css",
+    "static/js/main.058c8d96.chunk.js"
   ]
 }
