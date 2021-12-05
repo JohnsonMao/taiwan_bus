@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -11,9 +11,11 @@ export default function StationList({ data = [] }) {
     (cityObj) => cityObj.CityCode === data[0]?.LocationCityCode
   );
 
-  if (cityIndex !== -1 && city !== keyboard_city[cityIndex].CityName) {
-    setCity(keyboard_city[cityIndex].CityName);
-  }
+  useEffect(() => {
+    if (cityIndex !== -1 && city !== keyboard_city[cityIndex].CityName) {
+      setCity(keyboard_city[cityIndex].CityName);
+    }
+  }, [])
 
   return (
     <>
