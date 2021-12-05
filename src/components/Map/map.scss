@@ -6,8 +6,8 @@
   top: 64px;
   left: 0;
   right: 0;
-  bottom: calc(50% - 118px);
-  @media(min-width: 1024px)
+  bottom: calc(50% - 90px);
+  @media(min-width: 992px)
   {
     top: 0;
     right: 40%;
@@ -17,13 +17,13 @@
 .leaflet-container .leaflet-control-attribution
 {
   position: fixed;
-  bottom: calc(50% - 118px);
+  bottom: calc(50% - 90px);
   left: 0;
   right: 0;
   color: $light;
   background: rgba($dark, .5);
 
-  @media(min-width: 1024px)
+  @media(min-width: 992px)
   {
     bottom: 0;
   }
@@ -84,5 +84,21 @@
   .backMarker
   {
     display: none;
+  }
+}
+.person
+{
+  padding: 3px;
+  background: $primary;
+  border-radius: 50%;
+  outline: 2px solid rgba($primary, .6);
+  animation: radar 1s ease-out infinite;
+}
+
+@keyframes radar
+{
+  to
+  {
+    outline: 18px solid rgba($primary, 0);
   }
 }

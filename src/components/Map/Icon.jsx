@@ -55,10 +55,22 @@ const StationMarker = new L.Icon({
   iconSize: new L.Point(30, 30),
   className: "",
 });
+const PersonMarker = new L.Icon({
+  iconUrl: require("../../asset/icon/GPS.svg").default,
+  iconRetinaUrl: require("../../asset/icon/GPS.svg").default,
+  iconAnchor: null,
+  popupAnchor: [0, 0],
+  shadowUrl: null,
+  shadowSize: null,
+  shadowAnchor: null,
+  iconSize: new L.Point(24, 24),
+  className: "person",
+});
 export {
   goStopMarker,
   goBusNearStopMarker,
   backStopMarker,
   backBusNearStopMarker,
   StationMarker,
+  PersonMarker,
 };

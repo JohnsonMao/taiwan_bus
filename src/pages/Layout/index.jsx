@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
+import useGeolocation from "react-hook-geolocation";
 
 import Header from "../../components/Header";
 import Nav from "../../components/Nav";
@@ -69,6 +70,9 @@ export function Layout() {
   useEffect(() => {
     saveHistory(STORAGE_FAVORITES, favorites);
   }, [favorites]);
+  
+  /* 獲取定位資訊 */
+  const { latitude, longitude } = useGeolocation();
 
   /* 傳遞 outlet props */
   const outlet = useOutlet();
@@ -84,6 +88,8 @@ export function Layout() {
     showMap: showMap,
     favorites: favorites,
     setFavorites: handleFavorites,
+    latitude: latitude,
+    longitude: longitude
   };
 
   return (

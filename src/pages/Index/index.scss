@@ -37,9 +37,13 @@ $mr-bg: 85px;
     margin-right: $mr-1;
     margin-top: 14px;
 
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       margin-right: calc($mr-1 + 100px);
+    }
+    @media(max-width: 340px)
+    {
+      margin-right: calc($mr-1 - 20px);
     }
   }
   li:nth-child(2)
@@ -47,9 +51,13 @@ $mr-bg: 85px;
     margin-right: $mr-2;
     margin-top: 130px;
 
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       margin-right: calc($mr-2 + 100px);
+    }
+    @media(max-width: 340px)
+    {
+      margin-right: calc($mr-2 - 20px);
     }
   }
   li:nth-child(3)
@@ -57,10 +65,15 @@ $mr-bg: 85px;
     margin-right: $mr-3;
     margin-top: 70px;
     
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       margin-right: calc($mr-3 + 100px);
     }
+    @media(max-width: 340px)
+    {
+      margin-right: calc($mr-3 - 20px);
+    }
+
     &::before,
     &::after
     {
@@ -98,9 +111,13 @@ $mr-bg: 85px;
     width: 186px;
     z-index: -1;
     
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       margin-right: calc($mr-bg + 100px);
+    }
+    @media(max-width: 340px)
+    {
+      margin-right: calc($mr-bg - 20px);
     }
   }
 }

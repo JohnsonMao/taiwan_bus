@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import useGeolocation from "react-hook-geolocation";
 import { Container } from "react-bootstrap";
 
 import NearbyStops from "./NearbyStops";
@@ -12,8 +11,7 @@ import { Context } from "../Layout";
 import useHttp from "../../utils/useHttp";
 
 export default function Nearby() {
-  const { showMap } = useContext(Context);
-  const { latitude, longitude } = useGeolocation();
+  const { showMap, latitude, longitude } = useContext(Context);
   const location = latitude + ", " + longitude;
   const { data, loading } = useHttp(NEARBY, location);
 
@@ -28,14 +26,17 @@ export default function Nearby() {
   }
 
   const [center, setCenter] = useState([latitude, longitude])
+  const [person, setPerson] = useState([latitude, longitude])
 
   useEffect(() => {
     setCenter([latitude, longitude])
+    setPerson([latitude, longitude])
   }, [latitude, longitude , setCenter])
+
 
   return (
     <main className="main">
-      <Container className={`pb-7 position-fixed bottom-0 tableAndMap bg-dark ${showMap ? 'showMap' : ''}`}>
+      <Container fluid="lg" className={`pb-7 position-fixed bottom-0 tableAndMap bg-dark ${showMap ? 'showMap' : ''}`}>
         <Routes>
           <Route
             index
@@ -53,11 +54,12 @@ export default function Nearby() {
       </Container>
       {loading ? (
         <Loading />
-      ) : center[0] === null ? <span>讀取位置中...</span> : (
+      ) : center[0] === null ? <span>不好意思！您的裝置並沒開放定位功能～</span> : (
         <Map
           data={data}
           index={index}
           center={center}
+          person={person}
           map={map}
           setMap={handleMap}
           zoom={zoom}

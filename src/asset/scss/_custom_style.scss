@@ -47,7 +47,7 @@ input
   {
     backdrop-filter: brightness(100%);
     background: $dark;
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       background: linear-gradient(to left, $dark 40%,
                                         rgba($dark, .5) 40%);
@@ -65,7 +65,7 @@ input
   background: rgba($gray, 0);
   overflow: hidden;
   transition: .6s;
-  @media(min-width: 1024px)
+  @media(min-width: 992px)
   {
     margin-left: auto;
     max-width: 40%;
@@ -77,7 +77,7 @@ input
 }
 .page header
 {
-  @media(min-width: 1024px)
+  @media(min-width: 992px)
   {
     margin-left: auto;
     max-width: 40%;
@@ -169,7 +169,7 @@ input
   z-index: 1010;
   transition: .3s;
   
-  @media(min-width: 1024px)
+  @media(min-width: 992px)
   {
     max-width: 40%;
   }
@@ -180,7 +180,7 @@ input
     {
       height: calc(50vh - 162px);
       
-      @media(min-width: 1024px)
+      @media(min-width: 992px)
       {
         height: calc(100vh - 162px);
       }

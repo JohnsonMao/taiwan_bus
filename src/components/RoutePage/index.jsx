@@ -8,7 +8,7 @@ import RouteTable from "../RouteTable";
 import Map from "../Map";
 
 export default function RoutePage() {
-  const { city_En, isBack, search_keyword } = useContext(Context);
+  const { city_En, isBack, search_keyword, latitude, longitude } = useContext(Context);
   const [control, setControl] = useState(true);
   const handleControl = (e) => {
     setControl(e)
@@ -27,25 +27,28 @@ export default function RoutePage() {
   };
 
   /* 擷取所有站點的中心點 */
-  let latitude = 0;
-  let longitude = 0;
+  let lat = 0;
+  let lon = 0;
   const stopsArr = data[0] || [];
   stopsArr.forEach((stop) => {
-    latitude += stop.StopPosition.PositionLat;
-    longitude += stop.StopPosition.PositionLon;
+    lat += stop.StopPosition.PositionLat;
+    lon += stop.StopPosition.PositionLon;
   });
   const stopsArrLen = stopsArr.length === 0 ? 1 : stopsArr.length;
-  latitude = latitude / stopsArrLen;
-  longitude = longitude / stopsArrLen;
+  lat = lat / stopsArrLen;
+  lon = lon / stopsArrLen;
 
-  const [center, setCenter] = useState([latitude, longitude]);
+  const [center, setCenter] = useState([lat, lon]);
   const handleCenter = (e) => {
     setCenter(e);
   };
 
+  const [person, setPerson] = useState([latitude, longitude])
+
   useEffect(() => {
-    setCenter([latitude, longitude])
-  }, [latitude, longitude , setCenter])
+    setCenter([lat, lon]);
+    setPerson([latitude, longitude])
+  }, [lat, lon, setCenter, latitude, longitude, setPerson])
 
   return (
     <div className={isBack ? "backMarkerShow" : "goMarkerShow"}>
@@ -68,6 +71,7 @@ export default function RoutePage() {
             data={data}
             index={index}
             center={center}
+            person={person}
             map={map}
             setMap={handleMap}
             zoom={zoom}

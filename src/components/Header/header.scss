@@ -12,9 +12,13 @@
     white-space: nowrap;
     transition: .6s;
 
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       margin: calc(27vh - 80px) 254px 0 auto;
+    }
+    @media(max-width: 340px)
+    {
+      margin: calc(27vh - 80px) 134px 0 auto;
     }
 
     &::after
@@ -160,7 +164,7 @@
 
   .map
   {
-    @media(min-width: 1024px)
+    @media(min-width: 992px)
     {
       visibility: hidden;
     }
