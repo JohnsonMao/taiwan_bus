@@ -15,7 +15,7 @@ export default function StationList({ data = [] }) {
     if (cityIndex !== -1 && city !== keyboard_city[cityIndex].CityName) {
       setCity(keyboard_city[cityIndex].CityName);
     }
-  }, [])
+  }, [setCity, city, cityIndex])
 
   return (
     <>
