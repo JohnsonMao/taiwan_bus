@@ -5,13 +5,13 @@ import {
   TileLayer,
   Polyline,
   Marker,
-  Tooltip,
+  Popup,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import StopMarkers from "./StopMarkers";
 import StationMarkers from "./StationMarkers";
-import { PersonMarker } from "./Icon";
+import { PersonMarker, BusMarker } from "./Icon";
 import "./map.scss";
 
 const lineColor = {
@@ -40,7 +40,6 @@ export default function Map({
       clearTimeout(delay);
     };
   }, [map, center, zoom, index]);
-
   return (
     <MapContainer
       center={center}
@@ -75,6 +74,25 @@ export default function Map({
             activeIndex={index}
             map={map}
           />
+          {data[3].map((item) => {
+            const { PositionLat, PositionLon } = item.BusPosition;
+            const position = [PositionLat, PositionLon];
+            return (
+              <Marker key={item.PlateNumb} icon={BusMarker} position={position}>
+                <Popup>
+                  <div>
+                    <h3>
+                      車牌：{item.PlateNumb}
+                      <span className="ms-4">
+                        {item.Direction === 0 ? "去程" : "返程"}
+                      </span>
+                    </h3>
+                    <span>行駛速度：{item.Speed} km/h</span>
+                  </div>
+                </Popup>
+              </Marker>
+            );
+          })}
         </>
       ) : (
         <StationMarkers stations={data} activeIndex={index} map={map} />

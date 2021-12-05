@@ -92,6 +92,27 @@ const initShape = {
 const apiShape = (city = "", routeName = "") =>
   ajax(ROOT_URL + "/Shape/City/" + city + "/" + routeName, initShape);
 
+/* 批次動態定時資料 Map
+ *
+ * PlateNumb 車牌號碼
+ * BusPosition 車輛經緯度
+ * Speed 行駛速度
+ * Direction 去程返程
+ * Azimuth 方位角
+ */
+const initBus = {
+  $select: [
+    "PlateNumb",
+    "BusPosition",
+    "Speed",
+    "Direction",
+    "Azimuth"
+  ],
+};
+
+const apiBus = (city = "", routeName = "") =>
+  ajax(ROOT_URL + "/RealTimeByFrequency/City/" + city + "/" + routeName, initBus);
+
 /* 整合 Route 資料 */
 export const apiRouteName = async (city = "", routeName = "") => {
   if (city === "") {
@@ -101,6 +122,7 @@ export const apiRouteName = async (city = "", routeName = "") => {
   const busNearStop = await apiBusNearStop(city, routeName);
   const estimatedTime = await apiEstimatedTime(city, routeName);
   const shape = await apiShape(city, routeName);
+  const bus = await apiBus(city, routeName);
   /* stopOfRoute   [{Direction: 0, stops: [...], ...}, {Direction: 1, stops: [...], ...}]
    * busNearStop   [{Direction..., StopUID..., Plate..., A2E... }, ...]
    * estimatedTime [{Direction..., StopUID..., Estimate..., StopStatus...}, ...]
@@ -148,16 +170,12 @@ export const apiRouteName = async (city = "", routeName = "") => {
     .coordinates.map((position) => position.reverse()); // 將經緯度反轉
   result.push(newGeoJson);
 
-  return result; // result: [[Direction: 0], [Direction: 1], GeoJson]
+  /* 巴士定時資訊 */
+  result.push(bus);
+
+  return result; // result: [[Direction: 0], [Direction: 1], GeoJson, bus]
 };
 
-/* 批次動態定時資料 Map
- *
- * PlateNumb 車牌號碼
- * BusPosition 車輛經緯度
- * Speed 行駛速度
- * Direction 去程返程
- */
 
 /* 附近站牌資料 API
  *

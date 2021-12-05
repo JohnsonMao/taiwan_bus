@@ -64,7 +64,18 @@ const PersonMarker = new L.Icon({
   shadowSize: null,
   shadowAnchor: null,
   iconSize: new L.Point(24, 24),
-  className: "person",
+  className: "person animation-radar",
+});
+const BusMarker = new L.Icon({
+  iconUrl: require("../../asset/icon/bus.svg").default,
+  iconRetinaUrl: require("../../asset/icon/bus.svg").default,
+  iconAnchor: null,
+  popupAnchor: [0, 0],
+  shadowUrl: null,
+  shadowSize: null,
+  shadowAnchor: null,
+  iconSize: new L.Point(36, 36),
+  className: "bus animation-radar",
 });
 export {
   goStopMarker,
@@ -73,4 +84,5 @@ export {
   backBusNearStopMarker,
   StationMarker,
   PersonMarker,
+  BusMarker,
 };

@@ -91,6 +91,15 @@
   padding: 3px;
   background: $primary;
   border-radius: 50%;
+}
+.bus
+{
+  padding: 8px 6px;
+  background: $dark;
+  border-radius: 50%;
+}
+.animation-radar
+{
   outline: 2px solid rgba($primary, .6);
   animation: radar 1s ease-out infinite;
 }
