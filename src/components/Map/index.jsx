@@ -6,7 +6,6 @@ import {
   Polyline,
   Marker,
   Popup,
-  Tooltip,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -92,7 +91,6 @@ export default function Map({
                     <span>行駛速度：{item.Speed} km/h</span>
                   </div>
                 </Popup>
-                <Tooltip offset={[0, 0]} direction="center" permanent></Tooltip>
               </Marker>
             );
           })}

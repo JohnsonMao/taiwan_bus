@@ -11,6 +11,11 @@ import "./header.scss";
 
 export default function Header({ setKeyword, setShowMap, showMap }) {
 
+  /* 搜索框 focus，虛擬鍵盤隱藏 */
+  const handleFocus = () => {
+    PubSub.publish("focus", true);
+  }
+
   const [search, setSearch] = useState('');
   
   useEffect(() => {
@@ -80,6 +85,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
                 className="w-100"
                 value={search}
                 onChange={handleSearch}
+                onFocus={handleFocus}
               />
             </div>
           </div>

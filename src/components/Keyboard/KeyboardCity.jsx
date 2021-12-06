@@ -9,11 +9,9 @@ export default function KeyboardCity({ city, setCity }) {
     const { city, savecity, node } = e.target.dataset;
     switch (node) {
       case "setCity":
-        console.log(city);
         setEnterCity(city);
         break;
       case "saveCity":
-        console.log(savecity);
         setCity(savecity);
         break;
       default:

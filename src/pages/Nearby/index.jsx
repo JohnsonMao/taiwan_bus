@@ -27,12 +27,11 @@ export default function Nearby() {
 
   const [center, setCenter] = useState([latitude, longitude]);
   const [person, setPerson] = useState([latitude, longitude]);
-  console.log(geoError);
   useEffect(() => {
     setCenter([latitude, longitude]);
     setPerson([latitude, longitude]);
   }, [latitude, longitude, setCenter]);
-  //git commit -m "fix 修復桌面版點擊 Popup Bug & 行動版 Geolocation 無法獲取問題"
+  
 
   return (
     <main className="main">

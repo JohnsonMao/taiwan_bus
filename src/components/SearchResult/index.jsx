@@ -1,4 +1,5 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useEffect, useContext } from "react";
+import PubSub from 'pubsub-js'
 import { Container } from "react-bootstrap";
 
 import Keyboard from "../Keyboard";
@@ -14,6 +15,16 @@ export default function SearchResult() {
   const noShow = () => {
     noKeyboard.current.checked = true;
   };
+
+  useEffect(() => {
+    const token = PubSub.subscribe("focus", (_, state) => {
+      noShow()
+    })
+    return () => {
+      PubSub.unsubscribe(token);
+    }
+  }, [])
+
 
   const { city, city_En, keyword } = useContext(Context);
 
