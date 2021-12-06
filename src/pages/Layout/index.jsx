@@ -72,7 +72,7 @@ export function Layout() {
   }, [favorites]);
   
   /* 獲取定位資訊 */
-  const { latitude, longitude } = useGeolocation();
+  const { latitude, longitude, error: geoError } = useGeolocation();
 
   /* 傳遞 outlet props */
   const outlet = useOutlet();
@@ -89,7 +89,8 @@ export function Layout() {
     favorites: favorites,
     setFavorites: handleFavorites,
     latitude: latitude,
-    longitude: longitude
+    longitude: longitude,
+    geoError: geoError
   };
 
   return (

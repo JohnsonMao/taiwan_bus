@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
-import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
-import { ReactComponent as Search } from "../../asset/icon/search.svg";
-import { ReactComponent as Like } from "../../asset/icon/like.svg";
 import "./index.scss";
 
 const linkStyle = {
@@ -17,19 +14,19 @@ export default function Index() {
       <ul className="router">
         <li>
           <Link to="nearby" {...linkStyle}>
-            <GPS />
+            <img src={require('../../asset/icon/GPS.svg').default} alt="搜索附近圖標" />
             <span>附近公車站</span>
           </Link>
         </li>
         <li>
           <Link to="citybus" {...linkStyle}>
-            <Search />
+            <img src={require('../../asset/icon/search.svg').default} alt="查詢公車圖標" />
             <span>查詢公車</span>
           </Link>
         </li>
         <li>
           <Link to="favorites" {...linkStyle}>
-            <Like />
+            <img src={require('../../asset/icon/like_light.svg').default} alt="我的收藏圖標" />
             <span>我的收藏</span>
           </Link>
         </li>

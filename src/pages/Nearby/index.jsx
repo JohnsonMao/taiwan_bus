@@ -11,7 +11,7 @@ import { Context } from "../Layout";
 import useHttp from "../../utils/useHttp";
 
 export default function Nearby() {
-  const { showMap, latitude, longitude } = useContext(Context);
+  const { showMap, latitude, longitude, geoError } = useContext(Context);
   const location = latitude + ", " + longitude;
   const { data, loading } = useHttp(NEARBY, location);
 
@@ -20,23 +20,28 @@ export default function Nearby() {
   const handleMap = (e) => {
     setMap(e);
   };
-  const [index, setIndex] = useState('noIndex');
+  const [index, setIndex] = useState("noIndex");
   const handleIndex = (e) => {
-    setIndex(e)
-  }
+    setIndex(e);
+  };
 
-  const [center, setCenter] = useState([latitude, longitude])
-  const [person, setPerson] = useState([latitude, longitude])
-
+  const [center, setCenter] = useState([latitude, longitude]);
+  const [person, setPerson] = useState([latitude, longitude]);
+  console.log(geoError);
   useEffect(() => {
-    setCenter([latitude, longitude])
-    setPerson([latitude, longitude])
-  }, [latitude, longitude , setCenter])
-
+    setCenter([latitude, longitude]);
+    setPerson([latitude, longitude]);
+  }, [latitude, longitude, setCenter]);
+  //git commit -m "fix 修復桌面版點擊 Popup Bug & 行動版 Geolocation 無法獲取問題"
 
   return (
     <main className="main">
-      <Container fluid="lg" className={`pb-7 position-fixed bottom-0 tableAndMap bg-dark ${showMap ? 'showMap' : ''}`}>
+      <Container
+        fluid="lg"
+        className={`pb-7 position-fixed bottom-0 tableAndMap bg-dark ${
+          showMap ? "showMap" : ""
+        }`}
+      >
         <Routes>
           <Route
             index
@@ -52,9 +57,13 @@ export default function Nearby() {
           <Route path=":id" element={<StopRoute />} />
         </Routes>
       </Container>
-      {loading ? (
+      {geoError ? (
+        <p className="text-center mt-8">不好意思！您的裝置並未開放定位功能～</p>
+      ) : center[0] === null ? (
+        <p className="text-center mt-8">正在獲取定位中...</p>
+      ) : loading ? (
         <Loading />
-      ) : center[0] === null ? <span>不好意思！您的裝置並沒開放定位功能～</span> : (
+      ) : (
         <Map
           data={data}
           index={index}

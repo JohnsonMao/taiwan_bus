@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-import { ReactComponent as GPS } from "../../asset/icon/GPS.svg";
 import { keyboard_base } from "../../utils/keyboard_config";
 
 export default function KeyboardBase({ city }) {
@@ -11,7 +10,7 @@ export default function KeyboardBase({ city }) {
         className="btn btn-light city-btn"
         aria-label="選擇縣市"
       >
-        <GPS className="me-1" /> {city || "選擇縣市"}
+        <img src={require('../../asset/icon/GPS.svg').default} alt="GPS" /> {city || "選擇縣市"}
       </label>
 
       <label
