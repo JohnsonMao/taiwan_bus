@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/taiwan_bus/static/css/main.e10fcfca.chunk.css",
-    "main.js": "/taiwan_bus/static/js/main.058c8d96.chunk.js",
-    "main.js.map": "/taiwan_bus/static/js/main.058c8d96.chunk.js.map",
+    "main.css": "/taiwan_bus/static/css/main.afe5d0e6.chunk.css",
+    "main.js": "/taiwan_bus/static/js/main.1e39243d.chunk.js",
+    "main.js.map": "/taiwan_bus/static/js/main.1e39243d.chunk.js.map",
     "runtime-main.js": "/taiwan_bus/static/js/runtime-main.4d6c5631.js",
     "runtime-main.js.map": "/taiwan_bus/static/js/runtime-main.4d6c5631.js.map",
     "static/css/2.68ba508b.chunk.css": "/taiwan_bus/static/css/2.68ba508b.chunk.css",
-    "static/js/2.7ce66134.chunk.js": "/taiwan_bus/static/js/2.7ce66134.chunk.js",
-    "static/js/2.7ce66134.chunk.js.map": "/taiwan_bus/static/js/2.7ce66134.chunk.js.map",
+    "static/js/2.3dfa2ab7.chunk.js": "/taiwan_bus/static/js/2.3dfa2ab7.chunk.js",
+    "static/js/2.3dfa2ab7.chunk.js.map": "/taiwan_bus/static/js/2.3dfa2ab7.chunk.js.map",
     "index.html": "/taiwan_bus/index.html",
     "static/css/2.68ba508b.chunk.css.map": "/taiwan_bus/static/css/2.68ba508b.chunk.css.map",
-    "static/css/main.e10fcfca.chunk.css.map": "/taiwan_bus/static/css/main.e10fcfca.chunk.css.map",
-    "static/js/2.7ce66134.chunk.js.LICENSE.txt": "/taiwan_bus/static/js/2.7ce66134.chunk.js.LICENSE.txt",
+    "static/css/main.afe5d0e6.chunk.css.map": "/taiwan_bus/static/css/main.afe5d0e6.chunk.css.map",
+    "static/js/2.3dfa2ab7.chunk.js.LICENSE.txt": "/taiwan_bus/static/js/2.3dfa2ab7.chunk.js.LICENSE.txt",
     "static/media/Bus.mp3": "/taiwan_bus/static/media/Bus.f58a8cda.mp3",
     "static/media/GPS.svg": "/taiwan_bus/static/media/GPS.e4f566a1.svg",
     "static/media/bus.svg": "/taiwan_bus/static/media/bus.b0884a42.svg",
@@ -23,16 +23,17 @@
     "static/media/like.svg": "/taiwan_bus/static/media/like.dc7292e2.svg",
     "static/media/like_btn.svg": "/taiwan_bus/static/media/like_btn.71133b27.svg",
     "static/media/like_fill.svg": "/taiwan_bus/static/media/like_fill.14169483.svg",
-    "static/media/logo.66637c64.svg": "/taiwan_bus/static/media/logo.66637c64.svg",
+    "static/media/like_light.svg": "/taiwan_bus/static/media/like_light.bfa6e438.svg",
+    "static/media/logo.0baf16cd.svg": "/taiwan_bus/static/media/logo.0baf16cd.svg",
     "static/media/map.610382a7.svg": "/taiwan_bus/static/media/map.610382a7.svg",
-    "static/media/search.35200db0.svg": "/taiwan_bus/static/media/search.35200db0.svg",
+    "static/media/search.svg": "/taiwan_bus/static/media/search.35200db0.svg",
     "static/media/stop.svg": "/taiwan_bus/static/media/stop.9486e491.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.4d6c5631.js",
     "static/css/2.68ba508b.chunk.css",
-    "static/js/2.7ce66134.chunk.js",
-    "static/css/main.e10fcfca.chunk.css",
-    "static/js/main.058c8d96.chunk.js"
+    "static/js/2.3dfa2ab7.chunk.js",
+    "static/css/main.afe5d0e6.chunk.css",
+    "static/js/main.1e39243d.chunk.js"
   ]
 }
