@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { Container } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
-import { ReactComponent as GoBack } from "../../asset/icon/goBack.svg";
-import { ReactComponent as MapSVG } from "../../asset/icon/map.svg";
 import "./header.scss";
 
 export default function Header({ setKeyword, setShowMap, showMap }) {
@@ -60,7 +58,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
         <div className="d-flex justify-content-end align-items-center w-100">
           <div className="result_show">
             <button type="button" onClick={goBack} aria-label="上一頁 Go back">
-              <GoBack />
+              <img src={require('../../asset/icon/goBack.svg').default} alt="上一頁 Go back" />
             </button>
           </div>
           <div className="logo d-flex justify-content-center">
@@ -95,7 +93,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
               className="flex-shrink-0 position-relative map"
               aria-label="地圖 Map"
             >
-              <MapSVG />
+              <img src={require('../../asset/icon/map.svg').default} alt="地圖 Map" />
               <span className={`crossIcon ${showMap ? "showCross" : ""}`}></span>
             </button>
           </div>

@@ -56,10 +56,6 @@
     background: transparent;
     border: 0;
   }
-  svg
-  {
-    display: none;
-  }
   img
   {
     display: none;
@@ -145,7 +141,7 @@
     width: 100%;
     opacity: 1;
 
-    svg
+    img
     {
       display: inline;
     }
@@ -201,7 +197,7 @@
     width: 100%;
     opacity: 1;
 
-    svg
+    img
     {
       width: 34px;
       display: inline;

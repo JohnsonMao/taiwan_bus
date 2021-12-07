@@ -167,7 +167,10 @@ input
 .tableAndMap
 {
   z-index: 1010;
-  transition: .3s;
+  ul
+  {
+    transition: .6s;
+  }
   
   @media(min-width: 992px)
   {
