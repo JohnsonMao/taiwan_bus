@@ -1,5 +1,8 @@
 # The F2E 全台公車動態時刻查詢應用服務 | [Demo](https://johnsonmao.github.io/taiwan_bus)
 
+## 作品畫面
+
+![The F2E 全台公車動態時刻查詢應用服務畫面](https://i.imgur.com/tmPiHsW.png)
 ## 作品說明
 
 設計採用 [KT](https://ktdesigner.neocities.org/UIweb/TaiwanBus.html) 的設計稿
