@@ -55,7 +55,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
   return (
     <header className="fixed-top">
       <Container className="d-flex align-items-end py-3">
-        <div className="d-flex justify-content-end align-items-center w-100">
+        <div className="d-flex justify-content-end align-items-center header">
           <div className="result_show">
             <button type="button" onClick={goBack} aria-label="上一頁 Go back">
               <img src={require('../../asset/icon/goBack.svg').default} alt="上一頁 Go back" />

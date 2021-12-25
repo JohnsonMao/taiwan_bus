@@ -47,15 +47,17 @@ input
   {
     backdrop-filter: brightness(100%);
     background: $dark;
+  }
+  .header
+  {
+    width: 100%;
+    transition: .6s;
+
     @media(min-width: 992px)
     {
-      background: linear-gradient(to left, $dark 40%,
-                                        rgba($dark, .5) 40%);
+      margin-left: auto;
+      width: 40%;
     }
-  }
-  header
-  {
-    transition: .6s;
   }
 }
 .main
@@ -74,14 +76,6 @@ input
 .content
 {
   height: calc(100vh - 64px);
-}
-.page header
-{
-  @media(min-width: 992px)
-  {
-    margin-left: auto;
-    max-width: 40%;
-  }
 }
 .result
 {

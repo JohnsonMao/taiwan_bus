@@ -7,6 +7,12 @@ $mr-bg: 85px;
 .router
 {
   padding-top: 26.5vh;
+  
+  @media(min-width: 992px)
+  {
+    margin-left: auto;
+    max-width: 40%;
+  }
   .btn
   {
     position: relative;
@@ -26,10 +32,6 @@ $mr-bg: 85px;
     margin-right: $mr-1;
     margin-top: 14px;
 
-    @media(min-width: 992px)
-    {
-      margin-right: calc($mr-1 + 100px);
-    }
     @media(max-width: 340px)
     {
       margin-right: calc($mr-1 - 20px);
@@ -40,10 +42,6 @@ $mr-bg: 85px;
     margin-right: $mr-2;
     margin-top: 130px;
 
-    @media(min-width: 992px)
-    {
-      margin-right: calc($mr-2 + 100px);
-    }
     @media(max-width: 340px)
     {
       margin-right: calc($mr-2 - 20px);
@@ -53,11 +51,7 @@ $mr-bg: 85px;
   {
     margin-right: $mr-3;
     margin-top: 70px;
-    
-    @media(min-width: 992px)
-    {
-      margin-right: calc($mr-3 + 100px);
-    }
+
     @media(max-width: 340px)
     {
       margin-right: calc($mr-3 - 20px);
@@ -99,11 +93,7 @@ $mr-bg: 85px;
     height: 328px;
     width: 186px;
     z-index: -1;
-    
-    @media(min-width: 992px)
-    {
-      margin-right: calc($mr-bg + 100px);
-    }
+
     @media(max-width: 340px)
     {
       margin-right: calc($mr-bg - 20px);
