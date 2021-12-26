@@ -1,4 +1,4 @@
-@import '../../asset/scss/custom_variables';
+@import '../../styles/custom_variables';
 
 .logo
 {
@@ -71,9 +71,13 @@
 }
 .page
 {
-  .header
+  header
   {
     background: $dark;
+  }
+  .header
+  {
+    width: 100%;
   }
   .logo
   {

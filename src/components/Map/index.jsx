@@ -31,9 +31,9 @@ export default function Map({
   useEffect(() => {
     const delay = setTimeout(() => {
       if (index !== "noIndex") {
-        map.setView(center, zoom + 3);
+        map?.setView(center, zoom + 3);
       } else {
-        map.setView(center, zoom);
+        map?.setView(center, zoom);
       }
     }, 0);
     return () => {

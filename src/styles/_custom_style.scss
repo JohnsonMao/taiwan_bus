@@ -1,6 +1,6 @@
 body
 {
-  background-image: url('../cover.png');
+  background-image: url('../asset/cover.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -45,12 +45,15 @@ input
   transition: .6s;
   &.page
   {
-    backdrop-filter: brightness(100%);
     background: $dark;
+    @media(min-width: 992px)
+    {
+      background: linear-gradient(to left, $dark 40%,
+                                      transparent 40%);
+    }
   }
-  .header
+  header
   {
-    width: 100%;
     transition: .6s;
 
     @media(min-width: 992px)
@@ -58,6 +61,7 @@ input
       margin-left: auto;
       width: 40%;
     }
+    
   }
 }
 .main
@@ -67,6 +71,7 @@ input
   background: rgba($gray, 0);
   overflow: hidden;
   transition: .6s;
+
   @media(min-width: 992px)
   {
     margin-left: auto;
@@ -85,6 +90,7 @@ input
     padding-top: 115px;
   }
 }
+
 .btn
 {
   display: flex;
@@ -125,11 +131,11 @@ input
 
 .delete-icon
 {
-  content: url('../icon/del.svg');
+  content: url('../asset/icon/del.svg');
   
   &:hover
   {
-    content: url('../icon/del_hover.svg');
+    content: url('../asset/icon/del_hover.svg');
   }
 }
 ::-webkit-scrollbar

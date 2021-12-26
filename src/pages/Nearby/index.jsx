@@ -32,7 +32,7 @@ export default function Nearby() {
     setPerson([latitude, longitude]);
   }, [latitude, longitude, setCenter]);
   
-
+  console.log(map)
   return (
     <main className="main">
       <Container
