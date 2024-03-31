@@ -60,13 +60,14 @@ export default function RouteList({ data = [], favorites = [] }) {
             >
               {item.favorite ? (
                 <img
-                  src={require("../../asset/icon/like_fill.svg").default}
+                  src="/icon/like_fill.svg"
+                  // src="/icon/like_fill.svg"
                   className="active d-block py-6 px-5"
                   alt="like_off"
                 />
               ) : (
                 <img
-                  src={require("../../asset/icon/like.svg").default}
+                  src="/icon/like.svg"
                   className="d-block py-6 px-5"
                   alt="like_off"
                 />

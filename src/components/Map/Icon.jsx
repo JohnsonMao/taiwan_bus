@@ -1,8 +1,8 @@
 import L from "leaflet";
 
 const goStopMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/stop.svg").default,
-  iconRetinaUrl: require("../../asset/icon/stop.svg").default,
+  iconUrl: "icon/stop.svg",
+  iconRetinaUrl: "icon/stop.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,
@@ -12,8 +12,8 @@ const goStopMarker = new L.Icon({
   className: "stopIcon goMarker",
 });
 const goBusNearStopMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/busNearStop.svg").default,
-  iconRetinaUrl: require("../../asset/icon/busNearStop.svg").default,
+  iconUrl: "icon/busNearStop.svg",
+  iconRetinaUrl: "icon/busNearStop.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,
@@ -23,8 +23,8 @@ const goBusNearStopMarker = new L.Icon({
   className: "stopIcon goMarker",
 });
 const backStopMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/stop.svg").default,
-  iconRetinaUrl: require("../../asset/icon/stop.svg").default,
+  iconUrl: "icon/stop.svg",
+  iconRetinaUrl: "icon/stop.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,
@@ -34,8 +34,8 @@ const backStopMarker = new L.Icon({
   className: "stopIcon backMarker",
 });
 const backBusNearStopMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/busNearStop.svg").default,
-  iconRetinaUrl: require("../../asset/icon/busNearStop.svg").default,
+  iconUrl: "icon/busNearStop.svg",
+  iconRetinaUrl: "icon/busNearStop.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,
@@ -45,8 +45,8 @@ const backBusNearStopMarker = new L.Icon({
   className: "stopIcon backMarker",
 });
 const StationMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/GPS.svg").default,
-  iconRetinaUrl: require("../../asset/icon/GPS.svg").default,
+  iconUrl: "icon/GPS.svg",
+  iconRetinaUrl: "icon/GPS.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,
@@ -56,8 +56,8 @@ const StationMarker = new L.Icon({
   className: "",
 });
 const PersonMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/GPS.svg").default,
-  iconRetinaUrl: require("../../asset/icon/GPS.svg").default,
+  iconUrl: "icon/GPS.svg",
+  iconRetinaUrl: "icon/GPS.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,
@@ -67,8 +67,8 @@ const PersonMarker = new L.Icon({
   className: "person animation-radar",
 });
 const BusMarker = new L.Icon({
-  iconUrl: require("../../asset/icon/bus.svg").default,
-  iconRetinaUrl: require("../../asset/icon/bus.svg").default,
+  iconUrl: "icon/bus.svg",
+  iconRetinaUrl: "icon/bus.svg",
   iconAnchor: null,
   popupAnchor: [0, 0],
   shadowUrl: null,

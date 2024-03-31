@@ -29,13 +29,13 @@ export default function SearchResult() {
   const { city, city_En, keyword } = useContext(Context);
 
   const { data, loading } = useHttp(CITYBUS, city_En);
-
+console.log(data)
   /* 關鍵字即時過濾清單 */
   const filterData =
     data[0] === 0
       ? []
-      : data.filter((item) => item?.RouteName.Zh_tw.indexOf(keyword) !== -1);
-  let showData = filterData;
+      : data?.filter?.((item) => item?.RouteName.Zh_tw.indexOf(keyword) !== -1);
+  let showData = filterData || [];
   /* 渲染前 50 筆資料，無限下拉功能尚未實作 */
   showData.length = 50;
 

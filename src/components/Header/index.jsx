@@ -4,7 +4,7 @@ import PubSub from "pubsub-js";
 import PropTypes from 'prop-types';
 import { Container } from "react-bootstrap";
 
-import { ReactComponent as Logo } from "../../asset/icon/logo.svg";
+import Logo from "../../asset/icon/logo.svg?react";
 import "./header.scss";
 
 export default function Header({ setKeyword, setShowMap, showMap }) {
@@ -58,7 +58,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
         <div className="d-flex justify-content-end align-items-center header">
           <div className="result_show">
             <button type="button" onClick={goBack} aria-label="上一頁 Go back">
-              <img src={require('../../asset/icon/goBack.svg').default} alt="上一頁 Go back" />
+              <img src="/icon/goBack.svg" alt="上一頁 Go back" />
             </button>
           </div>
           <div className="logo d-flex justify-content-center">
@@ -93,7 +93,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
               className="flex-shrink-0 position-relative map"
               aria-label="地圖 Map"
             >
-              <img src={require('../../asset/icon/map.svg').default} alt="地圖 Map" />
+              <img src="/icon/map.svg" alt="地圖 Map" />
               <span className={`crossIcon ${showMap ? "showCross" : ""}`}></span>
             </button>
           </div>
@@ -103,7 +103,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
               className="flex-shrink-0 ms-2 d-block"
               aria-label="我的收藏 Favorites"
             >
-              <img src={require('../../asset/icon/like_btn.svg').default} alt="我的收藏 Favorites" />
+              <img src="/icon/like_btn.svg" alt="我的收藏 Favorites" />
             </Link>
           </div>
         </div>

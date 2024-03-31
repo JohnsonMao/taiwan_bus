@@ -14,19 +14,19 @@ export default function Index() {
       <ul className="router">
         <li>
           <Link to="nearby" {...linkStyle}>
-            <img src={require('../../asset/icon/GPS.svg').default} alt="搜索附近圖標" />
+            <img src="/icon/GPS.svg" alt="搜索附近圖標" />
             <span>附近公車站</span>
           </Link>
         </li>
         <li>
           <Link to="citybus" {...linkStyle}>
-            <img src={require('../../asset/icon/search.svg').default} alt="查詢公車圖標" />
+            <img src="/icon/search.svg" alt="查詢公車圖標" />
             <span>查詢公車</span>
           </Link>
         </li>
         <li>
           <Link to="favorites" {...linkStyle}>
-            <img src={require('../../asset/icon/like_light.svg').default} alt="我的收藏圖標" />
+            <img src="/icon/like_light.svg" alt="我的收藏圖標" />
             <span>我的收藏</span>
           </Link>
         </li>

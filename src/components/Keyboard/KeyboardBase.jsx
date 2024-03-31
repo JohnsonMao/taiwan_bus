@@ -10,7 +10,7 @@ export default function KeyboardBase({ city }) {
         className="btn btn-light city-btn"
         aria-label="選擇縣市"
       >
-        <img src={require('../../asset/icon/GPS.svg').default} alt="GPS" /> {city || "選擇縣市"}
+        <img src="/icon/GPS.svg" alt="GPS" /> {city || "選擇縣市"}
       </label>
 
       <label
