@@ -43,3 +43,16 @@ The F2E 全台公車動態時刻查詢應用服務，以行動裝置的方向開
 ## 引用圖檔
 
 Cover photo by <a href="https://unsplash.com/@malteesimo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Malte Schmidt</a> on <a href="https://unsplash.com/s/photos/city?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+## 環境變數
+
+請新增 .env 檔案並填入
+
+```bash
+VITE_CLIENT_ID= # TDX Client ID
+VITE_CLIENT_SECRET= # TDX Client Secret
+VITE_MAP_USERNAME= # MapBox Username
+VITE_MAP_STYLE_ID= # MapBox style ID
+VITE_MAP_TOKEN= # MapBox token
+```
+
