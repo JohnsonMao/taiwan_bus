@@ -1,19 +1,39 @@
 name: Build and Deploy
+
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
+    name: Build and Deploy to GitHub pages
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
       - name: Install and Build 🔧
         run: |
-          yarn
-          yarn build
+          pnpm install
+          pnpm build
         env:
           VITE_CLIENT_ID: ${{ secrets.VITE_CLIENT_ID}}
           VITE_CLIENT_SECRET: ${{ secrets.VITE_CLIENT_SECRET}}
@@ -22,7 +42,6 @@ jobs:
           VITE_MAP_TOKEN: ${{ secrets.VITE_MAP_TOKEN}}
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: actions/deploy-pages@v1
         with:
-          branch: gh-pages
-          folder: build
+          token: ${{ github.token }}
