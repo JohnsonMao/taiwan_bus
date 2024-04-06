@@ -29,7 +29,7 @@ export default function SearchResult() {
   const { city, city_En, keyword } = useContext(Context);
 
   const { data, loading } = useHttp(CITYBUS, city_En);
-console.log(data)
+
   /* 關鍵字即時過濾清單 */
   const filterData =
     data[0] === 0

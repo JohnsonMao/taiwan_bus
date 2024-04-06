@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { apiCityBus, apiRouteName, apiNearby, apiStation } from "../api";
+import { apiGetBusRoutesByCity, apiGetBusRoute } from "../api/basic/v2";
+import { apiGetNearbyStation, apiGetStationRoute } from "../api/advanced/v2";
 import { CITYBUS, ROUTENAME, NEARBY, STATION } from "./type_config";
 
 export default function useHttp(
@@ -17,24 +18,24 @@ export default function useHttp(
     try {
       switch (type) {
         case CITYBUS:
-          const cityBusData = await apiCityBus(location);
+          const cityBusData = await apiGetBusRoutesByCity(location);
           setData(cityBusData);
           break;
 
         case ROUTENAME:
-          const routeNameData = await apiRouteName(location, search_keyword);
+          const routeNameData = await apiGetBusRoute(location, search_keyword);
           setData(routeNameData);
           break;
 
         case NEARBY:
           if (location === 'null, null') return
           const newLocation = { $spatialFilter: [`nearby(${location}, 500)`] };
-          const nearbyData = await apiNearby(newLocation);
+          const nearbyData = await apiGetNearbyStation(newLocation);
           setData(nearbyData);
           break;
 
         case STATION:
-          const stationData = await apiStation(location, search_keyword)
+          const stationData = await apiGetStationRoute(location, search_keyword)
           setData(prevData => [prevData[0], stationData]);
           break;
 
