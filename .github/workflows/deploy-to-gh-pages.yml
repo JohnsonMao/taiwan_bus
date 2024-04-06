@@ -6,9 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -42,6 +40,6 @@ jobs:
           VITE_MAP_TOKEN: ${{ secrets.VITE_MAP_TOKEN}}
 
       - name: Deploy 🚀
-        uses: actions/deploy-pages@v1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ github.token }}
+          folder: dist
