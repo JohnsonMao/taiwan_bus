@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { keyboard_base } from "../../utils/keyboard_config";
+import { keyboard_base } from "../../asset/keyboard";
 
 export default function KeyboardBase({ city }) {
   return (

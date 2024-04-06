@@ -1,4 +1,4 @@
-import { keyboard_more } from "../../utils/keyboard_config";
+import { keyboard_more } from "../../asset/keyboard";
 
 export default function KeyboardMore() {
   return (

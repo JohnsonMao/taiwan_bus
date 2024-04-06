@@ -4,7 +4,7 @@ import useGeolocation from "react-hook-geolocation";
 
 import Header from "../../components/Header";
 import Nav from "../../components/Nav";
-import { keyboard_city } from "../../utils/keyboard_config";
+import { keyboard_city } from "../../asset/keyboard";
 import {
   STORAGE_CITY,
   STORAGE_ROUTE,
