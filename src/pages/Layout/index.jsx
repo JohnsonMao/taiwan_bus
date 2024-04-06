@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
 
@@ -13,7 +13,7 @@ import {
   setStorage,
 } from "../../utils/localStorage";
 
-export const Context = React.createContext({});
+export const Context = createContext({});
 
 export function Layout() {
   /* 判斷路由深度，驅動畫面變換 */
@@ -70,7 +70,7 @@ export function Layout() {
   useEffect(() => {
     setStorage(STORAGE_FAVORITES, favorites);
   }, [favorites]);
-  
+
   /* 獲取定位資訊 */
   const { latitude, longitude, error: geoError } = useGeolocation();
 
@@ -90,7 +90,7 @@ export function Layout() {
     setFavorites: handleFavorites,
     latitude: latitude,
     longitude: longitude,
-    geoError: geoError
+    geoError: geoError,
   };
 
   return (

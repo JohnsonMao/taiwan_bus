@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -31,23 +30,45 @@ export default function Index() {
           </Link>
         </li>
       </ul>
-      <footer className="fixed-bottom d-flex justify-content-center fs-4 p-4 fw-light">
-        Taiwan Bus © Code:&nbsp;
-        <a
-          href="https://github.com/JohnsonMao/taiwan_bus"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Mao
-        </a>
-        &nbsp;/ Design:&nbsp;
-        <a
-          href="https://ktdesigner.neocities.org/UIweb/TaiwanBus.html"
-          target="_blank"
-          rel="noreferrer"
-        >
-          KT
-        </a>
+      <footer className="fixed-bottom d-flex justify-content-center align-items-center fs-4 p-4 fw-light gap-1">
+        Taiwan Bus ©
+        <div className="d-flex align-items-center gap-1">
+          Code:
+          <a
+            href="https://github.com/JohnsonMao/taiwan_bus"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mao
+          </a>
+        </div>
+        /
+        <div className="d-flex align-items-center gap-1">
+          Design:
+          <a
+            href="https://www.behance.net/gallery/131646273/Taiwan-Bus-Project"
+            target="_blank"
+            rel="noreferrer"
+          >
+            KT
+          </a>
+        </div>
+        /
+        <div className="d-flex align-items-center gap-1">
+          資料介接
+          <a
+            href="https://tdx.transportdata.tw/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="/tdxlogo.png"
+              alt="交通部TDX平臺 Logo"
+              width={120}
+              className="bg-white rounded"
+            />
+          </a>
+        </div>
       </footer>
     </Container>
   );
