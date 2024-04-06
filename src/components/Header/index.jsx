@@ -1,56 +1,58 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PubSub from "pubsub-js";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Container } from "react-bootstrap";
 
+import GoBackSvg from "../../asset/icon/goBack.svg?react";
 import Logo from "../../asset/icon/logo.svg?react";
+import MapSvg from "../../asset/icon/map.svg?react";
+import LikeBtnSvg from "../../asset/icon/like_btn.svg?react";
 import "./header.scss";
 
 export default function Header({ setKeyword, setShowMap, showMap }) {
-
   /* 搜索框 focus，虛擬鍵盤隱藏 */
   const handleFocus = () => {
     PubSub.publish("focus", true);
-  }
+  };
 
-  const [search, setSearch] = useState('');
-  
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     const token = PubSub.subscribe("search", (_, state) => {
       switch (state) {
         case "倒退":
-          setSearch(prevState => prevState.slice(0, -1))
+          setSearch((prevState) => prevState.slice(0, -1));
           break;
         case "C":
-          setSearch('')
+          setSearch("");
           break;
         default:
-          setSearch(prevState => prevState + state)
+          setSearch((prevState) => prevState + state);
       }
-    })
+    });
     return () => {
       PubSub.unsubscribe(token);
-    }
-  }, [])
+    };
+  }, []);
 
   useEffect(() => {
-    setKeyword(search)
-  }, [setKeyword, search])
+    setKeyword(search);
+  }, [setKeyword, search]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
-  }
+  };
 
   const toggleMap = () => {
-    setShowMap(!showMap)
-  }
+    setShowMap(!showMap);
+  };
 
   return (
     <header className="fixed-top">
@@ -58,7 +60,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
         <div className="d-flex justify-content-end align-items-center header">
           <div className="result_show">
             <button type="button" onClick={goBack} aria-label="上一頁 Go back">
-              <img src="/icon/goBack.svg" alt="上一頁 Go back" />
+              <GoBackSvg />
             </button>
           </div>
           <div className="logo d-flex justify-content-center">
@@ -93,8 +95,10 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
               className="flex-shrink-0 position-relative map"
               aria-label="地圖 Map"
             >
-              <img src="/icon/map.svg" alt="地圖 Map" />
-              <span className={`crossIcon ${showMap ? "showCross" : ""}`}></span>
+              <MapSvg />
+              <span
+                className={`crossIcon ${showMap ? "showCross" : ""}`}
+              ></span>
             </button>
           </div>
           <div className="page_show like">
@@ -103,7 +107,7 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
               className="flex-shrink-0 ms-2 d-block"
               aria-label="我的收藏 Favorites"
             >
-              <img src="/icon/like_btn.svg" alt="我的收藏 Favorites" />
+              <LikeBtnSvg />
             </Link>
           </div>
         </div>
@@ -112,9 +116,8 @@ export default function Header({ setKeyword, setShowMap, showMap }) {
   );
 }
 
-
 Header.propTypes = {
   setKeyword: PropTypes.func.isRequired,
   setShowMap: PropTypes.func.isRequired,
-  showMap: PropTypes.bool.isRequired
-}
+  showMap: PropTypes.bool.isRequired,
+};

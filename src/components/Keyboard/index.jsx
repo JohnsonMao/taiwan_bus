@@ -1,6 +1,8 @@
 import { useContext, useRef } from "react";
 import PubSub from "pubsub-js";
 
+import BusMp3 from "../../asset/Bus.mp3";
+import KeyboardSvg from "../../asset/icon/keyboard.svg";
 import { Context } from "../../pages/Layout";
 import KeyboardBase from "./KeyboardBase";
 import KeyboardCity from "./KeyboardCity";
@@ -26,7 +28,6 @@ export default function Keyboard() {
 
   return (
     <div className="keyboard-frame position-relative" onClick={pressBtn}>
-
       <input {...inputRadio} id="moreKeyboard" />
       <KeyboardMore />
 
@@ -42,16 +43,13 @@ export default function Keyboard() {
         aria-label="鍵盤 Keyboard"
       >
         <img
-          src="/icon/keyboard.svg"
+          src={KeyboardSvg}
           className="px-4 py-2"
           alt="鍵盤 Keyboard"
         />
       </label>
       <audio ref={audio}>
-        <source
-          src="/Bus.mp3"
-          type="audio/mpeg"
-        />
+        <source type="audio/mpeg" src={BusMp3} />
       </audio>
     </div>
   );

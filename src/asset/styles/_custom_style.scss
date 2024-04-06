@@ -1,6 +1,6 @@
 body
 {
-  background-image: url('./cover.png');
+  background-image: url('cover.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -131,11 +131,11 @@ input
 
 .delete-icon
 {
-  content: url('./icon/del.svg');
+  content: url('icon/del.svg');
   
   &:hover
   {
-    content: url('./icon/del_hover.svg');
+    content: url('icon/del_hover.svg');
   }
 }
 ::-webkit-scrollbar

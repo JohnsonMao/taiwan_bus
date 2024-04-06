@@ -1,34 +1,43 @@
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
+import GpsSvg from "../../asset/icon/GPS.svg?react";
+import SearchSvg from "../../asset/icon/search.svg?react";
+import LikeSvg from "../../asset/icon/like_light.svg?react";
+import TdxLogo from "../../asset/tdxlogo.png";
+
 import "./index.scss";
 
-const linkStyle = {
-  className: "btn btn-primary fs-3 p-2",
-};
-
 export default function Index() {
+  const links = [
+    {
+      Icon: GpsSvg,
+      title: "附近公車站",
+      to: "nearby",
+    },
+    {
+      Icon: SearchSvg,
+      title: "查詢公車",
+      to: "citybus",
+    },
+    {
+      Icon: LikeSvg,
+      title: "我的收藏",
+      to: "favorites",
+    },
+  ];
+
   return (
     <Container className="position-relative" as="nav">
       <ul className="router">
-        <li>
-          <Link to="nearby" {...linkStyle}>
-            <img src="/icon/GPS.svg" alt="搜索附近圖標" />
-            <span>附近公車站</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="citybus" {...linkStyle}>
-            <img src="/icon/search.svg" alt="查詢公車圖標" />
-            <span>查詢公車</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="favorites" {...linkStyle}>
-            <img src="/icon/like_light.svg" alt="我的收藏圖標" />
-            <span>我的收藏</span>
-          </Link>
-        </li>
+        {links.map(({ Icon, to, title }) => (
+          <li key={to}>
+            <Link to={to} className="btn btn-primary fs-3 p-2">
+              <Icon />
+              <span>{title}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
       <footer className="fixed-bottom d-flex justify-content-center align-items-center fs-4 p-4 fw-light gap-1">
         Taiwan Bus ©
@@ -62,7 +71,7 @@ export default function Index() {
             rel="noreferrer"
           >
             <img
-              src="/tdxlogo.png"
+              src={TdxLogo}
               alt="交通部TDX平臺 Logo"
               width={120}
               className="bg-white rounded"
