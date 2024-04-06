@@ -1,16 +1,38 @@
-import jsSHA from "jssha/dist/sha1";
+import { getStorage, setStorage } from "../utils/localStorage";
 
-export default function getAuthorizationHeader() {
-  // let AppID = process.env.REACT_APP_TDX_ID;
-  // let AppKey = process.env.REACT_APP_TDX_KEY;
-  // let GMTString = new Date().toGMTString();
+export const ROOT_URL = "https://tdx.transportdata.tw";
 
-  // let ShaObj = new jsSHA("SHA-1", "TEXT", {
-  //   hmacKey: { value: AppKey, format: "TEXT" },
-  // });
-  // ShaObj.update("x-date: " + GMTString);
-  // let HMAC = ShaObj.getHMAC("B64");
-  // let Authorization = `hmac username="${AppID}",algorithm="hmac-sha1",headers="x-date",signature="${HMAC}"`;
-  // return { Authorization: Authorization, "X-Date": GMTString };
-  return {};
+const TOKEN_KEY = "token";
+
+export default async function getAuthorizationHeader() {
+  const time = Date.now();
+  const data = getStorage(TOKEN_KEY);
+
+  if (data?.token && data?.time > time - 24 * 60 * 60 * 1000) {
+    return data.token;
+  }
+
+  const params = new URLSearchParams();
+
+  params.append("grant_type", "client_credentials");
+  params.append("client_id", import.meta.env.VITE_CLIENT_ID);
+  params.append("client_secret", import.meta.env.VITE_CLIENT_SECRET);
+
+  const response = await fetch(
+    `${ROOT_URL}/auth/realms/TDXConnect/protocol/openid-connect/token`,
+    {
+      method: "POST",
+      headers: {
+        "Accept-Encoding": "br,gzip",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params,
+    }
+  );
+  const source = await response.json();
+  setStorage(TOKEN_KEY, {
+    token: source.access_token,
+    time,
+  });
+  return source.access_token;
 }

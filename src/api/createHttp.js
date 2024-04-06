@@ -1,4 +1,4 @@
-export const ROOT_URL = "https://tdx.transportdata.tw";
+import getAuthorizationHeader, { ROOT_URL } from "./getAuthorizationHeader";
 
 const defaultConfig = {
   contentType: "application/json",
@@ -11,7 +11,7 @@ const createUrl = (pathname, method, source) => {
 
   const urlSearchParams = new URLSearchParams();
 
-  Object.entries(source || {}).forEach(([key, value]) => {
+  Object.entries({ $format: "JSON", ...source }).forEach(([key, value]) => {
     if (value !== "" && value != null) {
       urlSearchParams.append(key, String(value));
     }
@@ -23,12 +23,13 @@ const createUrl = (pathname, method, source) => {
 const createHttp =
   (method) =>
   async (pathname, source, { contentType } = defaultConfig) => {
-    const token = "";
+    const token = await getAuthorizationHeader();
     const requestInit = { method };
     const headers = new Headers();
 
-    // headers.append("Authorization", `Bearer ${token}`);
+    if (token) headers.append("Authorization", `Bearer ${token}`);
     headers.append("Content-Type", contentType);
+    headers.append("Accept-Encoding", "br,gzip");
     requestInit.headers = headers;
 
     if (method !== "GET") {

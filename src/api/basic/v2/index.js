@@ -2,8 +2,8 @@ import Wkt from "wicket";
 import http from "../../createHttp";
 
 /** 取得指定[縣市]的市區公車路線資料 */
-export const apiGetBusRoutesByCity = (city = "") => {
-  if (city === "") return [];
+export const apiGetBusRoutesByCity = (city) => {
+  if (!city) return [];
   return http.get(`/api/basic/v2/Bus/Route/City/${city}`, {
     $select: [
       "RouteUID",
@@ -37,9 +37,9 @@ export const apiGetBusRoutesByCity = (city = "") => {
 
 /**
  * 取得指定[縣市],[路線名稱]的市區公車路線站序資料
- * @returns {Promise<BusStops>}
+ * @returns {Promise<BusStops[]>}
  */
-const apiGetBusStops = (city = "", routeName = "") =>
+const apiGetBusStops = (city, routeName) =>
   http.get(`/api/basic/v2/Bus/StopOfRoute/City/${city}/${routeName}`, {
     $select: ["RouteUID", "Direction", "Stops"],
   });
@@ -57,7 +57,7 @@ const apiGetBusStops = (city = "", routeName = "") =>
  * 取得指定[縣市],[路線名稱]的公車動態定點資料(A2)[批次更新]
  * @return {Promise<BusRealTimeInfo[]>}
  */
-const apiGetBusRealTimeNearStop = (city = "", routeName = "") =>
+const apiGetBusRealTimeNearStop = (city, routeName) =>
   http.get(`/api/basic/v2/Bus/RealTimeNearStop/City/${city}/${routeName}`, {
     $select: ["PlateNumb", "StopID", "A2EventType"],
   });
@@ -77,7 +77,7 @@ const apiGetBusRealTimeNearStop = (city = "", routeName = "") =>
  * 取得指定[縣市],[路線名稱]的公車預估到站資料(N1)[批次更新]
  * @returns {Promise<EstimatedTimeOfArrival[]>}
  */
-const apiGetBusEstimatedTimeOfArrival = (city = "", routeName = "") =>
+const apiGetBusEstimatedTimeOfArrival = (city, routeName) =>
   http.get(
     `/api/basic/v2/Bus/EstimatedTimeOfArrival/City/${city}/${routeName}`,
     {
@@ -103,9 +103,9 @@ const apiGetBusEstimatedTimeOfArrival = (city = "", routeName = "") =>
 
 /**
  * 取得指定[縣市],[路線名稱]的市區公車線型資料
- * @returns {Promise<BusShape>}
+ * @returns {Promise<BusShape[]>}
  */
-const apiGetBusShape = (city = "", routeName = "") =>
+const apiGetBusShape = (city, routeName) =>
   http.get(`/api/basic/v2/Bus/Shape/City/${city}/${routeName}`, {
     $select: ["RouteUID", "RouteName", "Direction", "Geometry"],
   });
@@ -125,29 +125,40 @@ const apiGetBusShape = (city = "", routeName = "") =>
  * 取得指定[縣市],[路線名稱]的公車動態定時資料(A1)[批次更新]
  * @returns {Promise<RealTimeByFrequency[]>}
  */
-const apiGetBusRealTimeByFrequency = (city = "", routeName = "") =>
+const apiGetBusRealTimeByFrequency = (city, routeName) =>
   http.get(`/api/basic/v2/Bus/RealTimeByFrequency/City/${city}/${routeName}`, {
     $select: ["PlateNumb", "BusPosition", "Speed", "Direction", "Azimuth"],
   });
 
 /* 整合 Route 資料 */
-export const apiGetBusRoute = async (city = "", routeName = "") => {
-  if (city === "" || routeName === "") return [];
+export const apiGetBusRoute = async (city, routeName) => {
+  if (!city || !routeName) return [];
+
   const promises = [
+    apiGetBusShape(city, routeName),
     apiGetBusStops(city, routeName),
     apiGetBusRealTimeNearStop(city, routeName),
     apiGetBusEstimatedTimeOfArrival(city, routeName),
-    apiGetBusShape(city, routeName),
     apiGetBusRealTimeByFrequency(city, routeName),
   ];
 
   const [
+    shape,
     originStops,
     realTimeNearStop,
     estimatedTimeOfArrival,
-    shape,
     realTimeByFrequency,
   ] = await Promise.all(promises);
+
+  /* Geometry 字串轉 GeoJson */
+  const wkt = new Wkt.Wkt();
+  wkt.read(shape[0].Geometry);
+  const geojson = wkt
+    .toJson()
+    .coordinates.map((position) => position.reverse());
+
+  // 資料區分成 去程, 返程, GeoJson 與 公車定時資訊
+  const result = [[], [], geojson, realTimeByFrequency];
 
   // 站點資料重新排序整合
   const stops = [...originStops[0].Stops, ...originStops[1].Stops].sort(
@@ -155,16 +166,11 @@ export const apiGetBusRoute = async (city = "", routeName = "") => {
   );
 
   // 過濾資料並排序整合
-  const newEstimatedTimeOfArrival = estimatedTimeOfArrival
-    .filter((stop) => stop.RouteName.Zh_tw === routeName)
-    .sort((first, second) => first.StopID - second.StopID);
+  estimatedTimeOfArrival.sort((first, second) => first.StopID - second.StopID);
 
   stops.forEach((stop, index) => {
-    Object.assign(stop, newEstimatedTimeOfArrival[index]);
+    Object.assign(stop, estimatedTimeOfArrival[index]);
   });
-
-  // 資料區分成 去程 與 返程
-  const result = [[], []];
 
   stops.forEach((stop) => {
     // Direction 車輛方向 [0:'去程',1:'返程',2:'迴圈',255:'未知']
@@ -185,13 +191,5 @@ export const apiGetBusRoute = async (city = "", routeName = "") => {
     );
   });
 
-  /* Geometry 字串轉 GeoJson */
-  const wkt = new Wkt.Wkt();
-  wkt.read(shape[0].Geometry);
-  result.push(wkt.toJson().coordinates.map((position) => position.reverse()));
-
-  /* 巴士定時資訊 */
-  result.push(realTimeByFrequency);
-
-  return result; // result: [[Direction: 0], [Direction: 1], GeoJson, bus]
+  return result;
 };
