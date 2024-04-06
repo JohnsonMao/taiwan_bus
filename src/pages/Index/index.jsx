@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -14,40 +13,62 @@ export default function Index() {
       <ul className="router">
         <li>
           <Link to="nearby" {...linkStyle}>
-            <img src={require('../../asset/icon/GPS.svg').default} alt="搜索附近圖標" />
+            <img src="/icon/GPS.svg" alt="搜索附近圖標" />
             <span>附近公車站</span>
           </Link>
         </li>
         <li>
           <Link to="citybus" {...linkStyle}>
-            <img src={require('../../asset/icon/search.svg').default} alt="查詢公車圖標" />
+            <img src="/icon/search.svg" alt="查詢公車圖標" />
             <span>查詢公車</span>
           </Link>
         </li>
         <li>
           <Link to="favorites" {...linkStyle}>
-            <img src={require('../../asset/icon/like_light.svg').default} alt="我的收藏圖標" />
+            <img src="/icon/like_light.svg" alt="我的收藏圖標" />
             <span>我的收藏</span>
           </Link>
         </li>
       </ul>
-      <footer className="fixed-bottom d-flex justify-content-center fs-4 p-4 fw-light">
-        Taiwan Bus © Code:&nbsp;
-        <a
-          href="https://github.com/JohnsonMao/taiwan_bus"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Mao
-        </a>
-        &nbsp;/ Design:&nbsp;
-        <a
-          href="https://ktdesigner.neocities.org/UIweb/TaiwanBus.html"
-          target="_blank"
-          rel="noreferrer"
-        >
-          KT
-        </a>
+      <footer className="fixed-bottom d-flex justify-content-center align-items-center fs-4 p-4 fw-light gap-1">
+        Taiwan Bus ©
+        <div className="d-flex align-items-center gap-1">
+          Code:
+          <a
+            href="https://github.com/JohnsonMao/taiwan_bus"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mao
+          </a>
+        </div>
+        /
+        <div className="d-flex align-items-center gap-1">
+          Design:
+          <a
+            href="https://www.behance.net/gallery/131646273/Taiwan-Bus-Project"
+            target="_blank"
+            rel="noreferrer"
+          >
+            KT
+          </a>
+        </div>
+        /
+        <div className="d-flex align-items-center gap-1">
+          資料介接
+          <a
+            href="https://tdx.transportdata.tw/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="/tdxlogo.png"
+              alt="交通部TDX平臺 Logo"
+              width={120}
+              className="bg-white rounded"
+            />
+          </a>
+        </div>
       </footer>
     </Container>
   );

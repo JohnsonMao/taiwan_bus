@@ -1,4 +1,3 @@
-import React from "react";
 import Lottie from "lottie-react-web";
 
 import loading from "../../asset/loading.json";

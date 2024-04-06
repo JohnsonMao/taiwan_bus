@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useCallback, useState, useEffect, useContext } from "react";
 
+import { apiGetBusRoute } from "../../api/basic/v2";
 import { Context } from "../../pages/Layout";
-import { ROUTENAME } from "../../utils/type_config";
-import useHttp from "../../utils/useHttp";
+import useFetch from "../../hooks/useFetch";
 import Loading from "../Loading";
 import RouteTable from "../RouteTable";
 import Map from "../Map";
 
 export default function RoutePage() {
-  const { city_En, isBack, search_keyword, latitude, longitude } = useContext(Context);
-  const [control, setControl] = useState(true);
-  const handleControl = (e) => {
-    setControl(e)
-  }
-
-  const { data, error } = useHttp(ROUTENAME, city_En, search_keyword, control);
+  const { city_En, isBack, search_keyword, latitude, longitude } =
+    useContext(Context);
+  const getBusRoute = useCallback(
+    () => apiGetBusRoute(city_En, search_keyword),
+    [city_En, search_keyword]
+  );
+  const { refetch, data = [], error } = useFetch(getBusRoute);
 
   const [map, setMap] = useState(null);
   const zoom = 14;
@@ -29,7 +29,7 @@ export default function RoutePage() {
   /* 擷取所有站點的中心點 */
   let lat = 0;
   let lon = 0;
-  const stopsArr = data[0] || [];
+  const stopsArr = data?.[0] || [];
   stopsArr.forEach((stop) => {
     lat += stop.StopPosition.PositionLat;
     lon += stop.StopPosition.PositionLon;
@@ -43,18 +43,18 @@ export default function RoutePage() {
     setCenter(e);
   };
 
-  const [person, setPerson] = useState([latitude, longitude])
+  const [person, setPerson] = useState([latitude, longitude]);
 
   useEffect(() => {
     setCenter([lat, lon]);
-    setPerson([latitude, longitude])
-  }, [lat, lon, setCenter, latitude, longitude, setPerson])
+    setPerson([latitude, longitude]);
+  }, [lat, lon, setCenter, latitude, longitude, setPerson]);
 
   return (
     <div className={isBack ? "backMarkerShow" : "goMarkerShow"}>
-      {data.length === 0 ? (
+      {data?.[0] == null ? (
         <Loading />
-      ) : data[0] === 0 || error ? (
+      ) : error ? (
         <div>網頁出錯啦！</div>
       ) : (
         <>
@@ -63,8 +63,7 @@ export default function RoutePage() {
               data={data}
               setIndex={handleIndex}
               setCenter={handleCenter}
-              setControl={handleControl}
-              control={control}
+              refetch={refetch}
             />
           ) : null}
           <Map

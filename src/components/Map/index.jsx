@@ -50,7 +50,13 @@ export default function Map({
       className="mapContainer"
     >
       <TileLayer
-        url={`https://api.mapbox.com/styles/v1/${process.env.REACT_APP_MAP_USERNAME}/${process.env.REACT_APP_MAP_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAP_TOKEN}`}
+        url={`https://api.mapbox.com/styles/v1/${
+          import.meta.env.VITE_MAP_USERNAME
+        }/${
+          import.meta.env.VITE_MAP_STYLE_ID
+        }/tiles/256/{z}/{x}/{y}@2x?access_token=${
+          import.meta.env.VITE_MAP_TOKEN
+        }`}
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
       />
       {person[0] === null ? null : (
@@ -75,7 +81,7 @@ export default function Map({
             activeIndex={index}
             map={map}
           />
-          {data[3].map((item) => {
+          {Array.isArray(data[3]) && data[3].map((item) => {
             const { PositionLat, PositionLon } = item.BusPosition;
             const position = [PositionLat, PositionLon];
             return (

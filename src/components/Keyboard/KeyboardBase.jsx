@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { keyboard_base } from "../../utils/keyboard_config";
+import { keyboard_base } from "../../asset/keyboard";
 
 export default function KeyboardBase({ city }) {
   return (
@@ -10,7 +10,7 @@ export default function KeyboardBase({ city }) {
         className="btn btn-light city-btn"
         aria-label="選擇縣市"
       >
-        <img src={require('../../asset/icon/GPS.svg').default} alt="GPS" /> {city || "選擇縣市"}
+        <img src="/icon/GPS.svg" alt="GPS" /> {city || "選擇縣市"}
       </label>
 
       <label

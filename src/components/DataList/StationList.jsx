@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Context } from "../../pages/Layout";
-import { keyboard_city } from "../../utils/keyboard_config";
+import { keyboard_city } from "../../asset/keyboard";
 
 export default function StationList({ data = [] }) {
   const { city, setCity } = useContext(Context);

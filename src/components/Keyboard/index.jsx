@@ -42,14 +42,14 @@ export default function Keyboard() {
         aria-label="鍵盤 Keyboard"
       >
         <img
-          src={require("../../asset/icon/keyboard.svg").default}
+          src="/icon/keyboard.svg"
           className="px-4 py-2"
           alt="鍵盤 Keyboard"
         />
       </label>
       <audio ref={audio}>
         <source
-          src={require("../../asset/Bus.mp3").default}
+          src="/Bus.mp3"
           type="audio/mpeg"
         />
       </audio>

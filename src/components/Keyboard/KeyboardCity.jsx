@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import { keyboard_city } from "../../utils/keyboard_config";
+import { keyboard_city } from "../../asset/keyboard";
 
 export default function KeyboardCity({ city, setCity }) {
   const [enterCity, setEnterCity] = useState(city || "");

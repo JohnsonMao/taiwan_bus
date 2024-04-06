@@ -1,13 +1,13 @@
-import React, { useRef, useEffect, useContext } from "react";
-import PubSub from 'pubsub-js'
+import { useCallback, useRef, useEffect, useContext } from "react";
+import PubSub from "pubsub-js";
 import { Container } from "react-bootstrap";
 
 import Keyboard from "../Keyboard";
 import DataList from "../DataList";
 import Loading from "../Loading";
+import { apiGetBusRoutesByCity } from "../../api/basic/v2";
+import useFetch from "../../hooks/useFetch";
 import { Context } from "../../pages/Layout";
-import { CITYBUS } from "../../utils/type_config";
-import useHttp from "../../utils/useHttp";
 
 export default function SearchResult() {
   /* 控制鍵盤 */
@@ -17,27 +17,28 @@ export default function SearchResult() {
   };
 
   useEffect(() => {
-    const token = PubSub.subscribe("focus", (_, state) => {
-      noShow()
-    })
+    const token = PubSub.subscribe("focus", () => {
+      noShow();
+    });
     return () => {
       PubSub.unsubscribe(token);
-    }
-  }, [])
-
+    };
+  }, []);
 
   const { city, city_En, keyword } = useContext(Context);
 
-  const { data, loading } = useHttp(CITYBUS, city_En);
+  const getBusRoutesByCity = useCallback(
+    () => apiGetBusRoutesByCity(city_En),
+    [city_En]
+  );
+  const { data, loading } = useFetch(getBusRoutesByCity);
 
   /* 關鍵字即時過濾清單 */
-  const filterData =
-    data[0] === 0
-      ? []
-      : data.filter((item) => item?.RouteName.Zh_tw.indexOf(keyword) !== -1);
-  let showData = filterData;
+  const filterData = Array.isArray(data)
+    ? data.filter?.((item) => item?.RouteName.Zh_tw.indexOf(keyword) !== -1)
+    : [];
   /* 渲染前 50 筆資料，無限下拉功能尚未實作 */
-  showData.length = 50;
+  const showData = filterData.slice(50);
 
   return (
     <>
