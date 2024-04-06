@@ -7,7 +7,7 @@ import Favorites from "./pages/Favorites";
 import Nearby from "./pages/Nearby";
 import SearchResult from "./components/SearchResult";
 import RoutePage from "./components/RoutePage";
-import "./styles/style.scss";
+import "./asset/styles/style.scss";
 
 export default function App() {
   return (

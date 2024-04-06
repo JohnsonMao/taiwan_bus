@@ -1,7 +1,10 @@
 import Wkt from "wicket";
 import http from "../../createHttp";
 
-/** 取得指定[縣市]的市區公車路線資料 */
+/**
+ * 取得指定[縣市]的市區公車路線資料
+ * @returns {Promise<any[]>}
+ */
 export const apiGetBusRoutesByCity = (city) => {
   if (!city) return [];
   return http.get(`/api/basic/v2/Bus/Route/City/${city}`, {

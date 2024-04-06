@@ -81,7 +81,7 @@ export default function Map({
             activeIndex={index}
             map={map}
           />
-          {data[3].map((item) => {
+          {Array.isArray(data[3]) && data[3].map((item) => {
             const { PositionLat, PositionLon } = item.BusPosition;
             const position = [PositionLat, PositionLon];
             return (

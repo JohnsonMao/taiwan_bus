@@ -12,7 +12,10 @@ import http from "../../createHttp";
  * @prop {string} LocationCityCode 城市代碼
  */
 
-/** 取得指定[位置,範圍]的全臺公車站位資料 */
+/**
+ * 取得指定[位置,範圍]的全臺公車站位資料
+ * @returns {Promise<Station[]>}
+ */
 export const apiGetNearbyStation = (data = {}) =>
   http.get(`/api/advanced/v2/Bus/Station/NearBy`, {
     $select: [
