@@ -1,4 +1,3 @@
-import React from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { Layout } from "./pages/Layout";
@@ -8,7 +7,7 @@ import Favorites from "./pages/Favorites";
 import Nearby from "./pages/Nearby";
 import SearchResult from "./components/SearchResult";
 import RoutePage from "./components/RoutePage";
-import "./asset/scss/style.scss";
+import "./asset/styles/style.scss";
 
 export default function App() {
   return (

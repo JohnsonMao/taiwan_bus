@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
 
 import Header from "../../components/Header";
 import Nav from "../../components/Nav";
-import { keyboard_city } from "../../utils/keyboard_config";
+import { keyboard_city } from "../../asset/keyboard";
 import {
   STORAGE_CITY,
   STORAGE_ROUTE,
   STORAGE_FAVORITES,
-  getHistory,
-  saveHistory,
+  getStorage,
+  setStorage,
 } from "../../utils/localStorage";
 
-export const Context = React.createContext({});
+export const Context = createContext({});
 
 export function Layout() {
   /* 判斷路由深度，驅動畫面變換 */
@@ -21,10 +21,10 @@ export function Layout() {
   const pathnameArr = pathname.split("/");
 
   /* City State */
-  const [city, setCity] = useState(getHistory(STORAGE_CITY) || "");
+  const [city, setCity] = useState(getStorage(STORAGE_CITY) || "");
   const handleCity = (e) => {
     setCity(e);
-    saveHistory(STORAGE_CITY, e || "");
+    setStorage(STORAGE_CITY, e || "");
   };
   /* City English name */
   const cityIndex = keyboard_city.findIndex(
@@ -34,11 +34,11 @@ export function Layout() {
 
   /* Route Start and End State */
   const [routeArr, setRouteArr] = useState(
-    getHistory(STORAGE_ROUTE) || ["start", "end"]
+    getStorage(STORAGE_ROUTE) || ["start", "end"]
   );
   const handleRouteArr = (e) => {
     setRouteArr(e);
-    saveHistory(STORAGE_ROUTE, e);
+    setStorage(STORAGE_ROUTE, e);
   };
 
   /* Search keyword State */
@@ -61,16 +61,16 @@ export function Layout() {
 
   /* Favorites State */
   const [favorites, setFavorites] = useState(
-    getHistory(STORAGE_FAVORITES) || []
+    getStorage(STORAGE_FAVORITES) || []
   );
   const handleFavorites = (e) => {
     setFavorites(e);
   };
 
   useEffect(() => {
-    saveHistory(STORAGE_FAVORITES, favorites);
+    setStorage(STORAGE_FAVORITES, favorites);
   }, [favorites]);
-  
+
   /* 獲取定位資訊 */
   const { latitude, longitude, error: geoError } = useGeolocation();
 
@@ -90,7 +90,7 @@ export function Layout() {
     setFavorites: handleFavorites,
     latitude: latitude,
     longitude: longitude,
-    geoError: geoError
+    geoError: geoError,
   };
 
   return (

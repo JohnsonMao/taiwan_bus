@@ -1,12 +1,16 @@
 {
   "name": "taiwan_bus",
-  "homepage": "https://johnsonmao.github.io/taiwan_bus/",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
+  "homepage": "https://johnsonmao.github.io/taiwan_bus/",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "bootstrap": "5.1.3",
     "jssha": "^3.2.0",
     "leaflet": "^1.7.1",
@@ -19,29 +23,24 @@
     "react-hook-geolocation": "^1.0.11",
     "react-leaflet": "^3.2.2",
     "react-router-dom": "^6.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1",
     "wicket": "^1.3.8"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@vitejs/plugin-react": "^4.2.1",
+    "dotenv-cli": "^4.1.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "sass": "^1.43.4",
+    "vite": "^5.1.6",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "dotenv-cli": "^4.1.0",
-    "sass": "^1.43.4"
-  }
+  ]
 }

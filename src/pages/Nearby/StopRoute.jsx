@@ -1,22 +1,26 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 
-import { Context } from "../../pages/Layout";
+import { apiGetStationRoute } from "../../api/advanced/v2";
+import useFetch from "../../hooks/useFetch";
 import Loading from "../../components/Loading";
 import DataList from "../../components/DataList";
-import { STATION } from "../../utils/type_config";
-import useHttp from "../../utils/useHttp";
+import { Context } from "../../pages/Layout";
 
 export default function StopRoute() {
   const { city_En, search_keyword } = useContext(Context);
-  const searchArr = search_keyword.split("-");
-  const { data, loading } = useHttp(STATION, city_En, searchArr[0]);
+  const [stationId, stationName] = search_keyword.split("-");
+  const getStationRoute = useCallback(
+    () => apiGetStationRoute(city_En, stationId),
+    [city_En, stationId]
+  );
+  const { data, loading } = useFetch(getStationRoute);
 
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-        <DataList title={searchArr[1]} data={data[1]} page="nearby" />
+        <DataList title={stationName} data={data} page="nearby" />
       )}
     </>
   );

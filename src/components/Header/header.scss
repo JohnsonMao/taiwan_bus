@@ -1,4 +1,4 @@
-@import '../../asset/scss/custom_variables';
+@import '../../asset/styles/custom_variables';
 
 .logo
 {
@@ -12,10 +12,6 @@
     white-space: nowrap;
     transition: .6s;
 
-    @media(min-width: 992px)
-    {
-      margin: calc(27vh - 80px) 254px 0 auto;
-    }
     @media(max-width: 340px)
     {
       margin: calc(27vh - 80px) 134px 0 auto;
@@ -45,7 +41,7 @@
 {
   width: 0;
   opacity: 0;
-  transition: .6s;
+  transition: margin .6s;
   input
   {
     padding: 0;
@@ -78,6 +74,10 @@
   header
   {
     background: $dark;
+  }
+  .header
+  {
+    width: 100%;
   }
   .logo
   {

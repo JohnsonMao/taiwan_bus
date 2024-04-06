@@ -2,12 +2,12 @@
 
 ## 作品畫面
 
-![The F2E 全台公車動態時刻查詢應用服務畫面](https://i.imgur.com/tmPiHsW.png)
+![The F2E 全台公車動態時刻查詢應用服務畫面](https://i.imgur.com/Gc44QTB.png)
 ## 作品說明
 
 設計採用 [KT](https://ktdesigner.neocities.org/UIweb/TaiwanBus.html) 的設計稿
 
-The F2E 全台公車動態時刻查詢應用服務，以行動裝置的方向開發，使用 [TDX 運輸資料流通服務](https://tdx.transportdata.tw/) API 實現查詢公車路線、收藏、查看路線地圖的功能。
+The F2E 全台公車動態時刻查詢應用服務，以行動裝置的方向開發，使用 [TDX 運輸資料流通服務](https://tdx.transportdata.tw/) API 實現查詢公車路線、收藏、查看路線地圖與附近公車站牌的功能。
 
 ## 系統說明
 
@@ -23,10 +23,11 @@ The F2E 全台公車動態時刻查詢應用服務，以行動裝置的方向開
 ```
 |- /src
     |- /api：存放 API 串接整合資料
-    |- /asset：Icon 與 SCSS
+    |- /asset：Icon, config 與 SCSS
     |- /components：共用元件
+    |- /hooks：共用 hooks
     |- /pages：頁面
-    |- /utils：通用工具 Hook、設置常數
+    |- /utils：通用工具
 ```
 
 ## 使用技術
