@@ -23,10 +23,11 @@ The F2E 全台公車動態時刻查詢應用服務，以行動裝置的方向開
 ```
 |- /src
     |- /api：存放 API 串接整合資料
-    |- /asset：Icon 與 SCSS
+    |- /asset：Icon, config 與 SCSS
     |- /components：共用元件
+    |- /hooks：共用 hooks
     |- /pages：頁面
-    |- /utils：通用工具 Hook、設置常數
+    |- /utils：通用工具
 ```
 
 ## 使用技術
