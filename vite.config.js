@@ -14,4 +14,7 @@ export default defineConfig((config) =>({
       },
     ],
   },
+  server: {
+    port: 1473
+  }
 }));
