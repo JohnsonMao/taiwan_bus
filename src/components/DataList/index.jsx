@@ -34,12 +34,13 @@ export default function DataList({
       favoriteObj.DepartureStopNameZh = favoriteArr[2];
       favoriteObj.DestinationStopNameZh = favoriteArr[3];
       switch (active) {
-        case "active":
+        case "active": {
           const newData = favorites.filter(
             (favorite) => favorite.RouteUID !== favoriteObj.RouteUID
           );
           setFavorites(newData);
           break;
+        }
         default:
           setFavorites((prevData) => [...prevData, favoriteObj]);
       }
@@ -96,4 +97,6 @@ DataList.propTypes = {
   page: PropTypes.string,
   zoom: PropTypes.number,
   map: PropTypes.object,
+  setIndex: PropTypes.func,
+  setCenter: PropTypes.func,
 };

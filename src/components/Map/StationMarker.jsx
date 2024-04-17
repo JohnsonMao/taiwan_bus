@@ -49,5 +49,7 @@ export default function StopMarker({ station, isActive, map }) {
 }
 
 StopMarker.propTypes = {
-  station: PropTypes.object
+  station: PropTypes.object,
+  isActive: PropTypes.bool,
+  map: PropTypes.object,
 };
