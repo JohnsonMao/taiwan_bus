@@ -39,7 +39,7 @@ export default function StopMarkers({ stops, direction, map, activeIndex }) {
       })}
     </>
   );
-};
+}
 
 StopMarkers.propTypes = {
   stops: PropTypes.array, 

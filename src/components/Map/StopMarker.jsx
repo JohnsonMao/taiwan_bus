@@ -60,4 +60,6 @@ StopMarker.propTypes = {
   stop: PropTypes.object,
   icon: PropTypes.object,
   className: PropTypes.string,
+  isActive: PropTypes.bool,
+  map: PropTypes.object,
 };
